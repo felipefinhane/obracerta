@@ -1,6 +1,6 @@
 # Onboarding — criar minha construtora
 
-Status: open
+Status: done
 Blocked by: 02, 04
 
 ## Contexto
@@ -14,3 +14,6 @@ Usuário logado sem nenhuma construtora precisa de um caminho óbvio pra criar a
 - Testar: fluxo completo cadastro → login → onboarding → construtora criada → vira admin.
 
 ## Comments
+
+- `src/app/page.tsx` vira o roteador pós-login: conta `construtora_membros` do usuário, manda pra `/onboarding` (0) ou `/obras` (>0). `src/app/onboarding/` chama a RPC `criar_construtora` (ticket 02) e redireciona pra `/obras`.
+- **Testado via HTTP real, fluxo completo**: cadastro → `GET /` redireciona pro onboarding (sem construtora) → cria construtora → `GET /` agora redireciona pra `/obras` (tem construtora) → `/obras` mostra vazio, formulário pré-preenchido com a `construtora_id` certa.

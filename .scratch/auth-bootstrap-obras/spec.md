@@ -1,6 +1,6 @@
 # Auth + bootstrap + Obras
 
-Status: open
+Status: done
 
 Primeiro effort de UI do MVP. Sem login, nenhuma tela é utilizável de verdade (RLS depende de sessão autenticada) — e sem um jeito de criar a primeira construtora e virar admin dela, ninguém chega a ver uma obra sequer (problema de ovo-e-galinha anotado como pendente no ticket 03 de `fundacao-tecnica`). Este effort fecha os dois antes de entrar em qualquer módulo funcional (Despesas, Diário, etc.).
 
