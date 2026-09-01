@@ -115,6 +115,7 @@ despesas (
   valor numeric (nullable até extração/confirmação),
   data_despesa date (nullable até extração/confirmação),
   descricao text,
+  origem text,          -- foto | manual
   status text,         -- pendente_confirmacao | confirmada
   forma_pagamento text,
   criado_por -> auth.users,
@@ -133,19 +134,18 @@ despesa_itens (
 
 recibos (
   id uuid pk,
-  despesa_id -> despesas,
-  arquivo_url text,               -- Supabase Storage
-  tipo_documento text,            -- nfe | recibo_informal
+  despesa_id -> despesas (unique — 1 recibo por despesa),
+  arquivo_url text,                -- chave do objeto no Cloudflare R2 (ADR 0003), não URL resolvível direto; caminho determinístico (recibos/{id}.jpg), preenchido já no INSERT (não é flag de upload — ver status_processamento)
+  tipo_documento text,             -- nfe | recibo_informal
   chave_acesso_nfe text (nullable),
-  dados_extraidos jsonb,          -- payload cru vindo do pipeline de extração
+  dados_extraidos jsonb,           -- payload cru vindo do pipeline de extração
   confianca_extracao numeric (nullable),  -- só para recibo_informal via OCR/LLM
-  status_processamento text,      -- pendente | processado | falhou
-  geolocalizacao point (nullable),
+  status_processamento text,       -- aguardando_upload | pendente | processado | falhou
   criado_em timestamptz
 )
 ```
 
-Fluxo (ver `planejamento.md` seção 3): `recibos` é criado no momento da foto, com `despesas` associada já em status `pendente_confirmacao` e campos nulos. O pipeline assíncrono preenche `dados_extraidos` e `status_processamento`. Na tela de confirmação, o usuário revisa `dados_extraidos`, preenche os campos que faltarem em `despesas`/`despesa_itens`, e o status vira `confirmada`.
+Fluxo (ver `planejamento.md` seção 3, ADR 0002 revisado e ADR 0003): `despesas` (origem `foto`) e `recibos` são criados no momento da foto, com `despesas` já em status `pendente_confirmacao` e campos nulos, e `recibos.status_processamento = aguardando_upload` — **antes** do upload da foto terminar, não depois. `arquivo_url` já é preenchido nesse INSERT com o caminho determinístico (é previsível a partir do `id`, não precisa esperar o upload). O cliente comprime a foto (ADR 0003) e pede uma URL assinada de upload a um Route Handler, que checa `has_obra_access` via RPC antes de emitir; o upload vai direto do cliente pro Cloudflare R2 com essa URL. Quando o upload confirma, o cliente atualiza `recibos.status_processamento` para `pendente`; um Database Webhook nessa transição (não mais no `INSERT`) dispara a Edge Function de extração, que busca o arquivo no R2, preenche `dados_extraidos` e marca `processado` ou `falhou`. Se o upload nunca confirma, o registro fica em `aguardando_upload` indefinidamente, disponível para retry manual — o reenvio reusa o mesmo registro e caminho, não cria um lançamento novo. Despesa lançada manualmente (origem `manual`) não gera linha em `recibos`; os campos já vêm preenchidos na criação. Na tela de confirmação, o usuário revisa `dados_extraidos`, preenche os campos que faltarem em `despesas`/`despesa_itens`, e o status vira `confirmada` — a foto em si é exibida via URL assinada de leitura, gerada sob demanda (bucket privado).
 
 ---
 
@@ -168,14 +168,7 @@ diario_entradas (
 diario_midia (
   id uuid pk,
   diario_entrada_id -> diario_entradas,
-  arquivo_url text,     -- Supabase Storage
-  tipo text              -- foto | video
+  arquivo_url text,     -- chave do objeto no Cloudflare R2 (ADR 0003)
+  tipo text              -- foto (só isso no MVP — vídeo fica pra fase 2, ver mvp.md)
 )
 ```
-
----
-
-## Pontos em aberto no modelo
-
-- **`despesas` com campos nullable até confirmação**: funciona para o fluxo de recibo, mas para despesa lançada manualmente (sem foto) os campos já vêm preenchidos direto — o schema suporta os dois casos, só confirmar que não precisa de tabela separada para isso.
-- **Geolocalização do recibo**: incluí como nullable/opcional; avaliar se vale a pena mesmo ou se é dado que ninguém vai usar no MVP.

@@ -24,7 +24,7 @@ Motivador central: o dono da obra (ou construtora) precisa comprovar ao banco fi
 ## 2. Módulos funcionais
 
 ### 2.1 Obras (cadastro raiz)
-- Uma conta pode gerenciar uma ou mais obras (multi-obra desde o início — decisão em aberto sobre isolamento de dados, ver seção 6).
+- Uma conta pode gerenciar uma ou mais obras (multi-obra desde o início — isolamento de dados em dois níveis, ver seção 7 e `docs/modelo-dados.md`).
 - Dados básicos: endereço, cliente/dono, construtora responsável, datas previstas, valor total planejado.
 
 ### 2.2 Planejamento
@@ -56,7 +56,7 @@ Esse é o módulo com o fluxo mais específico. Ver seção 3 (fluxo detalhado) 
 - Resultado: fluxo de caixa real da obra, não só "quanto já gastei".
 
 ### 2.6 Diário de obra
-- Lançamento do andamento com fotos e/ou vídeos.
+- Lançamento do andamento com fotos (vídeo fica pra fase 2 — ver `mvp.md` e ADR 0003, custo de storage no tier gratuito).
 - Complementos recomendados:
   - Clima do dia (justifica atrasos de cronograma).
   - Efetivo presente (quantas pessoas/quais equipes trabalharam).
@@ -84,6 +84,10 @@ Deve cobrir no mínimo:
 - **Documentos da obra**: plantas, ART/RRT, alvará, contrato de financiamento — repositório de arquivos não ligado a despesa.
 - **Alertas**: estouro de orçamento por etapa, parcela de financiamento não bate com % de medição, etc.
 - **PWA offline completo**: canteiro de obra costuma ter internet ruim — fila local + sync quando voltar conexão. Tratado como requisito técnico transversal, não módulo isolado (ver seção 4).
+- **Base SINAPI integrada ao orçamento**: referência de preço público da construção civil pra acelerar/dar mais precisão à montagem de etapas.
+- **Proposta Comercial**: gerar documento de proposta a partir do orçamento, pra enviar a um cliente potencial antes do contrato existir.
+- **Pré-lançamento de despesa via WhatsApp**: via alternativa de captura de recibo — manda a foto pelo WhatsApp em vez de abrir o app, sistema cria o lançamento provisório do mesmo jeito. Complementa o fluxo do ADR 0002, não substitui.
+- **Compras (solicitação → cotação → ordem de compra)**: fluxo de *antes* da despesa acontecer, com alçada de aprovação — hoje o sistema só registra gasto já realizado (via recibo).
 
 ---
 
@@ -117,10 +121,10 @@ Esse desenho resolve o requisito diretamente: captura em segundos na rua, confir
 ## 4. Stack técnica (proposta inicial, a validar)
 
 - **Next.js (React)** para o webapp, com PWA (service worker + manifest) para suportar captura offline no celular.
-- **Supabase** (Postgres + Auth + Storage):
+- **Supabase** (Postgres + Auth, sem Storage — ver abaixo):
   - RLS (Row Level Security) para o modelo de permissões por obra/papel — evita reinventar controle de acesso na camada de aplicação.
-  - Storage para fotos de recibo, vídeos/fotos do diário de obra.
   - Edge Functions para rodar o pipeline de extração de recibo (detecção de QR code → consulta NF-e ou fallback OCR/LLM) de forma assíncrona, sem travar o upload.
+- **Cloudflare R2** para arquivo (fotos de recibo, fotos do diário de obra) — tier gratuito bem maior que o Storage do Supabase; upload/leitura via URL assinada emitida por um Route Handler, que checa autorização via RPC nas mesmas funções `has_obra_access`/`has_construtora_access`. Detalhado em ADR 0003.
 - Fila local (IndexedDB) + background sync no service worker para suportar captura sem internet no canteiro — ponto tecnicamente mais delicado do projeto, tratar com atenção quando chegar na implementação.
 
 ---
@@ -135,7 +139,7 @@ Esse desenho resolve o requisito diretamente: captura em segundos na rua, confir
 - **Consulta de NF-e via chave de acesso**: definir se via SEFAZ diretamente ou serviço terceiro (custo/limites) — adiado para fase 2, nada contratado agora.
 - **Migração do provedor de extração de recibo**: quando sair da fase de testes (free tier do Gemini), decidir se migra para Claude Sonnet 5 (mais preciso em recibo informal bagunçado) ou mantém Gemini pago — reavaliar com base na taxa de erro observada em uso real.
 - **Infraestrutura pós-teste (AWS)**: sinalizado como opção a explorar quando o produto sair da fase gratuita, sem desenho ainda.
-- **Próximo passo**: arquitetura técnica (estrutura do projeto Next.js, schema SQL + políticas de RLS no Supabase, desenho do pipeline de extração de recibo) — ainda não iniciado.
+- **Próximo passo**: arquitetura técnica — decisões de alto nível já fechadas (ver histórico de decisões e `docs/adr/`); falta detalhar o schema SQL completo com as políticas de RLS escritas e a implementação do pipeline de extração de recibo.
 
 ---
 
@@ -152,11 +156,17 @@ Esse desenho resolve o requisito diretamente: captura em segundos na rua, confir
 - Confirmado: isolamento de dados em **dois níveis** — construtora é o limite principal de tenant (equipe de uma construtora só vê as obras dela), e dentro disso, acesso fino por obra via `obra_membros` (ex: um cliente vê só a obra dele, não todas as obras da construtora). Detalhado em `docs/modelo-dados.md`.
 - Confirmado: categorias e fornecedores são **compartilhados entre as obras da mesma construtora** (cadastra uma vez, reusa em qualquer obra).
 - Confirmado: provedor de extração de recibo na fase de testes é o **Google Gemini (família Flash)**, que tem tier gratuito contínuo (não é crédito único como a Claude API) — ver seção 8. Migração para Claude Sonnet 5 fica em aberto para quando sair da fase de testes.
+- Confirmado (sessão de grilling sobre arquitetura técnica): Next.js **App Router**; acesso a dados via `supabase-js` sem ORM, para preservar RLS como fonte de verdade (ADR 0001); pastas organizadas por domínio/módulo (`src/modules/{obras,planejamento,despesas,diario,cadastros}/`); RLS implementada com funções SQL auxiliares centralizadas (`has_obra_access`, `has_construtora_access`) em vez de subquery duplicada por tabela; schema/RLS desenvolvidos via Supabase CLI local (Docker) antes de subir pro projeto hospedado; tela de recibos pendentes atualiza por polling/refetch simples, sem Supabase Realtime.
+- Confirmado (mesma sessão): arquitetura do pipeline de captura de recibo — Edge Function (não Vercel, por limite de duração), upload da foto direto do cliente pro Storage, e registro em `despesas`/`recibos` criado **antes** do upload da foto (garante que o gasto não se perde se o upload falhar). Detalhado em ADR 0002. Gatilho da Edge Function revisado numa sessão posterior de grilling — ver bullet abaixo.
+- Confirmado: análise comparativa com sistema concorrente (Mais Controle, ERP de construtoras/incorporadoras) resultou em quatro novos itens de backlog fase 2+ (ver `mvp.md` seção 2): base SINAPI no orçamento, Proposta Comercial, pré-lançamento de despesa via WhatsApp, e módulo de Compras (solicitação → cotação → ordem de compra). Descartados conscientemente por não baterem com o modelo de negócio do ObraCerta (financiamento bancário pra construir, não venda de imóvel nem CRM de pré-venda): BDI/visão de venda com markup, emissão de boletos, BI/dashboard multi-obra, Venda Reajustada e Funil de Vendas.
+- Confirmado (sessão de grilling sobre armazenamento de arquivo gratuito): storage de arquivo (foto de recibo, mídia do diário) sai do Supabase Storage (1GB grátis) e vai para **Cloudflare R2** (10GB grátis/mês + egress ilimitado) — Supabase continua só com Postgres/Auth/Edge Functions. Upload e leitura passam por URL assinada emitida por um Route Handler no Next.js/Vercel, que checa autorização via RPC em `has_obra_access`/`has_construtora_access` antes de emitir (exceção documentada ao "RLS como fonte de verdade" do ADR 0001, já que R2 não tem RLS). Bucket privado — leitura também via URL assinada sob demanda, não link público. Detalhado em ADR 0003 (supera a decisão 3 do ADR 0002). Fotos de recibo são comprimidas no cliente antes do upload. Vídeo no diário de obra sai do MVP (só foto) — volta a ser avaliado com volume de uso real, ver `mvp.md`.
+- Confirmado (sessão de grilling sobre os pontos em aberto do modelo de despesas/recibo, ver `modelo-dados.md`): despesa lançada manualmente ganha campo `origem` (`foto` | `manual`) em vez de inferir por ausência de recibo; `recibos` é 1:1 com `despesas` (sem suporte a múltiplas fotos no MVP); geolocalização do recibo sai do MVP (sem consumidor definido); `recibos.status_processamento` ganha o valor `aguardando_upload` e passa a ser a única fonte de verdade do estado do upload — `arquivo_url` é preenchido já no `INSERT` (caminho determinístico) em vez de ficar nullable como flag. Isso muda o gatilho da Edge Function: o Database Webhook passa a disparar na transição de `status_processamento` para `pendente` (setada pelo cliente após o upload confirmar), não mais no `INSERT` de `recibos` — **revisa a decisão 2 do ADR 0002**, que descrevia o gatilho como o `INSERT` (nesse ponto o arquivo ainda não existe no Storage). Retry de upload travado reusa o registro e caminho existentes, sem expiração automática no MVP.
 
 ## 8. Stack de testes (fase atual)
 
 - **Vercel Hobby** (grátis): hospeda o Next.js. Atenção: não é permitido para uso comercial — serve para testar com você mesmo ou usuários convidados informalmente, não para operar a obra de um cliente pagante.
-- **Supabase Free** (grátis): Postgres + Auth + Storage. Dois pontos de atenção: projeto pausa após 1 semana sem uso (precisa reativar manualmente), e os limites de storage (1GB) enchem rápido se subir foto/vídeo do diário de obra à vontade — vale já nascer com algum limite de tamanho/compressão no upload, mesmo em teste.
+- **Supabase Free** (grátis): Postgres + Auth (500MB banco, 50k MAU). Ponto de atenção: projeto pausa após 1 semana sem uso (precisa reativar manualmente). Storage de arquivo não fica aqui — ver Cloudflare R2 abaixo (ADR 0003).
+- **Cloudflare R2** (grátis): storage de arquivo — fotos de recibo e do diário de obra. 10GB/mês grátis + egress ilimitado grátis (bem mais folga que o Storage do Supabase). Ainda assim, fotos são comprimidas no cliente antes do upload e vídeo do diário fica fora do MVP, pra não gastar o tier rápido.
 - **Sem domínio próprio**: usar o subdomínio gratuito do Vercel enquanto for teste.
 - **Google Gemini API (família Flash)** para o pipeline de extração de recibo: tier gratuito real e contínuo (não é crédito que acaba), na faixa de ~1.500 requisições/dia — dá folga de sobra para volume de teste. Atenção: assim que ativar cobrança (billing) nesse mesmo projeto do Google Cloud, o tier gratuito desaparece por completo — manter um projeto dedicado só para isso enquanto for teste.
   - A Claude API (Sonnet 5) fica como opção de qualidade superior para quando sair da fase de testes: não tem tier gratuito contínuo, só ~US$5 de crédito único por conta nova, mas costuma ser mais precisa em recibos informais bagunçados (letra ruim, layout de impressora térmica).

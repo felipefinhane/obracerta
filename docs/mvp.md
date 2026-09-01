@@ -28,7 +28,7 @@ Critério de corte: a v1 precisa entregar o ciclo **planejar etapa → gastar �
 - Resiliência básica de conexão: se o upload falhar por falta de sinal, o app guarda localmente e tenta reenviar quando a conexão voltar. **Não é offline-first completo** (isso é fase 2) — é só não perder o lançamento se a rede cair no meio do envio.
 
 ### Diário de obra
-- Lançamento com fotos/vídeos, texto, clima, efetivo presente, ocorrências, vínculo opcional a uma etapa.
+- Lançamento com fotos (sem vídeo no MVP — ver seção 2), texto, clima, efetivo presente, ocorrências, vínculo opcional a uma etapa.
 
 ### Relatórios
 - Orçado vs. Realizado (por etapa e consolidado).
@@ -50,6 +50,13 @@ Critério de corte: a v1 precisa entregar o ciclo **planejar etapa → gastar �
 | PWA offline-first completo (fila local + background sync) | Fica só a resiliência básica de reenvio na v1; offline completo é investimento técnico maior |
 | Papel "Auditor do banco" | Só relevante quando o relatório de medição formal existir |
 | Curva ABC de insumos | Relatório avançado, baixo valor sem volume de dados |
+| Base SINAPI integrada ao orçamento | Enriquece a montagem de etapas com referência de preço público, mas não bloqueia o MVP — orçamento manual funciona primeiro |
+| Proposta Comercial (documento gerado a partir do orçamento) | Fluxo pré-contrato; só faz sentido depois que o motor de orçamento por etapas já estiver validado em uso real |
+| Pré-lançamento de despesa via WhatsApp | Via alternativa de captura, complementar ao fluxo mobile já desenhado (ADR 0002) — validar o fluxo do app antes de multiplicar canal de entrada |
+| Compras (solicitação → cotação → ordem de compra, com alçada de aprovação) | Fluxo de *antes* da despesa acontecer; hoje o MVP só registra gasto já realizado. Exige desenhar aprovação, que não existe ainda no MVP |
+| Vídeo no diário de obra | Storage é tier gratuito (Cloudflare R2, 10GB/mês — ver ADR 0003); poucos vídeos já comem centenas de MB. MVP fica só com foto; volta a ser avaliado com volume de uso real |
+
+**Analisado e descartado conscientemente** (comparado com sistema concorrente — Mais Controle, ver `planejamento.md` seção 7): BDI/visão de venda com markup, emissão de boletos, BI/dashboard multi-obra, Venda Reajustada (INCC/CUB/IGPM/IPCA) e Funil de Vendas. Motivo comum: ou dependem de um modelo de negócio que o ObraCerta não assume (incorporadora vendendo unidade, construtora cobrando markup do cliente pelo próprio sistema), ou cobrem uma fase fora do ciclo central do produto (pré-venda, antes de a obra existir).
 
 ---
 
