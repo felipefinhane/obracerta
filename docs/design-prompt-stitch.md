@@ -25,12 +25,16 @@ Não é público tech-savvy — pense em mestre de obra usando celular no
 canteiro, não em early adopter de app.
 
 PLATAFORMA
-Mobile-first. A captura de recibo e o lançamento de diário acontecem no
-celular, na rua ou no canteiro de obra, muitas vezes com uma mão só e sol
-forte na tela (alto contraste importa). As telas de relatório/gestão também
-precisam funcionar bem em desktop. Desenhe primeiro pensando em mobile
-(390px de largura como referência) e depois pense em como adapta pra
-desktop nas telas de gestão/relatório.
+É UM webapp responsivo só (Next.js/PWA) — não é um app nativo separado do
+site, é a mesma aplicação rodando no navegador do celular e no desktop.
+Por isso, para CADA tela abaixo eu marquei explicitamente se quero o
+mockup em mobile (390px de largura), desktop (1280px), ou os dois — não
+deixe implícito "adapta depois", gere os dois quando eu pedir os dois. A
+escolha de qual(is) pedir por tela segue o uso real já descrito em
+`planejamento.md` §3: captura acontece na rua, sempre no celular; a
+confirmação e a gestão acontecem "quando o usuário tiver tempo, celular ou
+desktop" — por isso a maioria das telas pede os dois tamanhos, e só as
+duas telas de captura em campo (8 e 14) são mobile-only de propósito.
 
 TOM VISUAL (sugestão minha, não é uma decisão fechada do projeto — ajuste
 à vontade)
@@ -54,71 +58,86 @@ VOCABULÁRIO — use esses termos exatos nas telas, não troque por sinônimo:
 
 TELAS A DESENHAR
 
-1. Login — email + senha, campo de erro visível, link "criar conta".
+1. Login — [mobile + desktop] email + senha, campo de erro visível, link
+   "criar conta".
 
-2. Cadastro — email + senha, sem confirmação de email (login funciona na
-   hora).
+2. Cadastro — [mobile + desktop] email + senha, sem confirmação de email
+   (login funciona na hora).
 
-3. Onboarding (só na primeira vez) — "Crie sua construtora": nome da
-   construtora, CNPJ (opcional). Tela única, sem fricção.
+3. Onboarding (só na primeira vez) — [mobile + desktop] "Crie sua
+   construtora": nome da construtora, CNPJ (opcional). Tela única, sem
+   fricção.
 
-4. Lista de Obras — cards com nome da obra, cliente, endereço, e um
-   indicador rápido de progresso (ex. barra pequena de % orçado x
-   realizado). Botão destacado "Nova obra". Se o usuário tiver só uma
-   obra, o app pula direto pra ela depois do login (mostrar como o app se
-   comportaria, mas a tela de lista existe pra quem tem mais de uma).
+4. Lista de Obras — [mobile + desktop, layouts podem diferir bastante:
+   lista/cards empilhados no mobile, grid ou tabela no desktop] cards com
+   nome da obra, cliente, endereço, e um indicador rápido de progresso
+   (ex. barra pequena de % orçado x realizado). Botão destacado "Nova
+   obra". Se o usuário tiver só uma obra, o app pula direto pra ela depois
+   do login (mostrar como o app se comportaria, mas a tela de lista existe
+   pra quem tem mais de uma).
 
-5. Nova Obra — formulário: nome, endereço, nome do cliente, valor total
-   planejado, data de início prevista, data de fim prevista.
+5. Nova Obra — [mobile + desktop] formulário: nome, endereço, nome do
+   cliente, valor total planejado, data de início prevista, data de fim
+   prevista.
 
-6. Detalhe da Obra (hub) — topo com resumo (nome, cliente, % orçado x
-   realizado consolidado), abaixo navegação por seção: Planejamento,
-   Despesas, Diário, Relatórios.
+6. Detalhe da Obra (hub) — [mobile + desktop] topo com resumo (nome,
+   cliente, % orçado x realizado consolidado), abaixo navegação por seção:
+   Planejamento, Despesas, Diário, Relatórios.
 
-7. Planejamento — Etapas — lista de etapas da obra (nome, % de peso sobre
-   o total, valor planejado, datas previstas, e um indicador de % medido/
-   concluído). Botão "Nova etapa". Sem fluxo de aprovação — é medição
-   simples.
+7. Planejamento — Etapas — [mobile + desktop, mas o desktop é o uso mais
+   comum — montar o orçamento por etapa é trabalho de mesa, não de campo]
+   lista de etapas da obra (nome, % de peso sobre o total, valor
+   planejado, datas previstas, e um indicador de % medido/concluído).
+   Botão "Nova etapa". Sem fluxo de aprovação — é medição simples.
 
-8. Captura de Recibo (mobile, o fluxo mais crítico de desenhar bem) —
-   tela minimalista: botão grande "Tirar foto" ou "Escolher da galeria".
-   Único campo que pode aparecer é escolher a obra (só se o usuário tiver
-   mais de uma — se só tiver uma, nem pergunta, já manda direto). Depois
-   de tirar a foto: confirmação rápida "Recibo registrado! Você confirma
-   os detalhes depois." — a pessoa NÃO deve preencher nada mais nesse
-   momento. Precisa ser operável com uma mão, em segundos, no meio de uma
-   compra.
+8. Captura de Recibo — [MOBILE APENAS, de propósito — não faz sentido em
+   desktop, é literalmente "tirar foto no meio da compra"; o fluxo mais
+   crítico de desenhar bem] tela minimalista: botão grande "Tirar foto" ou
+   "Escolher da galeria". Único campo que pode aparecer é escolher a obra
+   (só se o usuário tiver mais de uma — se só tiver uma, nem pergunta, já
+   manda direto). Depois de tirar a foto: confirmação rápida "Recibo
+   registrado! Você confirma os detalhes depois." — a pessoa NÃO deve
+   preencher nada mais nesse momento. Precisa ser operável com uma mão, em
+   segundos, no meio de uma compra.
 
-9. Recibos Pendentes de Confirmação — lista dos lançamentos provisórios
-   acumulados (miniatura da foto + o que já foi extraído automaticamente,
-   tipo fornecedor e valor, quando disponível + indicador de "processando"
-   pros que ainda não terminaram a extração).
+9. Recibos Pendentes de Confirmação — [mobile + desktop — `planejamento.md`
+   §3 é explícito: a confirmação acontece "quando o usuário tiver tempo,
+   celular ou desktop"] lista dos lançamentos provisórios acumulados
+   (miniatura da foto + o que já foi extraído automaticamente, tipo
+   fornecedor e valor, quando disponível + indicador de "processando" pros
+   que ainda não terminaram a extração).
 
-10. Confirmar Despesa — a foto do recibo ao lado (ou acima, em mobile) dos
-    campos extraídos e editáveis: fornecedor, data, valor, itens (com
-    quantidade/valor unitário/total), categoria, etapa vinculada, forma de
-    pagamento. Campos que vieram com baixa confiança da extração devem ter
-    destaque visual (ex. borda amarela) pedindo atenção extra. Botão
-    "Confirmar despesa".
+10. Confirmar Despesa — [mobile + desktop, mesmo motivo da tela 9 — pode
+    ser a tela mais usada em desktop do produto, já que a pessoa "tem
+    calma" nesse momento] a foto do recibo ao lado (desktop) ou acima
+    (mobile) dos campos extraídos e editáveis: fornecedor, data, valor,
+    itens (com quantidade/valor unitário/total), categoria, etapa
+    vinculada, forma de pagamento. Campos que vieram com baixa confiança
+    da extração devem ter destaque visual (ex. borda amarela) pedindo
+    atenção extra. Botão "Confirmar despesa".
 
-11. Nova Despesa Manual — mesmos campos da confirmação, mas em branco
-    (sem foto), pra quando o gasto não tem recibo pra fotografar.
+11. Nova Despesa Manual — [mobile + desktop] mesmos campos da confirmação,
+    mas em branco (sem foto), pra quando o gasto não tem recibo pra
+    fotografar.
 
-12. Extrato de Despesas — lista filtrável por categoria, fornecedor e
-    período, com total.
+12. Extrato de Despesas — [mobile + desktop, mas o desktop é o uso mais
+    comum — é tela de análise/filtro] lista filtrável por categoria,
+    fornecedor e período, com total.
 
-13. Diário de Obra — feed cronológico de lançamentos, cada um com foto,
-    data, clima, efetivo presente, ocorrências, etapa vinculada (se houver).
-    Botão "Novo lançamento".
+13. Diário de Obra — [mobile + desktop] feed cronológico de lançamentos,
+    cada um com foto, data, clima, efetivo presente, ocorrências, etapa
+    vinculada (se houver). Botão "Novo lançamento".
 
-14. Novo Lançamento de Diário — foto, texto livre, seletor de clima
-    (ícone simples: sol/nublado/chuva), número de pessoas presentes,
-    ocorrências (texto livre), etapa vinculada (opcional).
+14. Novo Lançamento de Diário — [MOBILE APENAS, de propósito — é captura
+    em campo, igual à tela 8] foto, texto livre, seletor de clima (ícone
+    simples: sol/nublado/chuva), número de pessoas presentes, ocorrências
+    (texto livre), etapa vinculada (opcional).
 
-15. Relatório Orçado x Realizado — por etapa (lista/barra comparando
-    planejado x gasto) e um total consolidado da obra. É o relatório mais
-    importante do produto — deve comunicar "estourou" ou "dentro do
-    esperado" à primeira vista (cor/ícone), sem precisar ler número.
+15. Relatório Orçado x Realizado — [mobile + desktop, mas o desktop é o
+    uso mais comum] por etapa (lista/barra comparando planejado x gasto) e
+    um total consolidado da obra. É o relatório mais importante do
+    produto — deve comunicar "estourou" ou "dentro do esperado" à primeira
+    vista (cor/ícone), sem precisar ler número.
 
 NÃO DESENHAR (fora do escopo do MVP, não faz sentido gerar tela pra isso)
 Conciliação bancária, contratos com fornecedor, aprovação formal de
@@ -127,8 +146,10 @@ foto), alertas/notificações, almoxarifado, qualquer fluxo de pré-venda ou
 proposta comercial.
 
 PRIORIDADE SE PRECISAR ESCOLHER POR ONDE COMEÇAR
-Se for gerar aos poucos: comece pela tela 8 (Captura de Recibo) e 10
-(Confirmar Despesa) — são as mais específicas do produto e as que mais
-precisam acertar a experiência. Login/Cadastro/Lista de Obras podem ser
-mais genéricas.
+Se for gerar aos poucos: comece pela tela 8 (Captura de Recibo, mobile) e
+10 (Confirmar Despesa, mobile e desktop) — são as mais específicas do
+produto e as que mais precisam acertar a experiência. Login/Cadastro/Lista
+de Obras podem ser mais genéricas. Ao pedir uma tela por vez, sempre repita
+explicitamente qual tamanho quer (mobile, desktop, ou os dois) — não deixe
+o Stitch assumir.
 ```
