@@ -1,6 +1,6 @@
 # Schema — cadastros de apoio (categorias, fornecedores)
 
-Status: done — mas ver achado abaixo, precisa de decisão do usuário
+Status: done
 Blocked by: 03
 
 ## Contexto
@@ -15,4 +15,4 @@ Ver `docs/modelo-dados.md` seção "Cadastros de apoio". Compartilhados entre as
 ## Comments
 
 - Migration `supabase/migrations/20260901144939_cadastros_apoio.sql`, aplicada local e no hospedado.
-- **Achado no teste de RLS** (ver ticket 06 pro cenário completo): um usuário com acesso só via `obra_membros` (ex. cliente) **não consegue ler `categorias`/`fornecedores`**, mesmo sendo da mesma construtora da obra dele — a policy usa `has_construtora_access`, que só é true pra quem tem linha em `construtora_membros`. Na prática, um relatório de despesas pro cliente não traria nome de categoria/fornecedor, só o que der pra ver via `despesas`/`etapas`/`diario_*` (que usam `has_obra_access`, esse sim cobre cliente). Não decidido em nenhuma sessão de grilling anterior — fica pra você: aceita essa lacuna (cliente vê despesa sem rótulo de categoria/fornecedor) ou abre uma policy adicional pra isso?
+- **Achado no teste de RLS, resolvido**: um usuário com acesso só via `obra_membros` (ex. cliente) não conseguia ler `categorias`/`fornecedores`, mesmo sendo da mesma construtora da obra dele (a policy original usa `has_construtora_access`, que exige `construtora_membros`). Fechado em `supabase/migrations/20260901145517_categorias_fornecedores_via_despesa.sql`: policy adicional (RLS combina policies do mesmo comando com OR) — visível também se referenciado por uma despesa de obra que o usuário acessa. Testado: cliente vê a categoria/fornecedor da despesa dele, **não** vê uma segunda categoria não referenciada por nenhuma despesa da obra dele — não abre o cadastro inteiro da construtora, só o que já aparece nas despesas visíveis.
