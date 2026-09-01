@@ -14,65 +14,188 @@ export default async function ObrasPage() {
   const { data: construtoras } = await supabase.from("construtoras").select("id, nome");
 
   return (
-    <main style={{ maxWidth: 640, margin: "3rem auto", padding: "0 1rem" }}>
-      <h1>Obras</h1>
+    <div className="min-h-screen bg-background text-on-background">
+      <header className="bg-surface border-b border-outline-variant flex items-center px-margin-mobile h-touch-target-min">
+        <h1 className="font-headline-md text-headline-md text-primary">ObraCerta</h1>
+      </header>
 
-      {obras && obras.length > 0 ? (
-        <ul>
-          {obras.map((obra) => (
-            <li key={obra.id}>
-              <strong>{obra.nome}</strong>
-              {obra.cliente_nome ? ` — ${obra.cliente_nome}` : ""}
-              {obra.endereco ? ` — ${obra.endereco}` : ""}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Nenhuma obra ainda.</p>
-      )}
+      <main className="px-margin-mobile pt-stack-lg pb-stack-lg flex flex-col gap-stack-lg max-w-4xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
+          <div>
+            <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
+              Obras
+            </h2>
+            <p className="font-body-md text-body-md text-on-surface-variant mt-1">
+              Gerencie e acompanhe o progresso das suas obras.
+            </p>
+          </div>
+        </div>
 
-      <h2>Nova obra</h2>
-      <form action={criarObra} style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-        {construtoras && construtoras.length > 1 ? (
-          <label>
-            Construtora
-            <select name="construtora_id" required style={{ display: "block", width: "100%" }}>
-              {construtoras.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.nome}
-                </option>
-              ))}
-            </select>
-          </label>
+        {obras && obras.length > 0 ? (
+          <div className="grid gap-stack-lg md:grid-cols-2 lg:grid-cols-3">
+            {obras.map((obra) => (
+              <article
+                key={obra.id}
+                className="bg-surface-container-lowest border border-outline-variant rounded p-stack-md flex flex-col gap-stack-md shadow-sm"
+              >
+                <div>
+                  <h3 className="font-headline-md text-headline-md text-on-surface mb-1">{obra.nome}</h3>
+                  {obra.cliente_nome && (
+                    <p className="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+                      <span aria-hidden className="material-symbols-outlined text-[18px]">
+                        person
+                      </span>
+                      {obra.cliente_nome}
+                    </p>
+                  )}
+                  {obra.endereco && (
+                    <p className="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-1">
+                      <span aria-hidden className="material-symbols-outlined text-[18px]">
+                        location_on
+                      </span>
+                      {obra.endereco}
+                    </p>
+                  )}
+                </div>
+                {/* Orçado x Realizado por obra fica pro módulo de Despesas —
+                    precisa agregar a view orcado_vs_realizado (por etapa)
+                    somada pra obra inteira, não existe ainda nesta tela. */}
+              </article>
+            ))}
+          </div>
         ) : (
-          <input type="hidden" name="construtora_id" value={construtoras?.[0]?.id ?? ""} />
+          <p className="font-body-md text-body-md text-on-surface-variant">Nenhuma obra ainda.</p>
         )}
-        <label>
-          Nome
-          <input name="nome" type="text" required style={{ display: "block", width: "100%" }} />
-        </label>
-        <label>
-          Endereço
-          <input name="endereco" type="text" style={{ display: "block", width: "100%" }} />
-        </label>
-        <label>
-          Cliente
-          <input name="cliente_nome" type="text" style={{ display: "block", width: "100%" }} />
-        </label>
-        <label>
-          Valor total planejado
-          <input name="valor_planejado_total" type="number" step="0.01" style={{ display: "block", width: "100%" }} />
-        </label>
-        <label>
-          Data de início prevista
-          <input name="data_inicio_prevista" type="date" style={{ display: "block", width: "100%" }} />
-        </label>
-        <label>
-          Data de fim prevista
-          <input name="data_fim_prevista" type="date" style={{ display: "block", width: "100%" }} />
-        </label>
-        <button type="submit">Criar obra</button>
-      </form>
-    </main>
+
+        <form
+          action={criarObra}
+          className="space-y-stack-lg bg-surface-container-lowest p-stack-md border border-outline-variant rounded-lg"
+        >
+          {construtoras && construtoras.length > 1 ? (
+            <div className="flex flex-col gap-stack-sm">
+              <label className="font-label-bold text-label-bold text-on-surface" htmlFor="construtora_id">
+                Construtora
+              </label>
+              <select
+                id="construtora_id"
+                name="construtora_id"
+                required
+                className="h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                {construtoras.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.nome}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : (
+            <input type="hidden" name="construtora_id" value={construtoras?.[0]?.id ?? ""} />
+          )}
+
+          <div className="space-y-stack-md">
+            <h2 className="font-headline-md text-headline-md font-bold text-primary border-b-2 border-outline-variant pb-2">
+              Informações da Obra
+            </h2>
+            <div className="flex flex-col gap-stack-sm">
+              <label className="font-label-bold text-label-bold text-on-surface" htmlFor="nome">
+                Nome da Obra *
+              </label>
+              <input
+                id="nome"
+                name="nome"
+                type="text"
+                placeholder="Ex: Residencial Flores"
+                required
+                className="h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md text-body-md"
+              />
+            </div>
+            <div className="flex flex-col gap-stack-sm">
+              <label className="font-label-bold text-label-bold text-on-surface" htmlFor="endereco">
+                Endereço
+              </label>
+              <input
+                id="endereco"
+                name="endereco"
+                type="text"
+                placeholder="Rua, Número, Bairro, Cidade"
+                className="h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md text-body-md"
+              />
+            </div>
+            <div className="flex flex-col gap-stack-sm">
+              <label className="font-label-bold text-label-bold text-on-surface" htmlFor="cliente_nome">
+                Nome do Cliente
+              </label>
+              <input
+                id="cliente_nome"
+                name="cliente_nome"
+                type="text"
+                placeholder="Nome completo ou Empresa"
+                className="h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md text-body-md"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-stack-md pt-stack-sm">
+            <h2 className="font-headline-md text-headline-md font-bold text-primary border-b-2 border-outline-variant pb-2">
+              Planejamento Financeiro e Prazos
+            </h2>
+            <div className="flex flex-col gap-stack-sm">
+              <label className="font-label-bold text-label-bold text-on-surface" htmlFor="valor_planejado_total">
+                Valor Total Planejado (R$)
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md text-body-md">
+                  R$
+                </span>
+                <input
+                  id="valor_planejado_total"
+                  name="valor_planejado_total"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="0,00"
+                  className="w-full h-touch-target-min pl-10 pr-3 border border-outline rounded bg-surface-bright text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md text-body-md"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+              <div className="flex flex-col gap-stack-sm">
+                <label className="font-label-bold text-label-bold text-on-surface" htmlFor="data_inicio_prevista">
+                  Data de Início
+                </label>
+                <input
+                  id="data_inicio_prevista"
+                  name="data_inicio_prevista"
+                  type="date"
+                  className="h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md text-body-md"
+                />
+              </div>
+              <div className="flex flex-col gap-stack-sm">
+                <label className="font-label-bold text-label-bold text-on-surface" htmlFor="data_fim_prevista">
+                  Data de Fim Prevista
+                </label>
+                <input
+                  id="data_fim_prevista"
+                  name="data_fim_prevista"
+                  type="date"
+                  className="h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md text-body-md"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full md:w-auto h-touch-target-min px-6 bg-secondary-container text-on-secondary font-button-text text-button-text rounded flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+          >
+            <span aria-hidden className="material-symbols-outlined">
+              save
+            </span>
+            Salvar Obra
+          </button>
+        </form>
+      </main>
+    </div>
   );
 }
