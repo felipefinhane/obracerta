@@ -17,4 +17,4 @@ Schema é versionado como migrations SQL puras via Supabase CLI, sem camada de s
 
 ## Exceção conhecida
 
-O upload/leitura de arquivo via Cloudflare R2 (ADR 0003) não passa por RLS — R2 não tem esse conceito. Esse caminho específico faz a checagem de autorização explicitamente via RPC das mesmas funções `has_obra_access`/`has_construtora_access`, em vez de deixar o Postgres aplicar a policy sozinho. É a única exceção ao "RLS como fonte de verdade" descrito acima.
+O upload/leitura de arquivo via Cloudflare R2 (ADR 0003) não passa por RLS — R2 não tem esse conceito. A chamada ao R2 em si é uma exceção; a autorização de *quem pode pedir a URL*, porém, continua sendo a RLS de verdade (o Route Handler busca a linha via client autenticado da sessão do usuário — se a `select` policy deixar passar, o acesso está provado). É a única exceção ao "RLS como fonte de verdade" descrito acima, e mesmo ela reusa a RLS em vez de reimplementar a regra em JS.
