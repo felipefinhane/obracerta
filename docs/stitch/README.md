@@ -6,14 +6,21 @@ O `.zip` original fica só local (`.gitignore`) — o que está versionado é o 
 
 ## Cobertura
 
-15 telas pedidas no prompt original. Saiu:
-- **14 telas mobile** (todas, exceto uma — ver gaps abaixo)
-- **12 telas desktop** (das 13 que o prompt de desktop pediu)
+15 telas pedidas no prompt original, todas presentes agora (depois da 3ª solicitação, `docs/design-prompt-stitch-nova-despesa-manual.md`):
+- **15 telas mobile**
+- **13 telas desktop**
 
-## Gaps conhecidos (não corrigidos ainda, achados na primeira revisão)
+## Gaps conhecidos
 
-- **"Nova Despesa Manual" não foi gerada** — nem mobile, nem desktop. É a única das 15 telas ausente nas duas rodadas. Precisa de uma solicitação extra ao Stitch se for usar essa tela como referência.
-- **Deslize de vocabulário em pelo menos uma tela**: `confirmar_despesa_desktop` usa "+ Novo Projeto" no menu, onde deveria ser "+ Nova Obra" (o prompt pede explicitamente pra não trocar "Obra" por sinônimo). Vale conferir se aparece em outras telas antes de considerar o vocabulário fechado.
+- ~~"Nova Despesa Manual" ausente~~ — **resolvido**, veio na atualização do zip (`nova_despesa_manual/` e `nova_despesa_manual_desktop/`).
+- **Vocabulário "Projeto" vazando como sinônimo de "Obra" — pior do que o achado inicial, aparece espalhado**. A correção pedida na 3ª solicitação só "colou" na tela específica que eu tinha apontado (`confirmar_despesa_desktop`) — não generalizou, e a tela nova já nasceu com o mesmo erro. Ocorrências confirmadas via `grep -rli "projeto" */code.html`:
+  - `lista_de_obras/code.html:182` — "acompanhe o progresso dos seus **projetos**"
+  - `lista_de_obras/code.html:272` — "cadastrando seu primeiro **projeto**"
+  - `di_rio_de_obra/code.html:188` — "**Projeto**: Residencial Alpha" (deveria ser "Obra: ...")
+  - `planejamento_desktop/code.html:172` — "**Projeto**: Residencial Alpha - Torre B"
+  - `relat_rio_or_ado_x_realizado_desktop/code.html:170` — "**Projeto** Alpha (Centro)" (opção de dropdown)
+  - `nova_despesa_manual_desktop/code.html:148` — "Novo **Projeto**" (mesmo erro que já tinha sido apontado, voltou)
+  - Ver `docs/design-prompt-stitch-fix-vocabulario.md` — 4ª solicitação, pede correção sistemática em vez de pontual.
 
 ## Qualidade observada
 

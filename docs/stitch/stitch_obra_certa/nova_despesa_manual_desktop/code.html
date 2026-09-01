@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nova Despesa Manual - ObraCerta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#c3c6d0",
+                        "secondary": "#a04100",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "primary-fixed": "#d6e3ff",
+                        "tertiary": "#011f05",
+                        "inverse-surface": "#313030",
+                        "on-surface": "#1c1b1b",
+                        "on-surface-variant": "#43474f",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "on-secondary-fixed": "#351000",
+                        "tertiary-fixed-dim": "#acd0a7",
+                        "primary-container": "#002d5e",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-primary-fixed": "#001b3d",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#a9c7ff",
+                        "surface-tint": "#3e5f92",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#fe6b00",
+                        "tertiary-fixed": "#c7ecc2",
+                        "error": "#ba1a1a",
+                        "primary": "#001939",
+                        "outline": "#747780",
+                        "on-primary-fixed-variant": "#244779",
+                        "on-tertiary-fixed-variant": "#2f4e2f",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#032107",
+                        "on-tertiary-container": "#7c9e78",
+                        "on-secondary-container": "#572000",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-container": "#163418",
+                        "background": "#fcf9f8",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary-container": "#7696cd",
+                        "surface": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "secondary-fixed": "#ffdbcc",
+                        "surface-variant": "#e5e2e1",
+                        "inverse-primary": "#a9c7ff",
+                        "on-background": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb693"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "margin-mobile": "16px",
+                        "stack-lg": "24px",
+                        "stack-md": "16px",
+                        "gutter-mobile": "12px",
+                        "base": "8px",
+                        "touch-target-min": "48px",
+                        "stack-sm": "8px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "button-text": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-md": ["20px", { lineHeight: "28px", fontWeight: "700" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-lg": ["18px", { lineHeight: "26px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["26px", { lineHeight: "32px", fontWeight: "700" }],
+                        "label-bold": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "button-text": ["16px", { lineHeight: "24px", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low min-h-screen text-on-surface font-body-md text-body-md antialiased">
+<!-- SideNavBar (From JSON) -->
+<nav class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface flex flex-col py-stack-lg z-50">
+<!-- Brand Header -->
+<div class="px-stack-lg mb-stack-lg flex items-center gap-stack-md">
+<div class="w-12 h-12 rounded bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary">ObraCerta</h1>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Gestão de Canteiro</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col">
+<!-- Obras (Inactive) -->
+<a class="flex items-center px-stack-lg py-4 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined mr-stack-md" data-icon="construction">construction</span>
+<span class="font-label-bold text-label-bold">Obras</span>
+</a>
+<!-- Despesas (Active) -->
+<a class="flex items-center px-stack-lg py-4 text-primary border-r-4 border-secondary-container bg-surface-container-high transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined mr-stack-md" data-icon="payments">payments</span>
+<span class="font-label-bold text-label-bold">Despesas</span>
+</a>
+<!-- Diário (Inactive) -->
+<a class="flex items-center px-stack-lg py-4 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined mr-stack-md" data-icon="event_note">event_note</span>
+<span class="font-label-bold text-label-bold">Diário</span>
+</a>
+<!-- Relatórios (Inactive) -->
+<a class="flex items-center px-stack-lg py-4 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined mr-stack-md" data-icon="description">description</span>
+<span class="font-label-bold text-label-bold">Relatórios</span>
+</a>
+</div>
+<!-- CTA Action -->
+<div class="px-stack-lg mt-auto pt-stack-lg border-t border-outline-variant">
+<button class="w-full h-touch-target-min bg-primary text-on-primary rounded font-button-text text-button-text flex items-center justify-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Novo Projeto
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 p-stack-lg pb-24">
+<!-- Page Header -->
+<header class="mb-stack-lg flex items-center gap-stack-md">
+<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded border border-outline-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Nova Despesa Manual</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Insira os dados do comprovante ou fatura.</p>
+</div>
+</header>
+<!-- Form Card Container -->
+<div class="max-w-4xl mx-auto bg-surface border border-outline-variant rounded p-stack-lg">
+<!-- Basic Info Grid -->
+<div class="grid grid-cols-2 gap-x-stack-md gap-y-stack-lg mb-stack-lg pb-stack-lg border-b border-outline-variant">
+<!-- Fornecedor -->
+<div class="col-span-2">
+<label class="block font-label-bold text-label-bold text-on-surface mb-stack-sm flex flex-col">
+                        Fornecedor / Loja
+                        <input class="mt-2 h-12 px-4 border border-on-surface rounded bg-surface focus:ring-2 focus:ring-primary outline-none font-body-md text-body-md w-full placeholder-outline" placeholder="Ex: Depósito Silva" type="text"/>
+</label>
+</div>
+<!-- Data -->
+<div>
+<label class="block font-label-bold text-label-bold text-on-surface mb-stack-sm flex flex-col">
+                        Data da Despesa
+                        <input class="mt-2 h-12 px-4 border border-on-surface rounded bg-surface focus:ring-2 focus:ring-primary outline-none font-body-md text-body-md w-full text-on-surface-variant" type="date"/>
+</label>
+</div>
+<!-- Valor Total -->
+<div>
+<label class="block font-label-bold text-label-bold text-on-surface mb-stack-sm flex flex-col">
+                        Valor Total (R$)
+                        <input class="mt-2 h-12 px-4 border border-on-surface rounded bg-surface focus:ring-2 focus:ring-primary outline-none font-body-md text-body-md w-full placeholder-outline text-right" placeholder="0,00" type="text"/>
+</label>
+</div>
+<!-- Forma de Pagamento -->
+<div>
+<label class="block font-label-bold text-label-bold text-on-surface mb-stack-sm flex flex-col">
+                        Forma de Pagamento
+                        <select class="mt-2 h-12 px-4 border border-on-surface rounded bg-surface focus:ring-2 focus:ring-primary outline-none font-body-md text-body-md w-full text-on-surface-variant appearance-none">
+<option value="">Selecione...</option>
+<option value="boleto">Boleto</option>
+<option value="pix">PIX</option>
+<option value="cartao_credito">Cartão de Crédito</option>
+<option value="transferencia">Transferência</option>
+</select>
+</label>
+</div>
+<!-- Categoria -->
+<div>
+<label class="block font-label-bold text-label-bold text-on-surface mb-stack-sm flex flex-col">
+                        Categoria
+                        <select class="mt-2 h-12 px-4 border border-on-surface rounded bg-surface focus:ring-2 focus:ring-primary outline-none font-body-md text-body-md w-full text-on-surface-variant appearance-none">
+<option value="">Selecione...</option>
+<option value="materiais">Materiais de Construção</option>
+<option value="ferramentas">Ferramentas &amp; Locação</option>
+<option value="mao_obra">Mão de Obra</option>
+<option value="alimentacao">Alimentação</option>
+</select>
+</label>
+</div>
+<!-- Etapa Vinculada -->
+<div class="col-span-2">
+<label class="block font-label-bold text-label-bold text-on-surface mb-stack-sm flex flex-col">
+                        Etapa Vinculada
+                        <select class="mt-2 h-12 px-4 border border-on-surface rounded bg-surface focus:ring-2 focus:ring-primary outline-none font-body-md text-body-md w-full text-on-surface-variant appearance-none">
+<option value="">Selecione a etapa (opcional)</option>
+<option value="fundacao">01 - Fundação</option>
+<option value="alvenaria">02 - Alvenaria</option>
+<option value="cobertura">03 - Cobertura</option>
+<option value="acabamento">04 - Acabamento</option>
+</select>
+</label>
+</div>
+</div>
+<!-- Itens Discriminados Section -->
+<div>
+<div class="flex items-center justify-between mb-stack-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Itens Discriminados</h3>
+<button class="h-10 px-4 border border-outline text-primary rounded font-button-text text-button-text flex items-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+                        Adicionar Item
+                    </button>
+</div>
+<!-- Empty State Table -->
+<div class="border border-outline-variant rounded overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="py-3 px-4 font-label-bold text-label-bold text-on-surface-variant w-1/2">Descrição do Item</th>
+<th class="py-3 px-4 font-label-bold text-label-bold text-on-surface-variant">Qtd</th>
+<th class="py-3 px-4 font-label-bold text-label-bold text-on-surface-variant">Un.</th>
+<th class="py-3 px-4 font-label-bold text-label-bold text-on-surface-variant text-right">Valor Unit.</th>
+<th class="py-3 px-4 font-label-bold text-label-bold text-on-surface-variant text-right">Total</th>
+<th class="py-3 px-4 font-label-bold text-label-bold text-on-surface-variant text-center w-12"></th>
+</tr>
+</thead>
+<tbody>
+<!-- Empty State Row -->
+<tr>
+<td class="py-12 text-center bg-surface-bright" colspan="6">
+<div class="flex flex-col items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[48px] mb-2" data-icon="receipt_long">receipt_long</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Nenhum item adicionado ainda.</p>
+<p class="font-label-bold text-label-bold text-outline mt-1">Clique em "Adicionar Item" para detalhar a despesa.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Helper text for totals -->
+<div class="flex justify-end mt-stack-md">
+<div class="flex items-center gap-stack-md bg-surface-container-low p-stack-md rounded border border-outline-variant">
+<span class="font-label-bold text-label-bold text-on-surface-variant">Soma dos itens:</span>
+<span class="font-headline-md text-headline-md text-on-surface">R$ 0,00</span>
+</div>
+</div>
+</div>
+<!-- Form Actions -->
+<div class="mt-stack-lg pt-stack-lg border-t border-outline-variant flex items-center justify-end gap-stack-md">
+<button class="h-touch-target-min px-6 border border-outline text-on-surface-variant rounded font-button-text text-button-text hover:bg-surface-container-low transition-colors">
+                    Cancelar
+                </button>
+<button class="h-touch-target-min px-8 bg-secondary-container text-on-primary rounded font-button-text text-button-text hover:bg-secondary transition-colors shadow-sm">
+                    Salvar Despesa
+                </button>
+</div>
+</div>
+</main>
+</body></html>

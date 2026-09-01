@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-
-<html lang="pt-BR"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Relatório Orçado vs. Realizado - ObraCerta</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -104,7 +102,7 @@
 <!-- SideNavBar (Shared Component) -->
 <nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface dark:bg-surface-dim py-stack-lg z-50">
 <div class="px-6 mb-8 flex items-center gap-3">
-<img alt="Logo ObraCerta" class="w-10 h-10 object-contain" data-alt="Logotipo ObraCerta, um design geométrico e moderno utilizando as cores azul marinho e laranja sobre fundo branco, transmitindo solidez e confiança no setor de construção." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnxYul0tE5lYgLLb5LbKRaYPzOcejmWCXxEGeQcF56BNGdqeVyHYhG5oRAf8isAQBxNk8MTozDymB39k1MqLtaVHdBo39S_hp4o1AIHTdjXxRe9zRcH5aq8I6l3hfF4Dy2Tr8al9rXrm6tdqSygev61XCGULl8JmBNDe6ZDnTBdAsYt5PsTnI1B2jU4jIbZ8MVDwQ7Yba7Yc3HkqxRlqR9AhUy85cfgR84SY86kPKVFE3wubGThJU9"/>
+<img alt="Logo ObraCerta" class="w-10 h-10 object-contain" data-alt="Logotipo ObraCerta, um design geométrico e moderno utilizando as cores azul marinho e laranja sobre fundo branco, transmitindo solidez e confiança no setor de construção." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnxYul0tE5lYgLLb5LbKRaYPzOcejmWCXxEGeQcF56BNGdqeVyHYhG5oRAf8isAQBxNk8MTozDymB39k1MqLtaVHdBo39S_hp4o1AIHTdjXxRe9zRcH5aq8I6l3hfF4Dy2Tr8al9rXrm6tdqSygev61XCGULl8JmBNDe6ZDnTBdAsYt5PsTnI1B2jU4jIbZ8MVDwQ7Yba7Yc3HkqxRlqR9AhUy85cfgR84SY86kPKVFE3wubGThJU9">
 <div>
 <h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">ObraCerta</h1>
 <p class="font-label-bold text-label-bold text-on-surface-variant">Gestão de Canteiro</p>
@@ -133,10 +131,8 @@
 </a>
 </div>
 <div class="px-6 mt-auto">
-<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text py-3 rounded hover:bg-secondary transition-colors cursor-pointer active:bg-secondary flex items-center justify-center gap-2">
-<span class="material-symbols-outlined">add</span>
-                Novo Projeto
-            </button>
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text py-3 rounded hover:bg-secondary transition-colors cursor-pointer active:bg-secondary flex items-center justify-center gap-2"><span class="material-symbols-outlined">add</span>
+                Nova Obra</button>
 </div>
 </nav>
 <!-- TopNavBar (Shared Component) -->
@@ -145,7 +141,7 @@
 <!-- Search Bar placeholder -->
 <div class="relative w-64">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-on-surface" placeholder="Buscar..." type="text"/>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-on-surface" placeholder="Buscar..." type="text">
 </div>
 </div>
 <div class="flex items-center gap-4">
@@ -158,7 +154,7 @@
 <span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
 </button>
 <div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
-<img alt="Foto de perfil do gestor" class="w-full h-full object-cover" data-alt="Foto de perfil de um gestor de obras, homem com cerca de 40 anos, usando capacete branco e colete refletivo, com fundo desfocado de um canteiro de obras bem iluminado." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0_V8hrVD4Cdl6RRMnDrLbthQWL2W2GHkBSYvtSz6grAest0oyWrlRaasAUAsX9Xws6x39HzbuvMmzZcSiqOy4EVDk8Vfk1J7VeL4_0IHhQWjg28_e-Q5GLQfQg5Ub4nS1zewStMZ3ZHXnVdQMVbM0tkJM9Ft8RFIe16F_pg01cIuwU6q5CwokMU0hrYDeZ2b1cKOuJRgi1pxUU-l7NNWSILF9U5zK9J-wEY00pY7F0-Yy7aBcyaiH"/>
+<img alt="Foto de perfil do gestor" class="w-full h-full object-cover" data-alt="Foto de perfil de um gestor de obras, homem com cerca de 40 anos, usando capacete branco e colete refletivo, com fundo desfocado de um canteiro de obras bem iluminado." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0_V8hrVD4Cdl6RRMnDrLbthQWL2W2GHkBSYvtSz6grAest0oyWrlRaasAUAsX9Xws6x39HzbuvMmzZcSiqOy4EVDk8Vfk1J7VeL4_0IHhQWjg28_e-Q5GLQfQg5Ub4nS1zewStMZ3ZHXnVdQMVbM0tkJM9Ft8RFIe16F_pg01cIuwU6q5CwokMU0hrYDeZ2b1cKOuJRgi1pxUU-l7NNWSILF9U5zK9J-wEY00pY7F0-Yy7aBcyaiH">
 </div>
 </div>
 </header>
@@ -190,9 +186,9 @@
 <div class="flex-1 flex flex-col justify-center relative min-h-[250px]">
 <!-- Y Axis Labels -->
 <div class="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-right pr-2 font-label-bold text-on-surface-variant text-xs">
-<span>R$ 2.5M</span>
-<span>R$ 1.25M</span>
-<span>R$ 0</span>
+<span class="">R$ 2.5M</span>
+<span class="">R$ 1.25M</span>
+<span class="">R$ 0</span>
 </div>
 <!-- Graph Area -->
 <div class="ml-16 border-l border-b border-outline-variant h-[200px] flex items-end justify-around pb-0 relative">
@@ -203,7 +199,7 @@
 <div class="flex items-end gap-1 h-full w-24 z-10 group cursor-pointer relative">
 <!-- Tooltip -->
 <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">
-                                Orçado: R$ 800k<br/>Realizado: R$ 750k
+                                Orçado: R$ 800k<br>Realizado: R$ 750k
                             </div>
 <div class="w-10 bg-primary-container h-[80%] rounded-t relative"></div>
 <div class="w-10 bg-tertiary-container h-[75%] rounded-t"></div>
@@ -211,7 +207,7 @@
 <!-- Bar Group 2 -->
 <div class="flex items-end gap-1 h-full w-24 z-10 group cursor-pointer relative">
 <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">
-                                Orçado: R$ 1.2M<br/>Realizado: R$ 1.4M (Estouro)
+                                Orçado: R$ 1.2M<br>Realizado: R$ 1.4M (Estouro)
                             </div>
 <div class="w-10 bg-primary-container h-[60%] rounded-t"></div>
 <div class="w-10 bg-error h-[70%] rounded-t relative overflow-hidden">
@@ -221,7 +217,7 @@
 <!-- Bar Group 3 -->
 <div class="flex items-end gap-1 h-full w-24 z-10 group cursor-pointer relative">
 <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">
-                                Orçado: R$ 500k<br/>Realizado: R$ 450k
+                                Orçado: R$ 500k<br>Realizado: R$ 450k
                             </div>
 <div class="w-10 bg-primary-container h-[90%] rounded-t"></div>
 <div class="w-10 bg-tertiary-container h-[85%] rounded-t"></div>
@@ -261,7 +257,7 @@
 <p class="font-headline-lg text-error">R$ 2.600.000,00</p>
 <div class="flex items-center gap-1 text-error text-xs font-label-bold mt-2">
 <span class="material-symbols-outlined text-[16px]">trending_up</span>
-<span>4.0% acima da meta</span>
+<span class="">4.0% acima da meta</span>
 </div>
 </div>
 <div class="bg-surface border border-outline-variant rounded p-stack-md flex-1 flex flex-col justify-center relative overflow-hidden">
@@ -362,4 +358,6 @@
 </div>
 </div>
 </main>
+
+
 </body></html>

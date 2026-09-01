@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-
-<html lang="pt-BR"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Confirmar Despesa - ObraCerta</title>
 <!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Tailwind Config -->
@@ -125,27 +123,27 @@
 </div>
 <ul class="flex flex-col gap-stack-sm flex-1 mt-stack-md">
 <!-- Inactive Tab -->
-<li>
+<li class="">
 <a class="flex items-center gap-stack-md px-stack-lg py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
 <span class="material-symbols-outlined" data-icon="construction">construction</span>
 <span class="font-label-bold text-label-bold">Obras</span>
 </a>
 </li>
 <!-- Active Tab (Intent: Expenses) -->
-<li>
+<li class="">
 <a class="flex items-center gap-stack-md px-stack-lg py-3 text-primary dark:text-primary-fixed border-r-4 border-secondary-container bg-surface-container-high transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
 <span class="material-symbols-outlined" data-icon="payments" data-weight="fill" style="font-variation-settings: 'FILL' 1;">payments</span>
 <span class="font-label-bold text-label-bold">Despesas</span>
 </a>
 </li>
 <!-- Inactive Tabs -->
-<li>
+<li class="">
 <a class="flex items-center gap-stack-md px-stack-lg py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
 <span class="material-symbols-outlined" data-icon="event_note">event_note</span>
 <span class="font-label-bold text-label-bold">Diário</span>
 </a>
 </li>
-<li>
+<li class="">
 <a class="flex items-center gap-stack-md px-stack-lg py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
 <span class="material-symbols-outlined" data-icon="description">description</span>
 <span class="font-label-bold text-label-bold">Relatórios</span>
@@ -153,9 +151,8 @@
 </li>
 </ul>
 <div class="px-stack-lg mt-auto">
-<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text h-touch-target-min rounded flex items-center justify-center gap-base transition-all duration-200 hover:opacity-90">
-<span class="material-symbols-outlined" data-icon="add">add</span>
-                Novo Projeto
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text h-touch-target-min rounded flex items-center justify-center gap-base transition-all duration-200 hover:opacity-90"><span class="material-symbols-outlined" data-icon="add">add</span>
+                Nova Obra
             </button>
 </div>
 </nav>
@@ -167,7 +164,7 @@
 <!-- Search bar abstract layout representation based on "search_bar": "on_left" -->
 <div class="relative w-64">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
-<input class="w-full h-10 pl-10 pr-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Buscar..." type="text"/>
+<input class="w-full h-10 pl-10 pr-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Buscar..." type="text">
 </div>
 </div>
 <div class="flex items-center gap-stack-md">
@@ -180,7 +177,7 @@
 <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
 </button>
 <div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden border border-outline-variant ml-2">
-<img alt="Foto de perfil do gestor" class="w-full h-full object-cover" data-alt="A close up portrait of a male construction project manager wearing a white hard hat and safety vest, looking confident in bright daylight. The image has a clean, high-contrast corporate aesthetic suitable for a professional avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMvDtCJAvQhIhd0ldbqPDCgQsheB1sJVRNY8U9rm3jTplFJ-j5fhkSpfPOW3LcbzO9biFmMOuON2FLS0loJm6yojuXHl_w3ZJ-zwKx2nFXX9GR1ajvpTkDdlVksxPrQhpcqcyXe0WKD4nbkOQHc09-qaiUM96UAyalcIeaWsB52x7n7cxCfAE25A3NBsAgenTHI8vppUBTA6_nEin22RaKDZGTea5bUqadm-JsFsmpQogmakWQm2Av"/>
+<img alt="Foto de perfil do gestor" class="w-full h-full object-cover" data-alt="A close up portrait of a male construction project manager wearing a white hard hat and safety vest, looking confident in bright daylight. The image has a clean, high-contrast corporate aesthetic suitable for a professional avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMvDtCJAvQhIhd0ldbqPDCgQsheB1sJVRNY8U9rm3jTplFJ-j5fhkSpfPOW3LcbzO9biFmMOuON2FLS0loJm6yojuXHl_w3ZJ-zwKx2nFXX9GR1ajvpTkDdlVksxPrQhpcqcyXe0WKD4nbkOQHc09-qaiUM96UAyalcIeaWsB52x7n7cxCfAE25A3NBsAgenTHI8vppUBTA6_nEin22RaKDZGTea5bUqadm-JsFsmpQogmakWQm2Av">
 </div>
 </div>
 </header>
@@ -215,7 +212,7 @@
 <div class="flex-1 bg-surface-dim overflow-auto relative p-stack-lg flex items-start justify-center cursor-move touch-pan-xy">
 <!-- Simulated Receipt Image -->
 <div class="bg-surface border border-outline-variant shadow-md p-4 max-w-full inline-block transition-transform duration-200 origin-top">
-<img alt="Recibo digitalizado" class="max-w-none w-[600px] h-auto pointer-events-none" data-alt="A clear, top-down photograph of a crumpled paper receipt from a building materials supplier sitting on a rough wooden construction table. The receipt shows lists of items like cement and lumber, with some totals circled in pen. Bright, natural, overhead lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyV-C8fl7UWhF5dnozehoac4fFOHJ8sckpsZ_TMQkLq0kjPJ-4gJFYXI0bWLqXZiPpGkliK63Sa4i7LmIctrpjCzuqYXlDIBPpkZgfifnm8fD73Yl77h2i2dm40Q6KnWhBkJYg6AaeWyV__iGr4ZVjfsJ3QEQj1k32p38o-xO20kLKQVSlTcD261QnbMpeMbGK6Ex3LUdBQ5Ea_Y2Z3qfzi0cQMjeXHikoJpD0yXalwjfmwxZKa6R9"/>
+<img alt="Recibo digitalizado" class="max-w-none w-[600px] h-auto pointer-events-none" data-alt="A clear, top-down photograph of a crumpled paper receipt from a building materials supplier sitting on a rough wooden construction table. The receipt shows lists of items like cement and lumber, with some totals circled in pen. Bright, natural, overhead lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyV-C8fl7UWhF5dnozehoac4fFOHJ8sckpsZ_TMQkLq0kjPJ-4gJFYXI0bWLqXZiPpGkliK63Sa4i7LmIctrpjCzuqYXlDIBPpkZgfifnm8fD73Yl77h2i2dm40Q6KnWhBkJYg6AaeWyV__iGr4ZVjfsJ3QEQj1k32p38o-xO20kLKQVSlTcD261QnbMpeMbGK6Ex3LUdBQ5Ea_Y2Z3qfzi0cQMjeXHikoJpD0yXalwjfmwxZKa6R9">
 </div>
 </div>
 </section>
@@ -235,17 +232,17 @@
 <!-- Field: Fornecedor (High Confidence) -->
 <div class="flex flex-col gap-1">
 <label class="font-label-bold text-label-bold text-on-surface-variant">Fornecedor</label>
-<input class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="Depósito ConstruBem Ltda."/>
+<input class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="Depósito ConstruBem Ltda.">
 </div>
 <!-- Field: Data (High Confidence) -->
 <div class="flex flex-col gap-1">
 <label class="font-label-bold text-label-bold text-on-surface-variant">Data de Emissão</label>
-<input class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="date" value="2023-10-24"/>
+<input class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="date" value="2023-10-24">
 </div>
 <!-- Field: Valor Total (High Confidence) -->
 <div class="flex flex-col gap-1">
 <label class="font-label-bold text-label-bold text-on-surface-variant">Valor Total (R$)</label>
-<input class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md font-bold focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="3.450,00"/>
+<input class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md font-bold focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="3.450,00">
 </div>
 <!-- Field: Forma de Pagamento -->
 <div class="flex flex-col gap-1">
@@ -330,4 +327,6 @@
 </div>
 </main>
 </div>
+
+
 </body></html>
