@@ -13,14 +13,7 @@ O `.zip` original fica só local (`.gitignore`) — o que está versionado é o 
 ## Gaps conhecidos
 
 - ~~"Nova Despesa Manual" ausente~~ — **resolvido**, veio na atualização do zip (`nova_despesa_manual/` e `nova_despesa_manual_desktop/`).
-- **Vocabulário "Projeto" vazando como sinônimo de "Obra" — pior do que o achado inicial, aparece espalhado**. A correção pedida na 3ª solicitação só "colou" na tela específica que eu tinha apontado (`confirmar_despesa_desktop`) — não generalizou, e a tela nova já nasceu com o mesmo erro. Ocorrências confirmadas via `grep -rli "projeto" */code.html`:
-  - `lista_de_obras/code.html:182` — "acompanhe o progresso dos seus **projetos**"
-  - `lista_de_obras/code.html:272` — "cadastrando seu primeiro **projeto**"
-  - `di_rio_de_obra/code.html:188` — "**Projeto**: Residencial Alpha" (deveria ser "Obra: ...")
-  - `planejamento_desktop/code.html:172` — "**Projeto**: Residencial Alpha - Torre B"
-  - `relat_rio_or_ado_x_realizado_desktop/code.html:170` — "**Projeto** Alpha (Centro)" (opção de dropdown)
-  - `nova_despesa_manual_desktop/code.html:148` — "Novo **Projeto**" (mesmo erro que já tinha sido apontado, voltou)
-  - Ver `docs/design-prompt-stitch-fix-vocabulario.md` — 4ª solicitação, pede correção sistemática em vez de pontual.
+- ~~Vocabulário "Projeto" vazando como sinônimo de "Obra"~~ — **resolvido**. A 4ª solicitação (`docs/design-prompt-stitch-fix-vocabulario.md`, pedindo correção sistemática com cada ocorrência listada) corrigiu 5 das 6: `lista_de_obras` (mensagem de progresso), `di_rio_de_obra`, `planejamento_desktop`, `relat_rio_or_ado_x_realizado_desktop`, `nova_despesa_manual_desktop`. A 6ª (`lista_de_obras/code.html`, texto do estado vazio) veio de novo com "projeto" — corrigida à mão direto no HTML (é texto puro, mais barato que outra volta no Stitch). **Nota**: o `screen.png` de `lista_de_obras/` ainda mostra o texto antigo ("projeto"), porque só o `code.html` foi editado aqui — o screenshot não foi re-renderizado. Se for usar o PNG como referência visual dessa tela, o texto do estado vazio está desatualizado nele.
 
 ## Qualidade observada
 
