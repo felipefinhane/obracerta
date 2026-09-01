@@ -1,6 +1,6 @@
 # Função `criar_construtora` (bootstrap do primeiro admin)
 
-Status: open
+Status: done
 Blocked by: nenhuma
 
 ## Contexto
@@ -15,3 +15,6 @@ Problema de ovo-e-galinha anotado no ticket 03 de `fundacao-tecnica`: um usuári
 - Testar: usuário sem nenhuma construtora chama a função, vira admin, consegue criar obra na sequência (via ticket 01).
 
 ## Comments
+
+- Migration `supabase/migrations/20260901160324_criar_construtora.sql`. `security definer`, checa só `auth.uid()` não nulo, `revoke`/`grant execute` restrito a `authenticated`.
+- Testado com login real: usuário sem nenhuma construtora chama a função via RPC, vira admin, na sequência já consegue criar obra (ticket 01) — fluxo completo validado junto.
