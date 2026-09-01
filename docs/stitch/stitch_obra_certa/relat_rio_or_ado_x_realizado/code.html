@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ObraCerta - Orçado x Realizado</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e5e2e1",
+                      "tertiary": "#011f05",
+                      "on-primary-fixed": "#001b3d",
+                      "outline-variant": "#c3c6d0",
+                      "primary-container": "#002d5e",
+                      "inverse-surface": "#313030",
+                      "surface-bright": "#fcf9f8",
+                      "background": "#fcf9f8",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#032107",
+                      "on-tertiary-container": "#7c9e78",
+                      "tertiary-container": "#163418",
+                      "surface-container-low": "#f6f3f2",
+                      "surface-dim": "#dcd9d9",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#ffb693",
+                      "surface": "#fcf9f8",
+                      "tertiary-fixed": "#c7ecc2",
+                      "surface-tint": "#3e5f92",
+                      "primary-fixed": "#d6e3ff",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#f3f0ef",
+                      "on-surface-variant": "#43474f",
+                      "outline": "#747780",
+                      "on-primary-fixed-variant": "#244779",
+                      "error-container": "#ffdad6",
+                      "on-background": "#1c1b1b",
+                      "surface-container": "#f0eded",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-secondary-container": "#572000",
+                      "primary": "#001939",
+                      "on-primary-container": "#7696cd",
+                      "secondary-container": "#fe6b00",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#1c1b1b",
+                      "secondary": "#a04100",
+                      "on-secondary-fixed-variant": "#7a3000",
+                      "inverse-primary": "#a9c7ff",
+                      "secondary-fixed": "#ffdbcc",
+                      "surface-container-high": "#eae7e7",
+                      "tertiary-fixed-dim": "#acd0a7",
+                      "primary-fixed-dim": "#a9c7ff",
+                      "on-secondary-fixed": "#351000",
+                      "on-tertiary-fixed-variant": "#2f4e2f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-lg": "24px",
+                      "margin-mobile": "16px",
+                      "touch-target-min": "48px",
+                      "base": "8px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "gutter-mobile": "12px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "button-text": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "label-bold": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "button-text": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "26px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-touch-target-min bg-surface dark:bg-on-background border-b border-outline-variant dark:border-outline flat no shadows hidden md:flex">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-touch-target-min h-touch-target-min hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full text-on-surface-variant dark:text-surface-variant">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">ObraCerta</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-bold text-label-bold text-on-surface-variant">Profile Photo</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close up portrait photo of a construction site manager wearing a hard hat, lit by bright natural sunlight in a realistic, modern documentary style with a sharp focus on the face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB17JRRz1unfTaNyZitlByBVYmFufoY6gi27dQjcXwX7SKc-YGf-_cDpZh2ZzPePCobADMy5IxDLkjaVZ3Lm3CHdXFOvnyp32osOOgUyJs2Gb6gX70M5SGH2PQ9L9IhzyeHwWhGuAUQYVypuZY9mZGqPRUyO0gaeASYwbscoAbrIC5EumuteqtXTsI__UIAzchs9lejZfDE89Hew2Dz_gQDbLioiVWN2MaN3MVT80RWn6P9tj5pM-Nb"/>
+</div>
+</div>
+</header>
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-touch-target-min bg-surface dark:bg-on-background border-b border-outline-variant dark:border-outline flat no shadows md:hidden">
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center w-10 h-10 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full text-on-surface-variant dark:text-surface-variant">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">ObraCerta</h1>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-16 md:pt-20 px-margin-mobile md:px-8 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="mb-stack-lg pt-stack-md">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Relatório Orçado x Realizado</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Acompanhamento financeiro da obra Residencial Villa Lobos.</p>
+</div>
+<!-- Consolidado Topo -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 md:p-6 mb-stack-lg shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-10"></div>
+<h3 class="font-label-bold text-label-bold text-on-surface-variant mb-4 uppercase tracking-wider">Custo Total Consolidado</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Orçado -->
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface-variant mb-1">Planejado (Orçado)</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">R$ 1.250.000</span>
+</div>
+<!-- Realizado -->
+<div class="flex flex-col border-l-4 border-tertiary-container pl-4">
+<span class="font-body-md text-body-md text-on-surface-variant mb-1">Realizado (Até o momento)</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-tertiary-container">R$ 840.500</span>
+</div>
+<!-- Status Visual Global -->
+<div class="flex flex-col justify-center bg-tertiary-fixed/30 rounded-lg p-3 border border-tertiary-fixed-dim items-center">
+<div class="flex items-center gap-2 text-tertiary-container">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<span class="font-label-bold text-label-bold">DENTRO DO ORÇAMENTO</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant mt-1 text-center text-sm">Economia de 5% sobre o planejado até esta etapa.</span>
+</div>
+</div>
+<!-- Global Progress Bar -->
+<div class="mt-6">
+<div class="flex justify-between font-label-bold text-label-bold text-on-surface-variant mb-2">
+<span>Progresso Financeiro Global</span>
+<span>67% Consumido</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-3">
+<div class="bg-tertiary-container h-3 rounded-full" style="width: 67%"></div>
+</div>
+</div>
+</section>
+<!-- Lista de Etapas (Bento-style Grid for Desktop, Stack for Mobile) -->
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Detalhamento por Etapa</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
+<!-- Etapa 1: Fundações (Dentro do Orçado - Verde) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-button-text text-button-text text-on-surface">Fundações</h4>
+<span class="material-symbols-outlined text-tertiary-container" data-icon="check_circle">check_circle</span>
+</div>
+<div class="space-y-3 mt-4">
+<!-- Planejado -->
+<div>
+<div class="flex justify-between text-sm mb-1 text-on-surface-variant">
+<span>Planejado</span>
+<span>100k</span>
+</div>
+<div class="w-full bg-surface-variant h-4">
+<div class="bg-outline h-4 w-full"></div>
+</div>
+</div>
+<!-- Realizado -->
+<div>
+<div class="flex justify-between text-sm mb-1 text-tertiary-container font-semibold">
+<span>Realizado</span>
+<span>95k</span>
+</div>
+<div class="w-full bg-surface-variant h-4">
+<div class="bg-tertiary-container h-4" style="width: 95%"></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Etapa 2: Alvenaria (Estourou - Vermelho) -->
+<article class="bg-surface-container-lowest border-l-4 border-l-error border border-outline-variant rounded-xl p-4 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-error-container/20 rounded-bl-full -z-10"></div>
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-button-text text-button-text text-on-surface">Alvenaria</h4>
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+</div>
+<div class="space-y-3 mt-4">
+<!-- Planejado -->
+<div>
+<div class="flex justify-between text-sm mb-1 text-on-surface-variant">
+<span>Planejado</span>
+<span>150k</span>
+</div>
+<div class="w-full bg-surface-variant h-4">
+<!-- Base line for planned 100% relative -->
+<div class="bg-outline h-4 w-full"></div>
+</div>
+</div>
+<!-- Realizado (Estourou) -->
+<div>
+<div class="flex justify-between text-sm mb-1 text-error font-semibold">
+<span>Realizado</span>
+<span>175k</span>
+</div>
+<div class="w-full bg-surface-variant h-4 relative">
+<!-- Realizado bar exceeding planned visually. Using width 100% and red color to indicate overflow -->
+<div class="bg-error h-4 w-full"></div>
+<!-- Small indicator showing it went over -->
+<div class="absolute right-0 top-0 h-4 w-4 bg-error-container animate-pulse opacity-50"></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Etapa 3: Instalações Hidráulicas (Dentro - Verde) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-button-text text-button-text text-on-surface">Instalações Hidráulicas</h4>
+<span class="material-symbols-outlined text-tertiary-container" data-icon="check_circle">check_circle</span>
+</div>
+<div class="space-y-3 mt-4">
+<div>
+<div class="flex justify-between text-sm mb-1 text-on-surface-variant">
+<span>Planejado</span>
+<span>80k</span>
+</div>
+<div class="w-full bg-surface-variant h-4">
+<div class="bg-outline h-4 w-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1 text-tertiary-container font-semibold">
+<span>Realizado</span>
+<span>78k</span>
+</div>
+<div class="w-full bg-surface-variant h-4">
+<div class="bg-tertiary-container h-4" style="width: 97.5%"></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Etapa 4: Instalações Elétricas (Em andamento - Dentro) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-button-text text-button-text text-on-surface">Instalações Elétricas</h4>
+<span class="material-symbols-outlined text-tertiary-container" data-icon="schedule">schedule</span>
+</div>
+<div class="space-y-3 mt-4">
+<div>
+<div class="flex justify-between text-sm mb-1 text-on-surface-variant">
+<span>Planejado</span>
+<span>120k</span>
+</div>
+<div class="w-full bg-surface-variant h-4">
+<div class="bg-outline h-4 w-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1 text-tertiary-container font-semibold">
+<span>Realizado</span>
+<span>60k</span>
+</div>
+<div class="w-full bg-surface-variant h-4">
+<div class="bg-tertiary-container h-4" style="width: 50%"></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Etapa 5: Acabamentos (A iniciar - Cinza) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col justify-between opacity-70">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-button-text text-button-text text-on-surface">Acabamentos</h4>
+<span class="material-symbols-outlined text-outline" data-icon="pending">pending</span>
+</div>
+<div class="space-y-3 mt-4">
+<div>
+<div class="flex justify-between text-sm mb-1 text-on-surface-variant">
+<span>Planejado</span>
+<span>300k</span>
+</div>
+<div class="w-full bg-surface-variant h-4">
+<div class="bg-outline h-4 w-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1 text-outline font-semibold">
+<span>Realizado</span>
+<span>0k</span>
+</div>
+<div class="w-full bg-surface-variant h-4">
+<div class="bg-outline h-4" style="width: 0%"></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-gutter-mobile py-2 bg-surface dark:bg-on-background border-t border-outline-variant dark:border-outline flat no shadows md:hidden">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant w-full h-full min-h-[48px] min-w-[48px]">
+<span class="material-symbols-outlined mb-1" data-icon="engineering">engineering</span>
+<span class="font-label-bold text-label-bold text-[10px]">Obras</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant w-full h-full min-h-[48px] min-w-[48px]">
+<span class="material-symbols-outlined mb-1" data-icon="payments">payments</span>
+<span class="font-label-bold text-label-bold text-[10px]">Despesas</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant w-full h-full min-h-[48px] min-w-[48px]">
+<span class="material-symbols-outlined mb-1" data-icon="assignment">assignment</span>
+<span class="font-label-bold text-label-bold text-[10px]">Diário</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 active:scale-95 transition-transform duration-100 hover:bg-surface-container dark:hover:bg-surface-variant w-full h-full min-h-[48px] min-w-[48px] max-w-[80px]">
+<span class="material-symbols-outlined mb-1" data-icon="analytics">analytics</span>
+<span class="font-label-bold text-label-bold text-[10px]">Relatórios</span>
+</button>
+</nav>
+</body></html>

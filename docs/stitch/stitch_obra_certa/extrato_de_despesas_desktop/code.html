@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ObraCerta - Extrato de Despesas</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for table container to keep the rugged feel */
+        .table-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-scrollbar::-webkit-scrollbar-track {
+            background: #f6f3f2; /* surface-container-low */
+        }
+        .table-scrollbar::-webkit-scrollbar-thumb {
+            background: #c3c6d0; /* outline-variant */
+            border-radius: 4px;
+        }
+        .table-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #747780; /* outline */
+        }
+    </style>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#1c1b1b",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-bright": "#fcf9f8",
+                    "outline": "#747780",
+                    "inverse-primary": "#a9c7ff",
+                    "tertiary-fixed": "#c7ecc2",
+                    "on-tertiary-fixed-variant": "#2f4e2f",
+                    "surface-tint": "#3e5f92",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#572000",
+                    "secondary-container": "#fe6b00",
+                    "secondary-fixed-dim": "#ffb693",
+                    "on-primary-fixed": "#001b3d",
+                    "inverse-surface": "#313030",
+                    "on-primary-fixed-variant": "#244779",
+                    "on-secondary-fixed": "#351000",
+                    "surface": "#fcf9f8",
+                    "on-surface-variant": "#43474f",
+                    "surface-dim": "#dcd9d9",
+                    "primary": "#001939",
+                    "tertiary": "#011f05",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#c3c6d0",
+                    "error": "#ba1a1a",
+                    "surface-container": "#f0eded",
+                    "secondary-fixed": "#ffdbcc",
+                    "on-secondary-fixed-variant": "#7a3000",
+                    "on-primary-container": "#7696cd",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#163418",
+                    "surface-container-high": "#eae7e7",
+                    "tertiary-fixed-dim": "#acd0a7",
+                    "on-tertiary-container": "#7c9e78",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e5e2e1",
+                    "primary-fixed": "#d6e3ff",
+                    "primary-container": "#002d5e",
+                    "on-secondary": "#ffffff",
+                    "background": "#fcf9f8",
+                    "on-tertiary-fixed": "#032107",
+                    "on-background": "#1c1b1b",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary": "#a04100",
+                    "primary-fixed-dim": "#a9c7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "touch-target-min": "48px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px",
+                    "stack-lg": "24px",
+                    "gutter-mobile": "12px"
+            },
+            "fontFamily": {
+                    "button-text": ["Inter"],
+                    "label-bold": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "button-text": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-surface-container-low font-body-md text-on-surface antialiased min-h-screen overflow-x-hidden flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface dark:bg-surface-dim z-50 flex flex-col py-stack-lg">
+<!-- Header -->
+<div class="px-stack-md flex flex-col items-center mb-stack-lg">
+<div class="w-16 h-16 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center mb-stack-sm overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A rugged, minimalist corporate logo for a construction management software named 'ObraCerta'. The logo features heavy, geometric shapes resembling structural steel or concrete forms, using a stark palette of deep navy blue (#001939) and safety orange (#fe6b00) against a clean white background. High contrast, sharp edges, flat design, no gradients. The aesthetic is industrial, reliable, and functional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzlsMJLMBdzDg7vJJCEQm7asmNkyzlepVMvyZm3RpQCi1DGA1eNQgZ8ZgW-Th7m3pRXl8_jZFEjBe7Mk5rC5XPXswsqqaItSj2rvpez9kB48hxTpIRDUpfboePxbOpfl3jQDOw2FEd9cG7mLdkvxNuC0vgG-mZrffeDeEoHYKa8YF66TmlARM5gTXdX5qQfuDvBybmJitEzSZXCO9gtuE2gvjfOWd0vERpneLMgBC6T48jAmnuG4_Z"/>
+</div>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed text-center">ObraCerta</h1>
+<p class="font-label-bold text-label-bold text-on-surface-variant text-center mt-1">Gestão de Canteiro</p>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-1 px-2">
+<!-- Obras (Inactive) -->
+<a class="flex items-center px-4 py-3 rounded text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined mr-3">construction</span>
+<span class="font-label-bold text-label-bold">Obras</span>
+</a>
+<!-- Despesas (Active) -->
+<a class="flex items-center px-4 py-3 rounded text-primary dark:text-primary-fixed border-r-4 border-secondary-container bg-surface-container-high transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-bold text-label-bold">Despesas</span>
+</a>
+<!-- Diário (Inactive) -->
+<a class="flex items-center px-4 py-3 rounded text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined mr-3">event_note</span>
+<span class="font-label-bold text-label-bold">Diário</span>
+</a>
+<!-- Relatórios (Inactive) -->
+<a class="flex items-center px-4 py-3 rounded text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined mr-3">description</span>
+<span class="font-label-bold text-label-bold">Relatórios</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="px-stack-md mt-auto">
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text h-touch-target-min flex items-center justify-center rounded border border-[#e0e0e0] hover:bg-[#e66100] transition-colors">
+<span class="material-symbols-outlined mr-2">add</span>
+                Novo Projeto
+            </button>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-64 min-w-0">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-touch-target-min border-b border-outline-variant bg-surface dark:bg-surface-dim z-40 flex items-center justify-between px-margin-mobile">
+<!-- Left side empty/search (Search config was 'on_left' in JSON, but usually we just put the title or breadcrumbs if search isn't explicitly defined as an input. Let's add a placeholder for it based on the layout) -->
+<div class="flex-1">
+<!-- Optional breadcrumb or contextual title could go here -->
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-stack-md">
+<button class="text-on-surface-variant hover:text-primary transition-all duration-200 flex items-center h-touch-target-min px-2">
+<span class="material-symbols-outlined mr-2">sync</span>
+<span class="font-label-bold text-label-bold hidden md:inline">Sincronizar</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all duration-200 flex items-center h-touch-target-min px-2 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2 bg-surface-container-high">
+<img alt="Foto de perfil do gestor" class="w-full h-full object-cover" data-alt="A professional headshot of a construction site manager. The manager is wearing a clean white hardhat and a high-visibility yellow vest over a plain navy blue polo shirt. The background is a slightly blurred, bright outdoor construction site with clear blue skies. Lighting is bright, natural sunlight, casting strong but flattering shadows, emphasizing a rugged, authoritative, and reliable professional demeanor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7PyeLUEO2wpu8YBPgyL6pW4jBsleV3szkfD0lb2E0Sx8ZaI89nMD91szuEqC-BOG4Im17fuA9TMUUOtRsReaGjHruc9GRqIBVHPWh_ECWDzAUmYhEjNlb0aIrBQtMJg1irxDlTTUj1ZAV1Lp9YWcHKaQAHGt0IIFguFV3NK8wGh_kqN7mOR-FjCE1AVYKRslWegA0OcHLj0cb0FgTbJr0R5UeWKn3UN9R8ojDrRHr3hD6a9t69OVa"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="mt-[48px] p-stack-lg flex-1 flex flex-col gap-stack-lg">
+<!-- Top Highlight Row -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-stack-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">Extrato de Despesas</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Acompanhamento financeiro da obra ativa.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-stack-md items-stretch sm:items-end">
+<!-- Total Highlight Card -->
+<div class="bg-surface-container-lowest border border-outline-variant border-l-4 border-l-primary-container px-4 py-3 min-w-[200px]">
+<span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider text-xs block mb-1">Total Acumulado (Mês)</span>
+<div class="font-headline-lg text-headline-lg text-on-surface">R$ 142.500,00</div>
+</div>
+<!-- CTA Action -->
+<button class="bg-secondary-container text-on-secondary-container font-button-text text-button-text h-touch-target-min px-6 flex items-center justify-center rounded border border-[#e0e0e0] hover:bg-[#e66100] transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined mr-2">add_circle</span>
+                        Nova Despesa Manual
+                    </button>
+</div>
+</div>
+<!-- Split Layout: Filters & Table -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-start">
+<!-- Left Sidebar Filters (Col 1-3) -->
+<aside class="lg:col-span-3 bg-surface-container-lowest border border-outline-variant p-stack-md flex flex-col gap-stack-md">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">filter_list</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Filtros</h3>
+</div>
+<!-- Filter Form -->
+<form class="flex flex-col gap-stack-md">
+<!-- Período -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Período</label>
+<select class="w-full h-touch-target-min px-3 border border-outline-variant rounded bg-surface-bright text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors">
+<option>Este Mês (Outubro)</option>
+<option>Mês Anterior</option>
+<option>Últimos 3 Meses</option>
+<option>Personalizado...</option>
+</select>
+</div>
+<!-- Categoria -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Categoria</label>
+<select class="w-full h-touch-target-min px-3 border border-outline-variant rounded bg-surface-bright text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors">
+<option>Todas as Categorias</option>
+<option>Materiais Brutos</option>
+<option>Mão de Obra</option>
+<option>Equipamentos</option>
+<option>Logística</option>
+</select>
+</div>
+<!-- Fornecedor -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Fornecedor</label>
+<div class="relative">
+<input class="w-full h-touch-target-min pl-10 pr-3 border border-outline-variant rounded bg-surface-bright text-on-surface font-body-md text-body-md focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors placeholder:text-outline" placeholder="Buscar fornecedor..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+</div>
+</div>
+<!-- Etapa da Obra -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Etapa da Obra</label>
+<div class="flex flex-col gap-2 mt-1">
+<label class="flex items-center gap-3 h-8 cursor-pointer">
+<input checked="" class="w-5 h-5 border-outline-variant text-primary-container focus:ring-primary-container rounded-sm" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface">Fundação</span>
+</label>
+<label class="flex items-center gap-3 h-8 cursor-pointer">
+<input checked="" class="w-5 h-5 border-outline-variant text-primary-container focus:ring-primary-container rounded-sm" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface">Alvenaria</span>
+</label>
+<label class="flex items-center gap-3 h-8 cursor-pointer">
+<input class="w-5 h-5 border-outline-variant text-primary-container focus:ring-primary-container rounded-sm" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface">Acabamento</span>
+</label>
+</div>
+</div>
+<div class="mt-4 flex gap-2">
+<button class="flex-1 h-touch-target-min bg-primary text-on-primary font-button-text text-button-text rounded border border-primary hover:bg-primary-container transition-colors" type="button">Aplicar</button>
+<button class="w-touch-target-min h-touch-target-min bg-surface text-on-surface-variant border border-outline-variant rounded flex items-center justify-center hover:bg-surface-container-low transition-colors" title="Limpar Filtros" type="reset">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</form>
+</aside>
+<!-- Right Side Table (Col 4-12) -->
+<section class="lg:col-span-9 bg-surface-container-lowest border border-outline-variant flex flex-col overflow-hidden">
+<!-- Table Toolbar -->
+<div class="px-4 py-3 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-on-surface-variant">Exibindo 24 registros</span>
+<button class="text-primary font-button-text text-button-text flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">download</span> Exportar CSV
+                        </button>
+</div>
+<!-- Rich Table -->
+<div class="overflow-x-auto table-scrollbar">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-surface-container-lowest border-b-2 border-outline-variant">
+<th class="p-4 font-label-bold text-label-bold text-on-surface-variant">Data</th>
+<th class="p-4 font-label-bold text-label-bold text-on-surface-variant">Fornecedor</th>
+<th class="p-4 font-label-bold text-label-bold text-on-surface-variant">Descrição</th>
+<th class="p-4 font-label-bold text-label-bold text-on-surface-variant">Categoria</th>
+<th class="p-4 font-label-bold text-label-bold text-on-surface-variant">Etapa</th>
+<th class="p-4 font-label-bold text-label-bold text-on-surface-variant text-right">Valor (R$)</th>
+<th class="p-4 w-12"></th> <!-- Actions -->
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant bg-surface-container-lowest">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group h-16">
+<td class="p-4 font-body-md text-body-md text-on-surface whitespace-nowrap">12/10/2023</td>
+<td class="p-4">
+<div class="font-label-bold text-label-bold text-on-surface">Cimentos Votorantim</div>
+<div class="font-body-md text-sm text-outline">CNPJ: 12.345.678/0001-90</div>
+</td>
+<td class="p-4 font-body-md text-body-md text-on-surface max-w-[200px] truncate">Lote 05 Cimento CP II-Z 32</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high border border-outline-variant font-label-bold text-xs text-on-surface-variant">Materiais Brutos</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<span class="font-body-md text-body-md text-on-surface">Fundação</span>
+</div>
+</td>
+<td class="p-4 font-headline-md text-headline-md text-on-surface text-right whitespace-nowrap">4.500,00</td>
+<td class="p-4 text-center">
+<button class="text-outline hover:text-primary transition-colors opacity-0 group-hover:opacity-100 p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 (Alert variant) -->
+<tr class="hover:bg-surface-container-low transition-colors group h-16 border-l-4 border-l-error bg-[#fff5f5]">
+<td class="p-4 pl-3 font-body-md text-body-md text-on-surface whitespace-nowrap flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm">warning</span>
+                                        11/10/2023
+                                    </td>
+<td class="p-4">
+<div class="font-label-bold text-label-bold text-on-surface">Locadora XYZ Equipamentos</div>
+<div class="font-body-md text-sm text-outline">Boleto Vencido</div>
+</td>
+<td class="p-4 font-body-md text-body-md text-on-surface max-w-[200px] truncate">Aluguel Betoneira Mensal</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high border border-outline-variant font-label-bold text-xs text-on-surface-variant">Equipamentos</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+<span class="font-body-md text-body-md text-on-surface">Alvenaria</span>
+</div>
+</td>
+<td class="p-4 font-headline-md text-headline-md text-error text-right whitespace-nowrap">1.250,00</td>
+<td class="p-4 text-center">
+<button class="text-outline hover:text-primary transition-colors opacity-0 group-hover:opacity-100 p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group h-16">
+<td class="p-4 font-body-md text-body-md text-on-surface whitespace-nowrap">10/10/2023</td>
+<td class="p-4">
+<div class="font-label-bold text-label-bold text-on-surface">Gerdau S.A.</div>
+<div class="font-body-md text-sm text-outline">Fatura #8892</div>
+</td>
+<td class="p-4 font-body-md text-body-md text-on-surface max-w-[200px] truncate">Vergalhões 10mm CA50</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high border border-outline-variant font-label-bold text-xs text-on-surface-variant">Materiais Brutos</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<span class="font-body-md text-body-md text-on-surface">Fundação</span>
+</div>
+</td>
+<td class="p-4 font-headline-md text-headline-md text-on-surface text-right whitespace-nowrap">12.800,00</td>
+<td class="p-4 text-center">
+<button class="text-outline hover:text-primary transition-colors opacity-0 group-hover:opacity-100 p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group h-16">
+<td class="p-4 font-body-md text-body-md text-on-surface whitespace-nowrap">08/10/2023</td>
+<td class="p-4">
+<div class="font-label-bold text-label-bold text-on-surface">Folha de Pagamento</div>
+<div class="font-body-md text-sm text-outline">Equipe Base (15 func.)</div>
+</td>
+<td class="p-4 font-body-md text-body-md text-on-surface max-w-[200px] truncate">Quinzena 1 - Outubro</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high border border-outline-variant font-label-bold text-xs text-on-surface-variant">Mão de Obra</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<span class="font-body-md text-body-md text-on-surface">Geral</span>
+</div>
+</td>
+<td class="p-4 font-headline-md text-headline-md text-on-surface text-right whitespace-nowrap">28.450,00</td>
+<td class="p-4 text-center">
+<button class="text-outline hover:text-primary transition-colors opacity-0 group-hover:opacity-100 p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination (Simple) -->
+<div class="px-4 py-3 border-t border-outline-variant bg-surface flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Página 1 de 4</span>
+<div class="flex gap-2">
+<button class="h-10 px-3 border border-outline-variant rounded flex items-center bg-surface-container-low text-outline cursor-not-allowed">
+<span class="material-symbols-outlined text-sm mr-1">chevron_left</span> Anterior
+                            </button>
+<button class="h-10 px-3 border border-outline-variant rounded flex items-center bg-surface hover:bg-surface-container-low text-on-surface transition-colors">
+                                Próxima <span class="material-symbols-outlined text-sm ml-1">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

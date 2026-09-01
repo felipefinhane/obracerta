@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Relatório Orçado vs. Realizado - ObraCerta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#1c1b1b",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-bright": "#fcf9f8",
+                    "outline": "#747780",
+                    "inverse-primary": "#a9c7ff",
+                    "tertiary-fixed": "#c7ecc2",
+                    "on-tertiary-fixed-variant": "#2f4e2f",
+                    "surface-tint": "#3e5f92",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#572000",
+                    "secondary-container": "#fe6b00",
+                    "secondary-fixed-dim": "#ffb693",
+                    "on-primary-fixed": "#001b3d",
+                    "inverse-surface": "#313030",
+                    "on-primary-fixed-variant": "#244779",
+                    "on-secondary-fixed": "#351000",
+                    "surface": "#fcf9f8",
+                    "on-surface-variant": "#43474f",
+                    "surface-dim": "#dcd9d9",
+                    "primary": "#001939",
+                    "tertiary": "#011f05",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#c3c6d0",
+                    "error": "#ba1a1a",
+                    "surface-container": "#f0eded",
+                    "secondary-fixed": "#ffdbcc",
+                    "on-secondary-fixed-variant": "#7a3000",
+                    "on-primary-container": "#7696cd",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#163418",
+                    "surface-container-high": "#eae7e7",
+                    "tertiary-fixed-dim": "#acd0a7",
+                    "on-tertiary-container": "#7c9e78",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e5e2e1",
+                    "primary-fixed": "#d6e3ff",
+                    "primary-container": "#002d5e",
+                    "on-secondary": "#ffffff",
+                    "background": "#fcf9f8",
+                    "on-tertiary-fixed": "#032107",
+                    "on-background": "#1c1b1b",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary": "#a04100",
+                    "primary-fixed-dim": "#a9c7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "touch-target-min": "48px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px",
+                    "stack-lg": "24px",
+                    "gutter-mobile": "12px"
+            },
+            "fontFamily": {
+                    "button-text": ["Inter"],
+                    "label-bold": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "button-text": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased h-screen overflow-hidden flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface dark:bg-surface-dim py-stack-lg z-50">
+<div class="px-6 mb-8 flex items-center gap-3">
+<img alt="Logo ObraCerta" class="w-10 h-10 object-contain" data-alt="Logotipo ObraCerta, um design geométrico e moderno utilizando as cores azul marinho e laranja sobre fundo branco, transmitindo solidez e confiança no setor de construção." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnxYul0tE5lYgLLb5LbKRaYPzOcejmWCXxEGeQcF56BNGdqeVyHYhG5oRAf8isAQBxNk8MTozDymB39k1MqLtaVHdBo39S_hp4o1AIHTdjXxRe9zRcH5aq8I6l3hfF4Dy2Tr8al9rXrm6tdqSygev61XCGULl8JmBNDe6ZDnTBdAsYt5PsTnI1B2jU4jIbZ8MVDwQ7Yba7Yc3HkqxRlqR9AhUy85cfgR84SY86kPKVFE3wubGThJU9"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">ObraCerta</h1>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Gestão de Canteiro</p>
+</div>
+</div>
+<div class="flex-1 px-4 flex flex-col gap-2">
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-weight="regular">construction</span>
+<span class="font-label-bold text-label-bold">Obras</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-weight="regular">payments</span>
+<span class="font-label-bold text-label-bold">Despesas</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-4 py-3 rounded text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-weight="regular">event_note</span>
+<span class="font-label-bold text-label-bold">Diário</span>
+</a>
+<!-- Active -->
+<a class="flex items-center gap-3 px-4 py-3 rounded text-primary dark:text-primary-fixed border-r-4 border-secondary-container bg-surface-container-high transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-bold text-label-bold">Relatórios</span>
+</a>
+</div>
+<div class="px-6 mt-auto">
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text py-3 rounded hover:bg-secondary transition-colors cursor-pointer active:bg-secondary flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                Novo Projeto
+            </button>
+</div>
+</nav>
+<!-- TopNavBar (Shared Component) -->
+<header class="hidden md:flex fixed top-0 right-0 w-[calc(100%-16rem)] h-touch-target-min border-b border-outline-variant bg-surface dark:bg-surface-dim items-center justify-between px-margin-mobile ml-64 z-40 transition-all duration-200">
+<div class="flex-1 flex items-center">
+<!-- Search Bar placeholder -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-on-surface" placeholder="Buscar..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-primary-fixed font-button-text text-button-text hover:bg-surface-container-low px-4 py-2 rounded transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">sync</span>
+                Sincronizar
+            </button>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Foto de perfil do gestor" class="w-full h-full object-cover" data-alt="Foto de perfil de um gestor de obras, homem com cerca de 40 anos, usando capacete branco e colete refletivo, com fundo desfocado de um canteiro de obras bem iluminado." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0_V8hrVD4Cdl6RRMnDrLbthQWL2W2GHkBSYvtSz6grAest0oyWrlRaasAUAsX9Xws6x39HzbuvMmzZcSiqOy4EVDk8Vfk1J7VeL4_0IHhQWjg28_e-Q5GLQfQg5Ub4nS1zewStMZ3ZHXnVdQMVbM0tkJM9Ft8RFIe16F_pg01cIuwU6q5CwokMU0hrYDeZ2b1cKOuJRgi1pxUU-l7NNWSILF9U5zK9J-wEY00pY7F0-Yy7aBcyaiH"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-[48px] p-stack-lg flex-1 h-[calc(100vh-48px)] overflow-y-auto bg-surface-container-lowest">
+<div class="mb-stack-lg flex justify-between items-end">
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider mb-1">Visão Geral Financeira</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Orçado vs. Realizado</h2>
+</div>
+<div class="flex gap-2">
+<select class="bg-surface border border-outline-variant rounded px-4 py-2 font-button-text text-on-surface focus:ring-primary">
+<option>Projeto Alpha (Centro)</option>
+<option>Residencial Beta</option>
+</select>
+<button class="border border-outline-variant bg-surface hover:bg-surface-container-low text-on-surface p-2 rounded flex items-center justify-center">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<!-- Dashboard Grid (Bento style) -->
+<div class="grid grid-cols-12 gap-stack-lg">
+<!-- Hero Chart: Consolidado -->
+<div class="col-span-12 xl:col-span-8 bg-surface border border-outline-variant rounded p-stack-md flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+                    Consolidado Global
+                </h3>
+<div class="flex-1 flex flex-col justify-center relative min-h-[250px]">
+<!-- Y Axis Labels -->
+<div class="absolute left-0 top-0 bottom-8 w-16 flex flex-col justify-between text-right pr-2 font-label-bold text-on-surface-variant text-xs">
+<span>R$ 2.5M</span>
+<span>R$ 1.25M</span>
+<span>R$ 0</span>
+</div>
+<!-- Graph Area -->
+<div class="ml-16 border-l border-b border-outline-variant h-[200px] flex items-end justify-around pb-0 relative">
+<!-- Horizontal Grid Lines -->
+<div class="absolute w-full border-b border-outline-variant/30 bottom-1/2"></div>
+<div class="absolute w-full border-b border-outline-variant/30 top-0"></div>
+<!-- Bar Group 1 -->
+<div class="flex items-end gap-1 h-full w-24 z-10 group cursor-pointer relative">
+<!-- Tooltip -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">
+                                Orçado: R$ 800k<br/>Realizado: R$ 750k
+                            </div>
+<div class="w-10 bg-primary-container h-[80%] rounded-t relative"></div>
+<div class="w-10 bg-tertiary-container h-[75%] rounded-t"></div>
+</div>
+<!-- Bar Group 2 -->
+<div class="flex items-end gap-1 h-full w-24 z-10 group cursor-pointer relative">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">
+                                Orçado: R$ 1.2M<br/>Realizado: R$ 1.4M (Estouro)
+                            </div>
+<div class="w-10 bg-primary-container h-[60%] rounded-t"></div>
+<div class="w-10 bg-error h-[70%] rounded-t relative overflow-hidden">
+<div class="absolute top-0 w-full h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_4px,rgba(255,255,255,0.1)_4px,rgba(255,255,255,0.1)_8px)]"></div>
+</div>
+</div>
+<!-- Bar Group 3 -->
+<div class="flex items-end gap-1 h-full w-24 z-10 group cursor-pointer relative">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20 pointer-events-none">
+                                Orçado: R$ 500k<br/>Realizado: R$ 450k
+                            </div>
+<div class="w-10 bg-primary-container h-[90%] rounded-t"></div>
+<div class="w-10 bg-tertiary-container h-[85%] rounded-t"></div>
+</div>
+</div>
+<!-- X Axis Labels -->
+<div class="ml-16 flex justify-around mt-2 font-label-bold text-on-surface-variant text-xs">
+<span class="w-24 text-center">Fundação</span>
+<span class="w-24 text-center">Estrutura</span>
+<span class="w-24 text-center">Acabamento</span>
+</div>
+</div>
+<div class="flex justify-center gap-6 mt-4 pt-4 border-t border-outline-variant">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-primary-container rounded"></div>
+<span class="font-label-bold text-on-surface text-xs">Valor Orçado (Planejado)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-tertiary-container rounded"></div>
+<span class="font-label-bold text-on-surface text-xs">Valor Realizado (Dentro da Meta)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-error rounded relative overflow-hidden"><div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_2px,rgba(255,255,255,0.2)_2px,rgba(255,255,255,0.2)_4px)]"></div></div>
+<span class="font-label-bold text-on-surface text-xs">Valor Realizado (Estouro)</span>
+</div>
+</div>
+</div>
+<!-- Summary KPIs -->
+<div class="col-span-12 xl:col-span-4 flex flex-col gap-stack-md">
+<div class="bg-surface border border-outline-variant rounded p-stack-md flex-1 flex flex-col justify-center">
+<p class="font-label-bold text-on-surface-variant mb-1 uppercase text-xs">Orçamento Total</p>
+<p class="font-headline-lg text-primary">R$ 2.500.000,00</p>
+</div>
+<div class="bg-surface border border-outline-variant rounded p-stack-md flex-1 flex flex-col justify-center relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<p class="font-label-bold text-on-surface-variant mb-1 uppercase text-xs">Total Realizado</p>
+<p class="font-headline-lg text-error">R$ 2.600.000,00</p>
+<div class="flex items-center gap-1 text-error text-xs font-label-bold mt-2">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>4.0% acima da meta</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded p-stack-md flex-1 flex flex-col justify-center relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary-container"></div>
+<p class="font-label-bold text-on-surface-variant mb-1 uppercase text-xs">Economia Potencial (Etapas Restantes)</p>
+<p class="font-headline-lg text-tertiary-container">R$ 45.000,00</p>
+</div>
+</div>
+<!-- Detailed Breakdown List -->
+<div class="col-span-12 bg-surface border border-outline-variant rounded p-0 overflow-hidden">
+<div class="p-stack-md border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h3 class="font-headline-md text-on-surface">Detalhamento por Etapa</h3>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">filter_list</span>
+<span class="font-label-bold text-on-surface-variant text-xs">Filtrar</span>
+</div>
+</div>
+<div class="flex flex-col">
+<!-- List Header -->
+<div class="grid grid-cols-12 gap-4 px-stack-md py-2 bg-surface-container-lowest border-b border-outline-variant font-label-bold text-on-surface-variant text-xs uppercase tracking-wide">
+<div class="col-span-3">Etapa da Obra</div>
+<div class="col-span-2 text-right">Orçado (R$)</div>
+<div class="col-span-2 text-right">Realizado (R$)</div>
+<div class="col-span-1 text-center">Status</div>
+<div class="col-span-4">Progresso Visual (O x R)</div>
+</div>
+<!-- Row 1: Healthy -->
+<div class="grid grid-cols-12 gap-4 px-stack-md py-4 border-b border-outline-variant hover:bg-surface-container-lowest transition-colors items-center min-h-[64px]">
+<div class="col-span-3 font-button-text text-on-surface">1. Fundação e Infra</div>
+<div class="col-span-2 text-right font-body-md text-on-surface-variant">800.000</div>
+<div class="col-span-2 text-right font-button-text text-tertiary-container">750.000</div>
+<div class="col-span-1 flex justify-center">
+<span class="material-symbols-outlined text-tertiary-container">check_circle</span>
+</div>
+<div class="col-span-4 flex flex-col gap-1 justify-center">
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden flex">
+<div class="h-full bg-primary-container" style="width: 100%"></div>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden flex">
+<div class="h-full bg-tertiary-container" style="width: 93%"></div>
+</div>
+</div>
+</div>
+<!-- Row 2: Over Budget (Alert) -->
+<div class="grid grid-cols-12 gap-4 px-stack-md py-4 border-l-4 border-l-error border-b border-outline-variant bg-error-container/10 hover:bg-error-container/20 transition-colors items-center min-h-[64px]">
+<div class="col-span-3 font-button-text text-on-surface">2. Superestrutura</div>
+<div class="col-span-2 text-right font-body-md text-on-surface-variant">1.200.000</div>
+<div class="col-span-2 text-right font-button-text text-error">1.400.000</div>
+<div class="col-span-1 flex justify-center">
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+<div class="col-span-4 flex flex-col gap-1 justify-center relative">
+<!-- Overlay indicator for over-budget -->
+<div class="absolute right-0 top-0 bottom-0 w-[14%] bg-error/10 border-l border-error border-dashed pointer-events-none"></div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden flex relative z-10">
+<div class="h-full bg-primary-container" style="width: 86%"></div>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden flex relative z-10">
+<div class="h-full bg-error" style="width: 100%"></div>
+</div>
+</div>
+</div>
+<!-- Row 3: In Progress / Healthy -->
+<div class="grid grid-cols-12 gap-4 px-stack-md py-4 border-b border-outline-variant hover:bg-surface-container-lowest transition-colors items-center min-h-[64px]">
+<div class="col-span-3 font-button-text text-on-surface">3. Alvenaria e Vedação</div>
+<div class="col-span-2 text-right font-body-md text-on-surface-variant">300.000</div>
+<div class="col-span-2 text-right font-button-text text-on-surface">280.000</div>
+<div class="col-span-1 flex justify-center">
+<span class="material-symbols-outlined text-outline">schedule</span>
+</div>
+<div class="col-span-4 flex flex-col gap-1 justify-center">
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden flex">
+<div class="h-full bg-primary-container" style="width: 100%"></div>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden flex">
+<div class="h-full bg-tertiary-container" style="width: 93%"></div>
+</div>
+</div>
+</div>
+<!-- Row 4: Not Started -->
+<div class="grid grid-cols-12 gap-4 px-stack-md py-4 border-b border-outline-variant hover:bg-surface-container-lowest transition-colors items-center min-h-[64px] opacity-60">
+<div class="col-span-3 font-button-text text-on-surface">4. Acabamentos</div>
+<div class="col-span-2 text-right font-body-md text-on-surface-variant">200.000</div>
+<div class="col-span-2 text-right font-button-text text-on-surface-variant">-</div>
+<div class="col-span-1 flex justify-center">
+<span class="material-symbols-outlined text-outline">horizontal_rule</span>
+</div>
+<div class="col-span-4 flex flex-col gap-1 justify-center">
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden flex">
+<div class="h-full bg-primary-container" style="width: 100%"></div>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden flex">
+<!-- empty -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

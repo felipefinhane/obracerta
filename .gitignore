@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# exports do Stitch: o .zip original fica local, só o conteúdo extraído
+# (docs/stitch/stitch_obra_certa/) é versionado — evita duplicar ~6MB
+docs/stitch/*.zip

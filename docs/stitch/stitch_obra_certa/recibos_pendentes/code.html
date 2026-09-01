@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ObraCerta - Recibos Pendentes</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e5e2e1",
+                        "tertiary": "#011f05",
+                        "on-primary-fixed": "#001b3d",
+                        "outline-variant": "#c3c6d0",
+                        "primary-container": "#002d5e",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fcf9f8",
+                        "background": "#fcf9f8",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#032107",
+                        "on-tertiary-container": "#7c9e78",
+                        "tertiary-container": "#163418",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb693",
+                        "surface": "#fcf9f8",
+                        "tertiary-fixed": "#c7ecc2",
+                        "surface-tint": "#3e5f92",
+                        "primary-fixed": "#d6e3ff",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-surface-variant": "#43474f",
+                        "outline": "#747780",
+                        "on-primary-fixed-variant": "#244779",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1c1b1b",
+                        "surface-container": "#f0eded",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-container": "#572000",
+                        "primary": "#001939",
+                        "on-primary-container": "#7696cd",
+                        "secondary-container": "#fe6b00",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "secondary": "#a04100",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "inverse-primary": "#a9c7ff",
+                        "secondary-fixed": "#ffdbcc",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-fixed-dim": "#acd0a7",
+                        "primary-fixed-dim": "#a9c7ff",
+                        "on-secondary-fixed": "#351000",
+                        "on-tertiary-fixed-variant": "#2f4e2f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "24px",
+                        "margin-mobile": "16px",
+                        "touch-target-min": "48px",
+                        "base": "8px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "gutter-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "button-text": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "button-text": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-bold": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-touch-target-min">
+<button aria-label="Voltar" class="flex items-center justify-center w-touch-target-min h-touch-target-min text-primary hover:bg-surface-container-high transition-colors rounded-full -ml-2">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary flex-1 text-center truncate px-2">ObraCerta</h1>
+<div class="w-touch-target-min h-touch-target-min flex items-center justify-center -mr-2">
+<img alt="Profile Photo" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A close-up portrait of a rugged male construction project manager wearing a white hard hat and a high-visibility yellow vest. He has a serious, authoritative expression. The background is a blurred construction site under clear blue skies. The lighting is bright and natural." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvn3uuJ1t_J8lv5yWtaRzAYAppq9JjQ_9n6NkSIR1x9N3CedthKlIKaZ2INrnJZSM6sVCm7L6DD65tK3PcJmptkdHJaLMW1NYMe41lcEJkS0m4wpqUnfUPeKFbykjXph7cBStJyLBL0t9LrLWHQZxyyjc-hAghyrf47_lfD7J9uXwvi3abAjmlCf9BmOcvsMg86VhRsIEjZ-40wCpKsmnTRij9_qSxo-5r_Vlximd5e5oKM4na2oUN"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 pt-[calc(48px+24px)] pb-[calc(70px+24px)] px-margin-mobile flex flex-col gap-stack-lg max-w-2xl mx-auto w-full">
+<!-- Header Section -->
+<section class="flex flex-col gap-stack-sm">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Recibos Pendentes</h2>
+<p class="font-body-md text-on-surface-variant">3 lançamentos provisórios aguardando sua revisão ou processamento.</p>
+</section>
+<!-- List of Provisional Entries -->
+<div class="flex flex-col gap-stack-md">
+<!-- Card 1: Ready for Confirmation -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-stack-md flex flex-col gap-stack-md shadow-sm">
+<div class="flex items-start gap-stack-md">
+<!-- Thumbnail -->
+<div class="w-16 h-16 shrink-0 rounded border border-outline-variant overflow-hidden bg-surface-container">
+<img alt="Recibo Depósito Silva" class="w-full h-full object-cover" data-alt="A clear, well-lit close-up photograph of a printed hardware store receipt resting on a wooden workbench. The receipt shows typed line items for construction materials like cement and nails. The lighting is bright, natural daylight indicating an outdoor construction site office. The style is realistic, high-contrast, and utilitarian." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdhvye8-wnLgvPOaKG21WCGcoQWWduDcdrl0ypsZTitIDf9SMdlY49JCfKM9pIT-JRddOuKQi_ygakN-tDPOoFciG9FUEQ1XE_3WJ44eRHfmiJ6C1esW4ybUbwi_ErDib3n5Xj4xze-GsEVZ3NcxEQ3KqElan_I9ZCqju4qP0THCpl_5SHndEheQK_ZHfyoDQjx4o6-5rv_WEW4W4iJeJ0JOrfV9F2llMWxeUSAOeyCUEDgRA834rv"/>
+</div>
+<!-- Details -->
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider text-xs">Fornecedor Identificado</span>
+<h3 class="font-headline-md text-headline-md text-primary truncate">Depósito Silva e Cia</h3>
+<p class="font-body-md text-body-md text-on-surface mt-1">R$ 1.450,00</p>
+<p class="font-body-md text-body-md text-outline text-sm">12 Out 2023 • Cimento e Areia</p>
+</div>
+</div>
+<!-- Action -->
+<button class="w-full h-touch-target-min bg-secondary-container text-on-secondary font-button-text text-button-text rounded flex items-center justify-center gap-2 hover:opacity-90 transition-opacity active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                    Confirmar Lançamento
+                </button>
+</article>
+<!-- Card 2: Processing (OCR in progress) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-stack-md flex flex-col gap-stack-md relative overflow-hidden">
+<!-- Subtle loading background pulse -->
+<div class="absolute inset-0 bg-primary/5 animate-pulse pointer-events-none"></div>
+<div class="flex items-start gap-stack-md relative z-10">
+<!-- Thumbnail (Blurred/Processing) -->
+<div class="w-16 h-16 shrink-0 rounded border border-outline-variant overflow-hidden bg-surface-container relative">
+<img alt="Recibo em processamento" class="w-full h-full object-cover opacity-50 blur-[2px]" data-alt="A slightly blurry, in-motion photograph of a handwritten delivery slip for construction sand, held by a person wearing a dirty leather work glove. The background is a dusty construction site under bright sunlight. The image has a raw, documentary feel with high contrast and focus on the paper texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaAQNW9ubIDh0PxtcxkHwNvs_17ivc9FNOictyXPj6mLPGY2Ils1HzoSlQlJNBw5RRQEgwv8NG5tpv6f6cgaXFZXoN69RuDnm5xrGpauFxuMRHCDVSqXByE5pwFRqCcCFRnaXSQdoHl_xx7Wap-tT6BCa84ixOedt4MWCGeSNh9x0fjx9PhHDrYf4rykHwKAy30BgIXn6Mhg5r6ed974Ug6cSqThv_PpRT2cwtOE3MT9FudwFI3iK2"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary animate-spin" data-icon="sync">sync</span>
+</div>
+</div>
+<!-- Details -->
+<div class="flex flex-col flex-1 justify-center">
+<h3 class="font-headline-md text-headline-md text-on-surface-variant">Processando imagem...</h3>
+<p class="font-body-md text-body-md text-outline mt-1 text-sm">Extraindo dados via IA</p>
+<!-- Thick Progress Bar -->
+<div class="w-full h-2 bg-surface-dim rounded-full mt-3 overflow-hidden">
+<div class="h-full bg-primary w-2/3 rounded-full animate-[pulse_2s_ease-in-out_infinite]"></div>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 3: Needs Review (Missing Data) -->
+<article class="bg-surface-container-lowest border-l-4 border-l-secondary border border-outline-variant rounded-lg p-stack-md flex flex-col gap-stack-md">
+<div class="flex items-start gap-stack-md">
+<!-- Thumbnail -->
+<div class="w-16 h-16 shrink-0 rounded border border-outline-variant overflow-hidden bg-surface-container">
+<img alt="Recibo Posto Ipiranga" class="w-full h-full object-cover" data-alt="A top-down photograph of a crumpled gas station receipt placed on a yellow hard hat. The receipt details diesel fuel purchase for heavy machinery. The lighting is harsh and direct, creating sharp shadows. The scene reflects the rugged, industrial reality of a construction environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5d1DVaLdWSOncn85_OqrreJh5MFvmWpRW9Iadat2IOEKvWNFAXqsMne_gYarl8L9yDqPebkcCHFez-ED5fT9loUU3hzxCY1vJjkGeKn91Hyhvv9AiIhqzc3JkE4cHTrLsY8dnTQXr2UcUZIEAooQhV8ZYXXGBVSKoqAzQ8nx03DheTIGCPBKdE_54JnzlBPHTfyodtGyuSVJRxJwWgN1Tp2fm1ji0kllKK3w0M-rCV57ZmjIDirBy"/>
+</div>
+<!-- Details -->
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center gap-1 text-secondary mb-1">
+<span class="material-symbols-outlined text-sm" data-icon="warning" style="font-size: 16px;">warning</span>
+<span class="font-label-bold text-label-bold uppercase tracking-wider text-xs">Revisão Necessária</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary truncate">Posto Ipiranga BR</h3>
+<p class="font-body-md text-body-md text-outline mt-1 italic">Valor não identificado</p>
+</div>
+</div>
+<!-- Action -->
+<button class="w-full h-touch-target-min border border-outline text-on-surface font-button-text text-button-text rounded flex items-center justify-center gap-2 hover:bg-surface-container transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+                    Completar Dados
+                </button>
+</article>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface border-t border-outline-variant fixed bottom-0 w-full z-50 flex justify-around items-center px-gutter-mobile py-2 pb-[calc(8px+env(safe-area-inset-bottom))]">
+<button aria-label="Obras" class="flex flex-col items-center justify-center text-on-surface-variant p-2 min-w-[64px]">
+<span class="material-symbols-outlined mb-1" data-icon="engineering">engineering</span>
+<span class="font-label-bold text-label-bold text-[10px]">Obras</span>
+</button>
+<!-- Active Tab: Despesas -->
+<button aria-label="Despesas" class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 min-w-[64px]">
+<span class="material-symbols-outlined mb-1" data-icon="payments" data-weight="fill" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-bold text-label-bold text-[10px]">Despesas</span>
+</button>
+<button aria-label="Diário" class="flex flex-col items-center justify-center text-on-surface-variant p-2 min-w-[64px]">
+<span class="material-symbols-outlined mb-1" data-icon="assignment">assignment</span>
+<span class="font-label-bold text-label-bold text-[10px]">Diário</span>
+</button>
+<button aria-label="Relatórios" class="flex flex-col items-center justify-center text-on-surface-variant p-2 min-w-[64px]">
+<span class="material-symbols-outlined mb-1" data-icon="analytics">analytics</span>
+<span class="font-label-bold text-label-bold text-[10px]">Relatórios</span>
+</button>
+</nav>
+</body></html>

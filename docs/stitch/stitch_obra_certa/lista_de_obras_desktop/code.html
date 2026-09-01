@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ObraCerta - Obras Ativas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#1c1b1b",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-bright": "#fcf9f8",
+                    "outline": "#747780",
+                    "inverse-primary": "#a9c7ff",
+                    "tertiary-fixed": "#c7ecc2",
+                    "on-tertiary-fixed-variant": "#2f4e2f",
+                    "surface-tint": "#3e5f92",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#572000",
+                    "secondary-container": "#fe6b00",
+                    "secondary-fixed-dim": "#ffb693",
+                    "on-primary-fixed": "#001b3d",
+                    "inverse-surface": "#313030",
+                    "on-primary-fixed-variant": "#244779",
+                    "on-secondary-fixed": "#351000",
+                    "surface": "#fcf9f8",
+                    "on-surface-variant": "#43474f",
+                    "surface-dim": "#dcd9d9",
+                    "primary": "#001939",
+                    "tertiary": "#011f05",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#c3c6d0",
+                    "error": "#ba1a1a",
+                    "surface-container": "#f0eded",
+                    "secondary-fixed": "#ffdbcc",
+                    "on-secondary-fixed-variant": "#7a3000",
+                    "on-primary-container": "#7696cd",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#163418",
+                    "surface-container-high": "#eae7e7",
+                    "tertiary-fixed-dim": "#acd0a7",
+                    "on-tertiary-container": "#7c9e78",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e5e2e1",
+                    "primary-fixed": "#d6e3ff",
+                    "primary-container": "#002d5e",
+                    "on-secondary": "#ffffff",
+                    "background": "#fcf9f8",
+                    "on-tertiary-fixed": "#032107",
+                    "on-background": "#1c1b1b",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary": "#a04100",
+                    "primary-fixed-dim": "#a9c7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "touch-target-min": "48px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px",
+                    "stack-lg": "24px",
+                    "gutter-mobile": "12px"
+            },
+            "fontFamily": {
+                    "button-text": [
+                            "Inter"
+                    ],
+                    "label-bold": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Inter"
+                    ],
+                    "headline-lg": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "button-text": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-bold": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "26px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "26px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+            .material-symbols-outlined.filled {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low text-on-surface font-body-md h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-surface-dim h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col h-full py-stack-lg z-20 hidden md:flex">
+<div class="px-stack-lg mb-stack-lg flex items-center gap-stack-sm">
+<div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-primary filled" data-icon="construction">construction</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-fixed">ObraCerta</h1>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Gestão de Canteiro</p>
+</div>
+</div>
+<div class="px-stack-md mb-stack-lg">
+<button class="w-full bg-secondary-container text-on-secondary-container h-touch-target-min rounded flex items-center justify-center gap-base font-button-text hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Novo Projeto
+            </button>
+</div>
+<ul class="flex-1 flex flex-col gap-1 px-stack-sm overflow-y-auto">
+<li>
+<a class="flex items-center gap-stack-md px-stack-md h-touch-target-min text-primary dark:text-primary-fixed border-r-4 border-secondary-container bg-surface-container-high cursor-pointer active:bg-surface-container-highest font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined filled" data-icon="construction">construction</span>
+                    Obras
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-stack-md px-stack-md h-touch-target-min text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                    Despesas
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-stack-md px-stack-md h-touch-target-min text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+                    Diário
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-stack-md px-stack-md h-touch-target-min text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                    Relatórios
+                </a>
+</li>
+</ul>
+<div class="mt-auto px-stack-md">
+<div class="border-t border-outline-variant pt-stack-md flex items-center gap-stack-sm cursor-pointer hover:bg-surface-container-low p-2 rounded">
+<img alt="Foto de perfil do gestor" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A close-up portrait of a rugged construction project manager with a hard hat, lit by bright daylight against a clear sky, conveying authority and experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzKLiIDNSkngV0NHmUSzx_gE338PKNAOAB8nSdYm1sj9BdpUmscaiiHWXCvUmiWIAUZoIIt7yVwh0jcEzj5GyPLED-3rR0fvmTxIR8nXs9DMVG2dSZdRkpAoF7Ox7OOyWqafIcRXExb_26VQ-CiJCneWGCSRNLk8HKjY8KV-aKyzQpiTjqeIZUbkWR5NxFjc61iko_3OdxQo7eKtJAcirlHjRwwA4PZHCGCGMXWT4IbiIDKu9xYyQu"/>
+<div class="flex-1 min-w-0">
+<p class="font-label-bold text-label-bold text-on-surface truncate">João Silva</p>
+<p class="text-xs text-on-surface-variant truncate">Engenheiro Chefe</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="logout">logout</span>
+</div>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] h-touch-target-min border-b border-outline-variant flex items-center justify-between px-margin-mobile z-10 hidden md:flex transition-all duration-200">
+<div class="flex-1 flex items-center max-w-md">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-4 bg-surface-container border border-outline-variant rounded text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Buscar obras, fornecedores..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="flex items-center gap-base text-on-surface hover:text-primary font-button-text text-button-text h-10 px-4 rounded hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+                Sincronizar
+            </button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 mt-0 md:mt-touch-target-min p-stack-lg h-[calc(100vh-48px)] overflow-y-auto">
+<!-- Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-stack-lg gap-stack-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Obras Ativas</h2>
+<p class="text-body-md text-on-surface-variant mt-1">Gerencie e monitore o progresso financeiro e físico de todos os canteiros.</p>
+</div>
+<button class="bg-secondary-container text-on-secondary-container h-touch-target-min px-stack-lg rounded flex items-center justify-center gap-base font-button-text shadow-sm hover:opacity-90 transition-opacity whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Nova Obra
+            </button>
+</div>
+<!-- Data Table Card -->
+<div class="bg-surface rounded-lg border border-outline-variant overflow-hidden">
+<!-- Table Controls -->
+<div class="p-stack-md border-b border-outline-variant bg-surface-container-lowest flex flex-wrap items-center justify-between gap-stack-md">
+<div class="flex items-center gap-stack-sm">
+<span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider">Filtros Ativos:</span>
+<span class="inline-flex items-center gap-1 px-2 py-1 bg-surface-container-high text-on-surface text-xs font-medium rounded">
+                        Status: Em Andamento
+                        <button class="material-symbols-outlined text-[14px] hover:text-error" data-icon="close">close</button>
+</span>
+</div>
+<div class="flex items-center gap-stack-sm">
+<button class="p-2 border border-outline-variant rounded hover:bg-surface-container-low text-on-surface-variant flex items-center gap-1 text-sm font-medium">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span> Filtrar
+                    </button>
+<button class="p-2 border border-outline-variant rounded hover:bg-surface-container-low text-on-surface-variant flex items-center gap-1 text-sm font-medium">
+<span class="material-symbols-outlined" data-icon="download">download</span> Exportar
+                    </button>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant text-on-surface-variant font-label-bold text-label-bold uppercase tracking-wider">
+<th class="p-stack-md font-semibold">Nome da Obra / ID</th>
+<th class="p-stack-md font-semibold">Cliente</th>
+<th class="p-stack-md font-semibold w-1/3">Progresso Financeiro (Orçado x Realizado)</th>
+<th class="p-stack-md font-semibold">Status</th>
+<th class="p-stack-md font-semibold text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-body-md text-on-surface bg-surface-container-lowest">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-stack-md">
+<div class="font-bold text-primary">Residencial Alpha</div>
+<div class="text-xs text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="pin_drop">pin_drop</span>
+                                    Av. Paulista, 1000 - SP
+                                </div>
+</td>
+<td class="p-stack-md text-on-surface-variant">Construtora Apex</td>
+<td class="p-stack-md">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium">R$ 1.2M <span class="text-on-surface-variant text-xs font-normal">Realizado</span></span>
+<span class="text-on-surface-variant">R$ 2.5M <span class="text-xs">Orçado</span></span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 48%;"></div>
+</div>
+<div class="text-right text-xs text-primary font-medium mt-1">48% Concluído</div>
+</td>
+<td class="p-stack-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary-fixed-dim">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-fixed-variant"></span>
+                                    No Prazo
+                                </span>
+</td>
+<td class="p-stack-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-stack-md">
+<div class="font-bold text-primary">Edifício Corporate Center</div>
+<div class="text-xs text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="pin_drop">pin_drop</span>
+                                    Rua Funchal, 411 - SP
+                                </div>
+</td>
+<td class="p-stack-md text-on-surface-variant">Vanguard Investimentos</td>
+<td class="p-stack-md">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium text-error">R$ 8.9M <span class="text-on-surface-variant text-xs font-normal">Realizado</span></span>
+<span class="text-on-surface-variant">R$ 8.5M <span class="text-xs">Orçado</span></span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden flex">
+<div class="bg-error h-full rounded-full" style="width: 100%;"></div>
+</div>
+<div class="text-right text-xs text-error font-medium mt-1">104% (Estouro)</div>
+</td>
+<td class="p-stack-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-container text-on-error-container border border-error">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                    Atenção
+                                </span>
+</td>
+<td class="p-stack-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-stack-md">
+<div class="font-bold text-primary">Galpão Logístico BR-116</div>
+<div class="text-xs text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="pin_drop">pin_drop</span>
+                                    Rod. Régis Bittencourt, Km 290
+                                </div>
+</td>
+<td class="p-stack-md text-on-surface-variant">LogisCorp Brasil</td>
+<td class="p-stack-md">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-medium">R$ 450K <span class="text-on-surface-variant text-xs font-normal">Realizado</span></span>
+<span class="text-on-surface-variant">R$ 3.0M <span class="text-xs">Orçado</span></span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 15%;"></div>
+</div>
+<div class="text-right text-xs text-primary font-medium mt-1">15% Concluído</div>
+</td>
+<td class="p-stack-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary-fixed-dim">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-fixed-variant"></span>
+                                    Início
+                                </span>
+</td>
+<td class="p-stack-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-stack-md border-t border-outline-variant bg-surface flex items-center justify-between text-sm text-on-surface-variant">
+<span>Mostrando 1 a 3 de 12 obras</span>
+<div class="flex items-center gap-2">
+<button class="p-1 rounded hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<span class="font-medium text-on-surface">1</span>
+<button class="p-1 rounded hover:bg-surface-container">2</button>
+<button class="p-1 rounded hover:bg-surface-container">3</button>
+<span class="px-1">...</span>
+<button class="p-1 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

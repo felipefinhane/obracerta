@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lista de Obras</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e5e2e1",
+                      "tertiary": "#011f05",
+                      "on-primary-fixed": "#001b3d",
+                      "outline-variant": "#c3c6d0",
+                      "primary-container": "#002d5e",
+                      "inverse-surface": "#313030",
+                      "surface-bright": "#fcf9f8",
+                      "background": "#fcf9f8",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#032107",
+                      "on-tertiary-container": "#7c9e78",
+                      "tertiary-container": "#163418",
+                      "surface-container-low": "#f6f3f2",
+                      "surface-dim": "#dcd9d9",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#ffb693",
+                      "surface": "#fcf9f8",
+                      "tertiary-fixed": "#c7ecc2",
+                      "surface-tint": "#3e5f92",
+                      "primary-fixed": "#d6e3ff",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#f3f0ef",
+                      "on-surface-variant": "#43474f",
+                      "outline": "#747780",
+                      "on-primary-fixed-variant": "#244779",
+                      "error-container": "#ffdad6",
+                      "on-background": "#1c1b1b",
+                      "surface-container": "#f0eded",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-secondary-container": "#572000",
+                      "primary": "#001939",
+                      "on-primary-container": "#7696cd",
+                      "secondary-container": "#fe6b00",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#1c1b1b",
+                      "secondary": "#a04100",
+                      "on-secondary-fixed-variant": "#7a3000",
+                      "inverse-primary": "#a9c7ff",
+                      "secondary-fixed": "#ffdbcc",
+                      "surface-container-high": "#eae7e7",
+                      "tertiary-fixed-dim": "#acd0a7",
+                      "primary-fixed-dim": "#a9c7ff",
+                      "on-secondary-fixed": "#351000",
+                      "on-tertiary-fixed-variant": "#2f4e2f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-lg": "24px",
+                      "margin-mobile": "16px",
+                      "touch-target-min": "48px",
+                      "base": "8px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "gutter-mobile": "12px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "button-text": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "label-bold": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "26px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "button-text": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "26px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background antialiased pb-[80px] pt-[64px] min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-touch-target-min">
+<div class="flex items-center gap-4">
+<button class="text-primary hover:bg-surface-container-high rounded-full p-2 h-touch-target-min w-touch-target-min flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">ObraCerta</h1>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Profile Photo" class="w-full h-full object-cover" data-alt="A close up, high quality profile photo of a construction manager wearing a hard hat, smiling confidently. Bright, neutral lighting with a slightly blurred construction site background. Corporate and professional aesthetic, fitting a modern high-contrast design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB89wFgu2JcYBKHa7KTYSGJ413TNJqgGrFLcQ9l5PpE6TRKG9itVW8MLoYOAQL7lOaw_GhvXTluweJLk9wEctrncYmN0fDaMeerjeuhrpIrX3vO73968S3ivR1bQcM6qLe38CqRNjK7gHeyYq1sQK7g-ltdbwy4SrlYQywZIEnp4Y3WAg-yBHTgPqpXjI0Ed0a6N7r3Dul7XNphumrlgtn8j0AFIDX8QqFUalMbLIc31prNuC6ORA8S"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="px-margin-mobile pt-stack-lg pb-stack-lg flex flex-col gap-stack-lg max-w-4xl mx-auto md:grid md:grid-cols-12 md:gap-x-gutter-mobile">
+<!-- Header Actions -->
+<div class="md:col-span-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Obras Ativas</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Gerencie e acompanhe o progresso dos seus projetos.</p>
+</div>
+<button class="bg-secondary-container text-on-secondary w-full sm:w-auto h-touch-target-min px-6 rounded flex items-center justify-center gap-2 hover:bg-secondary transition-colors md:hidden">
+<span class="material-symbols-outlined">add</span>
+<span class="font-button-text text-button-text">Nova Obra</span>
+</button>
+</div>
+<!-- Obras List (Bento-style Cards for Web, Stack for Mobile) -->
+<div class="md:col-span-12 flex flex-col gap-stack-lg md:grid md:grid-cols-2 lg:grid-cols-3">
+<!-- Card 1 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded p-stack-md flex flex-col gap-stack-md shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Edifício Horizon</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">person</span> Construtora Alfa
+                        </p>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[18px]">location_on</span> Av. Paulista, 1000 - SP
+                        </p>
+</div>
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between mb-2">
+<span class="font-label-bold text-label-bold text-on-surface">Orçado x Realizado</span>
+<span class="font-label-bold text-label-bold text-primary">75%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 text-right">R$ 1.5M / R$ 2.0M</p>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded p-stack-md flex flex-col gap-stack-md shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Residencial Villa Rica</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">person</span> Família Silva
+                        </p>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[18px]">location_on</span> R. das Flores, 45 - Campinas
+                        </p>
+</div>
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between mb-2">
+<span class="font-label-bold text-label-bold text-on-surface">Orçado x Realizado</span>
+<span class="font-label-bold text-label-bold text-secondary-container">105%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2">
+<div class="bg-secondary-container h-2 rounded-full" style="width: 100%"></div>
+</div>
+<p class="font-body-md text-body-md text-error mt-2 text-right">R$ 525k / R$ 500k (Estouro)</p>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded p-stack-md flex flex-col gap-stack-md shadow-sm">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Galpão Logístico Sul</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">person</span> LogiCorp
+                        </p>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[18px]">location_on</span> Rodovia BR-116, Km 200
+                        </p>
+</div>
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between mb-2">
+<span class="font-label-bold text-label-bold text-on-surface">Orçado x Realizado</span>
+<span class="font-label-bold text-label-bold text-primary">30%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 30%"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 text-right">R$ 3M / R$ 10M</p>
+</div>
+</article>
+</div>
+<!-- Empty State Example (Hidden by default, shown here for completeness) -->
+<!-- 
+        <div class="col-span-12 flex flex-col items-center justify-center p-stack-lg bg-surface-container-low rounded border border-outline-variant text-center py-20">
+            <span class="material-symbols-outlined text-[64px] text-outline mb-4">construction</span>
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-2">Nenhuma obra cadastrada</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-6 max-w-md">Você ainda não possui obras ativas. Comece cadastrando seu primeiro projeto para acompanhar custos e evolução.</p>
+             <button class="bg-secondary-container text-on-secondary h-touch-target-min px-6 rounded flex items-center justify-center gap-2 hover:bg-secondary transition-colors">
+                <span class="material-symbols-outlined">add</span>
+                <span class="font-button-text text-button-text">Nova Obra</span>
+            </button>
+        </div>
+        -->
+</main>
+<!-- FAB for Desktop (Optional, typically primary action is in header on web, but fulfilling prompt) -->
+<button class="hidden md:flex fixed bottom-24 right-8 bg-secondary-container text-on-secondary w-[64px] h-[64px] rounded-xl items-center justify-center shadow-lg hover:bg-secondary transition-colors z-40">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="bg-surface border-t border-outline-variant fixed bottom-0 w-full z-50 flex justify-around items-center px-gutter-mobile py-2 h-[72px] md:hidden">
+<!-- Active: Obras -->
+<a class="flex flex-col items-center justify-center group w-16" href="#">
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 w-full scale-95 transition-transform duration-100 opacity-80">
+<span class="material-symbols-outlined" data-icon="engineering" style="font-variation-settings: 'FILL' 1;">engineering</span>
+</div>
+<span class="font-label-bold text-[12px] leading-[16px] font-semibold text-primary mt-1">Obras</span>
+</a>
+<!-- Inactive: Despesas -->
+<a class="flex flex-col items-center justify-center group w-16 text-on-surface-variant hover:bg-surface-container p-2 rounded transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="payments">payments</span>
+<span class="font-label-bold text-[12px] leading-[16px] font-semibold">Despesas</span>
+</a>
+<!-- Inactive: Diário -->
+<a class="flex flex-col items-center justify-center group w-16 text-on-surface-variant hover:bg-surface-container p-2 rounded transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="assignment">assignment</span>
+<span class="font-label-bold text-[12px] leading-[16px] font-semibold">Diário</span>
+</a>
+<!-- Inactive: Relatórios -->
+<a class="flex flex-col items-center justify-center group w-16 text-on-surface-variant hover:bg-surface-container p-2 rounded transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="analytics">analytics</span>
+<span class="font-label-bold text-[12px] leading-[16px] font-semibold">Relatórios</span>
+</a>
+</nav>
+<!-- Desktop Navigation (Alternative to Bottom Nav for Web) -->
+<nav class="hidden md:flex fixed top-0 left-1/2 -translate-x-1/2 h-touch-target-min z-[51] items-center gap-8">
+<a class="font-label-bold text-label-bold text-primary border-b-2 border-primary h-full flex items-center px-2" href="#">Obras</a>
+<a class="font-label-bold text-label-bold text-on-surface-variant hover:text-on-surface h-full flex items-center px-2" href="#">Despesas</a>
+<a class="font-label-bold text-label-bold text-on-surface-variant hover:text-on-surface h-full flex items-center px-2" href="#">Diário</a>
+<a class="font-label-bold text-label-bold text-on-surface-variant hover:text-on-surface h-full flex items-center px-2" href="#">Relatórios</a>
+</nav>
+</body></html>

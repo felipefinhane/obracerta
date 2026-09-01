@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ObraCerta - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e5e2e1",
+                        "tertiary": "#011f05",
+                        "on-primary-fixed": "#001b3d",
+                        "outline-variant": "#c3c6d0",
+                        "primary-container": "#002d5e",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fcf9f8",
+                        "background": "#fcf9f8",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#032107",
+                        "on-tertiary-container": "#7c9e78",
+                        "tertiary-container": "#163418",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb693",
+                        "surface": "#fcf9f8",
+                        "tertiary-fixed": "#c7ecc2",
+                        "surface-tint": "#3e5f92",
+                        "primary-fixed": "#d6e3ff",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-surface-variant": "#43474f",
+                        "outline": "#747780",
+                        "on-primary-fixed-variant": "#244779",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1c1b1b",
+                        "surface-container": "#f0eded",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-container": "#572000",
+                        "primary": "#001939",
+                        "on-primary-container": "#7696cd",
+                        "secondary-container": "#fe6b00",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "secondary": "#a04100",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "inverse-primary": "#a9c7ff",
+                        "secondary-fixed": "#ffdbcc",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-fixed-dim": "#acd0a7",
+                        "primary-fixed-dim": "#a9c7ff",
+                        "on-secondary-fixed": "#351000",
+                        "on-tertiary-fixed-variant": "#2f4e2f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "24px",
+                        "margin-mobile": "16px",
+                        "touch-target-min": "48px",
+                        "base": "8px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "gutter-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "button-text": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "button-text": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-bold": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface h-screen flex flex-col justify-center items-center p-margin-mobile">
+<!-- Top App Bar equivalent for Login (Brand focus) -->
+<header class="w-full max-w-md mb-stack-lg flex justify-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">ObraCerta</h1>
+</header>
+<main class="w-full max-w-md bg-surface-container-lowest border border-outline-variant rounded-lg p-margin-mobile">
+<form class="flex flex-col gap-stack-md">
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-bold text-label-bold text-on-surface" for="email">Email</label>
+<input class="min-h-[48px] px-3 border border-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded" id="email" name="email" required="" type="email" value="gerente@obracerta.com"/>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-bold text-label-bold text-on-surface" for="password">Senha</label>
+<div class="relative">
+<input class="w-full min-h-[48px] px-3 border border-error focus:border-error focus:ring-1 focus:ring-error outline-none bg-error-container text-on-surface font-body-md text-body-md rounded pr-12" id="password" name="password" required="" type="password" value="wrongpassword"/>
+<button class="absolute right-0 top-0 bottom-0 px-3 flex items-center justify-center text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Error State Alert -->
+<div class="bg-error-container border-l-4 border-error p-3 flex items-start gap-3 rounded-r" role="alert">
+<span class="material-symbols-outlined text-error mt-0.5" data-icon="error">error</span>
+<p class="font-body-md text-body-md text-on-error-container m-0">Senha incorreta. Tente novamente ou recupere sua senha.</p>
+</div>
+<div class="flex justify-end">
+<a class="font-body-md text-body-md text-primary hover:underline" href="#">Esqueceu a senha?</a>
+</div>
+<button class="w-full min-h-[48px] bg-secondary-container text-on-secondary-container font-button-text text-button-text rounded mt-stack-sm flex items-center justify-center transition-colors hover:bg-secondary hover:text-on-secondary" type="submit">
+                Entrar
+            </button>
+</form>
+<div class="mt-stack-lg text-center border-t border-outline-variant pt-stack-md">
+<span class="font-body-md text-body-md text-on-surface-variant">Ainda não tem conta?</span>
+<a class="font-button-text text-button-text text-primary hover:underline ml-2" href="#">Criar conta</a>
+</div>
+</main>
+</body></html>

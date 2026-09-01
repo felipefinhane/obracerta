@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Confirmar Despesa - ObraCerta</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1c1b1b",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-bright": "#fcf9f8",
+                        "outline": "#747780",
+                        "inverse-primary": "#a9c7ff",
+                        "tertiary-fixed": "#c7ecc2",
+                        "on-tertiary-fixed-variant": "#2f4e2f",
+                        "surface-tint": "#3e5f92",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#572000",
+                        "secondary-container": "#fe6b00",
+                        "secondary-fixed-dim": "#ffb693",
+                        "on-primary-fixed": "#001b3d",
+                        "inverse-surface": "#313030",
+                        "on-primary-fixed-variant": "#244779",
+                        "on-secondary-fixed": "#351000",
+                        "surface": "#fcf9f8",
+                        "on-surface-variant": "#43474f",
+                        "surface-dim": "#dcd9d9",
+                        "primary": "#001939",
+                        "tertiary": "#011f05",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c3c6d0",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eded",
+                        "secondary-fixed": "#ffdbcc",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "on-primary-container": "#7696cd",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#163418",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-fixed-dim": "#acd0a7",
+                        "on-tertiary-container": "#7c9e78",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e5e2e1",
+                        "primary-fixed": "#d6e3ff",
+                        "primary-container": "#002d5e",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed": "#032107",
+                        "on-background": "#1c1b1b",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary": "#a04100",
+                        "primary-fixed-dim": "#a9c7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "touch-target-min": "48px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "stack-lg": "24px",
+                        "gutter-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "button-text": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button-text": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md flex h-screen overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface dark:bg-surface-dim h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col py-stack-lg z-20">
+<div class="px-stack-lg mb-stack-lg flex items-center gap-stack-md">
+<div class="w-10 h-10 bg-primary-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="domain" data-weight="fill" style="font-variation-settings: 'FILL' 1;">domain</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed tracking-tight">ObraCerta</h1>
+<p class="font-label-bold text-label-bold text-on-surface-variant text-[11px] uppercase">Gestão de Canteiro</p>
+</div>
+</div>
+<ul class="flex flex-col gap-stack-sm flex-1 mt-stack-md">
+<!-- Inactive Tab -->
+<li>
+<a class="flex items-center gap-stack-md px-stack-lg py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span class="font-label-bold text-label-bold">Obras</span>
+</a>
+</li>
+<!-- Active Tab (Intent: Expenses) -->
+<li>
+<a class="flex items-center gap-stack-md px-stack-lg py-3 text-primary dark:text-primary-fixed border-r-4 border-secondary-container bg-surface-container-high transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-icon="payments" data-weight="fill" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-bold text-label-bold">Despesas</span>
+</a>
+</li>
+<!-- Inactive Tabs -->
+<li>
+<a class="flex items-center gap-stack-md px-stack-lg py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-bold text-label-bold">Diário</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-stack-md px-stack-lg py-3 text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-bold text-label-bold">Relatórios</span>
+</a>
+</li>
+</ul>
+<div class="px-stack-lg mt-auto">
+<button class="w-full bg-secondary-container text-on-secondary-container font-button-text text-button-text h-touch-target-min rounded flex items-center justify-center gap-base transition-all duration-200 hover:opacity-90">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Novo Projeto
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col h-full bg-surface-container-low">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface-dim h-touch-target-min border-b border-outline-variant flex items-center justify-between px-margin-mobile flex-shrink-0 z-10 w-full">
+<div class="flex items-center gap-stack-sm flex-1">
+<!-- Search bar abstract layout representation based on "search_bar": "on_left" -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Buscar..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="flex items-center gap-base text-on-surface-variant font-label-bold text-label-bold hover:bg-surface-container-low p-2 rounded transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+<span class="hidden lg:inline">Sincronizar</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden border border-outline-variant ml-2">
+<img alt="Foto de perfil do gestor" class="w-full h-full object-cover" data-alt="A close up portrait of a male construction project manager wearing a white hard hat and safety vest, looking confident in bright daylight. The image has a clean, high-contrast corporate aesthetic suitable for a professional avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMvDtCJAvQhIhd0ldbqPDCgQsheB1sJVRNY8U9rm3jTplFJ-j5fhkSpfPOW3LcbzO9biFmMOuON2FLS0loJm6yojuXHl_w3ZJ-zwKx2nFXX9GR1ajvpTkDdlVksxPrQhpcqcyXe0WKD4nbkOQHc09-qaiUM96UAyalcIeaWsB52x7n7cxCfAE25A3NBsAgenTHI8vppUBTA6_nEin22RaKDZGTea5bUqadm-JsFsmpQogmakWQm2Av"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="flex-1 overflow-hidden flex flex-col p-stack-lg">
+<!-- Page Header -->
+<div class="mb-stack-lg flex items-center justify-between flex-shrink-0">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Revisar Extração</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Verifique os dados capturados do documento antes de salvar.</p>
+</div>
+<button class="text-primary font-button-text text-button-text hover:bg-surface-container py-2 px-4 rounded transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="undo">undo</span>
+                    Descartar
+                </button>
+</div>
+<!-- Bento/Side-by-Side Split Layout -->
+<div class="flex-1 flex flex-col lg:flex-row gap-stack-lg min-h-0">
+<!-- Left Panel: Document Viewer -->
+<section class="w-full lg:w-5/12 bg-surface rounded-xl border border-outline-variant flex flex-col overflow-hidden relative">
+<div class="bg-surface-container-low border-b border-outline-variant p-stack-md flex justify-between items-center z-10 shadow-sm">
+<span class="font-label-bold text-label-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="receipt_long">receipt_long</span>
+                            Documento Original
+                        </span>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded" title="Zoom In"><span class="material-symbols-outlined" data-icon="zoom_in">zoom_in</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded" title="Zoom Out"><span class="material-symbols-outlined" data-icon="zoom_out">zoom_out</span></button>
+</div>
+</div>
+<!-- Image Container (Simulated panning area) -->
+<div class="flex-1 bg-surface-dim overflow-auto relative p-stack-lg flex items-start justify-center cursor-move touch-pan-xy">
+<!-- Simulated Receipt Image -->
+<div class="bg-surface border border-outline-variant shadow-md p-4 max-w-full inline-block transition-transform duration-200 origin-top">
+<img alt="Recibo digitalizado" class="max-w-none w-[600px] h-auto pointer-events-none" data-alt="A clear, top-down photograph of a crumpled paper receipt from a building materials supplier sitting on a rough wooden construction table. The receipt shows lists of items like cement and lumber, with some totals circled in pen. Bright, natural, overhead lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyV-C8fl7UWhF5dnozehoac4fFOHJ8sckpsZ_TMQkLq0kjPJ-4gJFYXI0bWLqXZiPpGkliK63Sa4i7LmIctrpjCzuqYXlDIBPpkZgfifnm8fD73Yl77h2i2dm40Q6KnWhBkJYg6AaeWyV__iGr4ZVjfsJ3QEQj1k32p38o-xO20kLKQVSlTcD261QnbMpeMbGK6Ex3LUdBQ5Ea_Y2Z3qfzi0cQMjeXHikoJpD0yXalwjfmwxZKa6R9"/>
+</div>
+</div>
+</section>
+<!-- Right Panel: Data Form & Table -->
+<section class="w-full lg:w-7/12 bg-surface rounded-xl border border-outline-variant flex flex-col overflow-hidden">
+<!-- Scrollable Form Area -->
+<div class="flex-1 overflow-y-auto p-stack-lg pb-32">
+<div class="mb-stack-lg border-b border-outline-variant pb-stack-sm flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Dados Extraídos</h3>
+<span class="bg-surface-container-high text-on-surface-variant font-label-bold text-[12px] px-2 py-1 rounded border border-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="auto_awesome">auto_awesome</span>
+                                IA Aplicada
+                            </span>
+</div>
+<!-- Form Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-stack-lg gap-y-stack-md mb-stack-lg">
+<!-- Field: Fornecedor (High Confidence) -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Fornecedor</label>
+<input class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="Depósito ConstruBem Ltda."/>
+</div>
+<!-- Field: Data (High Confidence) -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Data de Emissão</label>
+<input class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="date" value="2023-10-24"/>
+</div>
+<!-- Field: Valor Total (High Confidence) -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Valor Total (R$)</label>
+<input class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md font-bold focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="3.450,00"/>
+</div>
+<!-- Field: Forma de Pagamento -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Forma de Pagamento</label>
+<select class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option>Boleto Bancário</option>
+<option selected="">Transferência / PIX</option>
+<option>Cartão de Crédito</option>
+</select>
+</div>
+<!-- Field: Categoria (Low Confidence - Yellow Alert equivalent) -->
+<div class="flex flex-col gap-1 col-span-1 md:col-span-2 relative">
+<div class="flex justify-between items-center">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Categoria Financeira</label>
+<span class="text-secondary flex items-center gap-1 text-[12px] font-bold">
+<span class="material-symbols-outlined text-[16px]" data-icon="warning">warning</span>
+                                        Revisão sugerida
+                                    </span>
+</div>
+<!-- Applied thick border with secondary (orange-ish) to act as the 'yellow' warning -->
+<select class="h-touch-target-min px-3 bg-surface border-2 border-secondary rounded text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option>Selecione...</option>
+<option selected="">Materiais Básicos</option>
+<option>Acabamentos</option>
+<option>Ferramentas</option>
+</select>
+</div>
+<!-- Field: Etapa da Obra -->
+<div class="flex flex-col gap-1 col-span-1 md:col-span-2">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Vincular à Etapa</label>
+<select class="h-touch-target-min px-3 bg-surface border border-outline-variant rounded text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option>01. Fundações</option>
+<option selected="">02. Alvenaria e Estrutura</option>
+<option>03. Cobertura</option>
+</select>
+</div>
+</div>
+<!-- Table: Itens Reconhecidos -->
+<div class="mt-stack-lg">
+<h4 class="font-label-bold text-label-bold text-on-surface mb-stack-sm">Itens Discriminados</h4>
+<div class="border border-outline-variant rounded-lg overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="p-3 font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider">Descrição</th>
+<th class="p-3 font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider text-right w-24">Qtd</th>
+<th class="p-3 font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider text-right w-32">Total</th>
+</tr>
+</thead>
+<tbody class="bg-surface divide-y divide-outline-variant">
+<tr class="h-16 hover:bg-surface-container-low transition-colors">
+<td class="p-3 font-body-md text-on-surface">Cimento CP II 50kg Votoran</td>
+<td class="p-3 font-body-md text-on-surface text-right">50</td>
+<td class="p-3 font-body-md text-on-surface text-right">R$ 1.850,00</td>
+</tr>
+<tr class="h-16 hover:bg-surface-container-low transition-colors">
+<td class="p-3 font-body-md text-on-surface">Areia Média Lavada (m³)</td>
+<td class="p-3 font-body-md text-on-surface text-right">10</td>
+<td class="p-3 font-body-md text-on-surface text-right">R$ 1.200,00</td>
+</tr>
+<tr class="h-16 hover:bg-surface-container-low transition-colors">
+<td class="p-3 font-body-md text-on-surface">Tijolo Baiano 8 furos (Milheiro)</td>
+<td class="p-3 font-body-md text-on-surface text-right">0.5</td>
+<td class="p-3 font-body-md text-on-surface text-right">R$ 400,00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Fixed Footer Action Area -->
+<div class="bg-surface border-t border-outline-variant p-stack-lg flex justify-end gap-stack-md absolute bottom-0 right-0 w-full lg:w-7/12 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-20">
+<button class="px-6 h-touch-target-min rounded font-button-text text-button-text text-primary border border-outline hover:bg-surface-container transition-colors">
+                            Salvar Rascunho
+                        </button>
+<button class="px-8 h-touch-target-min rounded font-button-text text-button-text bg-secondary-container text-on-secondary-container hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                            Confirmar Despesa
+                        </button>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

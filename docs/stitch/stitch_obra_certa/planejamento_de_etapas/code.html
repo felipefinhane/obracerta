@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ObraCerta - Planejamento: Etapas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e5e2e1",
+                        "tertiary": "#011f05",
+                        "on-primary-fixed": "#001b3d",
+                        "outline-variant": "#c3c6d0",
+                        "primary-container": "#002d5e",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fcf9f8",
+                        "background": "#fcf9f8",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#032107",
+                        "on-tertiary-container": "#7c9e78",
+                        "tertiary-container": "#163418",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb693",
+                        "surface": "#fcf9f8",
+                        "tertiary-fixed": "#c7ecc2",
+                        "surface-tint": "#3e5f92",
+                        "primary-fixed": "#d6e3ff",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-surface-variant": "#43474f",
+                        "outline": "#747780",
+                        "on-primary-fixed-variant": "#244779",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1c1b1b",
+                        "surface-container": "#f0eded",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-container": "#572000",
+                        "primary": "#001939",
+                        "on-primary-container": "#7696cd",
+                        "secondary-container": "#fe6b00",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "secondary": "#a04100",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "inverse-primary": "#a9c7ff",
+                        "secondary-fixed": "#ffdbcc",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-fixed-dim": "#acd0a7",
+                        "primary-fixed-dim": "#a9c7ff",
+                        "on-secondary-fixed": "#351000",
+                        "on-tertiary-fixed-variant": "#2f4e2f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "24px",
+                        "margin-mobile": "16px",
+                        "touch-target-min": "48px",
+                        "base": "8px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "gutter-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "button-text": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "button-text": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-bold": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col pt-touch-target-min pb-24 md:pb-0 md:pt-[72px]">
+<!-- TopAppBar (From JSON) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-touch-target-min bg-surface dark:bg-on-background border-b border-outline-variant dark:border-outline md:h-[72px] md:px-8">
+<div class="flex items-center gap-4">
+<button aria-label="Voltar" class="flex items-center justify-center w-touch-target-min h-touch-target-min hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-full">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">ObraCerta</h1>
+</div>
+<div class="flex items-center gap-4 hidden md:flex">
+<nav class="flex gap-6">
+<a class="font-label-bold text-label-bold flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant transition-colors rounded-xl" href="#">Obras</a>
+<a class="font-label-bold text-label-bold flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 hover:bg-surface-container dark:hover:bg-surface-variant transition-colors" href="#">Etapas</a>
+<a class="font-label-bold text-label-bold flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant transition-colors rounded-xl" href="#">Despesas</a>
+<a class="font-label-bold text-label-bold flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant transition-colors rounded-xl" href="#">Diário</a>
+<a class="font-label-bold text-label-bold flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant transition-colors rounded-xl" href="#">Relatórios</a>
+</nav>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-variant border-2 border-outline-variant overflow-hidden">
+<img alt="Profile Photo" class="w-full h-full object-cover" data-alt="A close up professional headshot of a construction site manager wearing a hard hat, smiling slightly against a clear blue sky, capturing a corporate modern aesthetic with high contrast lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS02Auk49nQDMRzWmWXp8_1s4y4GKOw-OYBQc4AUDyBvQxB64N71UMQRtsxXleszHX-PbCH3j0loAYTLS_tEshKvjmgkkqH-7lUeimOFn4lFC6auY_geyTF0073JTHDTt8XuuNgidH8iDFv2Xd_GfrYfNB847U6qUTC7oKLJ5MBZq3w8xVQr38svR3eSgBSFx4QKGF-5E7rk7zCOaKXbK1K0mcva9AWzGKynoowsnqGADG5-KHZWEY"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-margin-mobile md:px-8 py-stack-lg max-w-7xl mx-auto w-full">
+<!-- Header & Action -->
+<div class="flex flex-col md:flex-row md:justify-between md:items-end mb-stack-lg gap-4">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-1">Planejamento</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Gerencie as etapas e acompanhe a medição da obra.</p>
+</div>
+<button class="bg-secondary-container text-on-secondary-container font-button-text text-button-text py-3 px-6 rounded-lg w-full md:w-auto hover:bg-secondary hover:text-on-secondary transition-colors flex items-center justify-center gap-2 h-touch-target-min">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Nova etapa
+            </button>
+</div>
+<!-- Dashboard Summary (Optional enhancement) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-stack-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4">
+<p class="font-label-bold text-label-bold text-on-surface-variant mb-1">Total Medido</p>
+<p class="font-headline-md text-headline-md text-primary">35%</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4">
+<p class="font-label-bold text-label-bold text-on-surface-variant mb-1">Valor Total Planejado</p>
+<p class="font-headline-md text-headline-md text-primary">R$ 1.2M</p>
+</div>
+</div>
+<!-- Stages List (Bento-ish Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- Stage Card: Fundação -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-primary">Fundação</h3>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-bold text-label-bold px-2 py-1 rounded">100% Concluído</span>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Peso</p>
+<p class="font-body-md text-body-md">15%</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Valor Planejado</p>
+<p class="font-body-md text-body-md">R$ 180.000,00</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Início</p>
+<p class="font-body-md text-body-md">01/03/2024</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Fim</p>
+<p class="font-body-md text-body-md">31/03/2024</p>
+</div>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="mt-4">
+<div class="flex justify-between text-label-bold font-label-bold mb-1">
+<span class="text-on-surface-variant">Medição</span>
+<span class="text-tertiary">100%</span>
+</div>
+<div class="h-2 w-full bg-surface-dim rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full w-full"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-end">
+<button aria-label="Editar etapa" class="text-primary font-button-text text-button-text flex items-center gap-1 p-2 hover:bg-surface-container rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span> Editar
+                    </button>
+</div>
+</div>
+<!-- Stage Card: Alvenaria -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-primary">Alvenaria</h3>
+<span class="bg-primary-fixed text-on-primary-fixed font-label-bold text-label-bold px-2 py-1 rounded">Em andamento</span>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Peso</p>
+<p class="font-body-md text-body-md">25%</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Valor Planejado</p>
+<p class="font-body-md text-body-md">R$ 300.000,00</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Início</p>
+<p class="font-body-md text-body-md">01/04/2024</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Fim</p>
+<p class="font-body-md text-body-md">15/06/2024</p>
+</div>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="mt-4">
+<div class="flex justify-between text-label-bold font-label-bold mb-1">
+<span class="text-on-surface-variant">Medição</span>
+<span class="text-primary-container">60%</span>
+</div>
+<div class="h-2 w-full bg-surface-dim rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full w-[60%]"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-end">
+<button aria-label="Editar etapa" class="text-primary font-button-text text-button-text flex items-center gap-1 p-2 hover:bg-surface-container rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span> Editar
+                    </button>
+</div>
+</div>
+<!-- Stage Card: Instalações Elétricas -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col justify-between opacity-75">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-primary">Instalações Elétricas</h3>
+<span class="bg-surface-dim text-on-surface-variant font-label-bold text-label-bold px-2 py-1 rounded">Não iniciado</span>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Peso</p>
+<p class="font-body-md text-body-md">10%</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Valor Planejado</p>
+<p class="font-body-md text-body-md">R$ 120.000,00</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Início</p>
+<p class="font-body-md text-body-md">01/06/2024</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant">Fim</p>
+<p class="font-body-md text-body-md">30/07/2024</p>
+</div>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="mt-4">
+<div class="flex justify-between text-label-bold font-label-bold mb-1">
+<span class="text-on-surface-variant">Medição</span>
+<span class="text-on-surface-variant">0%</span>
+</div>
+<div class="h-2 w-full bg-surface-dim rounded-full overflow-hidden">
+<div class="h-full bg-outline rounded-full w-0"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-end">
+<button aria-label="Editar etapa" class="text-primary font-button-text text-button-text flex items-center gap-1 p-2 hover:bg-surface-container rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span> Editar
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (From JSON - Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-gutter-mobile py-2 bg-surface dark:bg-on-background border-t border-outline-variant dark:border-outline md:hidden">
+<a aria-current="page" class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 hover:bg-surface-container dark:hover:bg-surface-variant transition-transform duration-100 scale-95" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="engineering" data-weight="fill" style="font-variation-settings: 'FILL' 1;">engineering</span>
+<span class="font-label-bold text-label-bold">Obras</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="payments">payments</span>
+<span class="font-label-bold text-label-bold">Despesas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="assignment">assignment</span>
+<span class="font-label-bold text-label-bold">Diário</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-2 hover:bg-surface-container dark:hover:bg-surface-variant" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="analytics">analytics</span>
+<span class="font-label-bold text-label-bold">Relatórios</span>
+</a>
+</nav>
+</body></html>

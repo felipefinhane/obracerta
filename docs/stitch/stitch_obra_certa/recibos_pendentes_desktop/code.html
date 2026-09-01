@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recibos Pendentes - ObraCerta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1c1b1b",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-bright": "#fcf9f8",
+                        "outline": "#747780",
+                        "inverse-primary": "#a9c7ff",
+                        "tertiary-fixed": "#c7ecc2",
+                        "on-tertiary-fixed-variant": "#2f4e2f",
+                        "surface-tint": "#3e5f92",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#572000",
+                        "secondary-container": "#fe6b00",
+                        "secondary-fixed-dim": "#ffb693",
+                        "on-primary-fixed": "#001b3d",
+                        "inverse-surface": "#313030",
+                        "on-primary-fixed-variant": "#244779",
+                        "on-secondary-fixed": "#351000",
+                        "surface": "#fcf9f8",
+                        "on-surface-variant": "#43474f",
+                        "surface-dim": "#dcd9d9",
+                        "primary": "#001939",
+                        "tertiary": "#011f05",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c3c6d0",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eded",
+                        "secondary-fixed": "#ffdbcc",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "on-primary-container": "#7696cd",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#163418",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-fixed-dim": "#acd0a7",
+                        "on-tertiary-container": "#7c9e78",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e5e2e1",
+                        "primary-fixed": "#d6e3ff",
+                        "primary-container": "#002d5e",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed": "#032107",
+                        "on-background": "#1c1b1b",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary": "#a04100",
+                        "primary-fixed-dim": "#a9c7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "touch-target-min": "48px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "stack-lg": "24px",
+                        "gutter-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "button-text": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button-text": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "label-bold": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-surface-dim h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col h-full py-stack-lg z-50">
+<div class="px-stack-md pb-stack-lg border-b border-outline-variant mb-stack-md flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest overflow-hidden mb-stack-sm flex items-center justify-center border border-outline">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="business">business</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">ObraCerta</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestão de Canteiro</p>
+</div>
+<div class="flex-grow flex flex-col space-y-1">
+<a class="text-on-surface-variant dark:text-outline hover:bg-surface-container-low cursor-pointer active:bg-surface-container-highest flex items-center px-stack-md py-3 rounded-none h-touch-target-min transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="construction">construction</span>
+<span class="font-label-bold text-label-bold">Obras</span>
+</a>
+<a class="text-primary dark:text-primary-fixed border-r-4 border-secondary-container bg-surface-container-high cursor-pointer active:bg-surface-container-highest flex items-center px-stack-md py-3 rounded-none h-touch-target-min transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="payments">payments</span>
+<span class="font-label-bold text-label-bold">Despesas</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline hover:bg-surface-container-low cursor-pointer active:bg-surface-container-highest flex items-center px-stack-md py-3 rounded-none h-touch-target-min transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="event_note">event_note</span>
+<span class="font-label-bold text-label-bold">Diário</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline hover:bg-surface-container-low cursor-pointer active:bg-surface-container-highest flex items-center px-stack-md py-3 rounded-none h-touch-target-min transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="description">description</span>
+<span class="font-label-bold text-label-bold">Relatórios</span>
+</a>
+</div>
+<div class="px-stack-md mt-auto">
+<button class="w-full bg-secondary text-on-secondary font-button-text text-button-text h-touch-target-min flex items-center justify-center rounded transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
+<span class="material-symbols-outlined mr-2" data-icon="add">add</span>
+                Novo Projeto
+            </button>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim fixed top-0 right-0 w-[calc(100%-16rem)] h-touch-target-min border-b border-outline-variant flex items-center justify-between px-margin-mobile z-40">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline rounded text-on-surface font-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary h-10" placeholder="Buscar..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-stack-md">
+<button class="text-primary hover:bg-surface-container-low p-2 rounded transition-all duration-200 flex items-center font-label-bold text-label-bold h-10">
+                Sincronizar
+            </button>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded transition-all duration-200 h-10 w-10 flex items-center justify-center relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline bg-surface-container-highest cursor-pointer">
+<img alt="Foto de perfil do gestor" class="w-full h-full object-cover" data-alt="Close-up portrait of a rugged construction site manager wearing a hard hat, strong features, natural daylight outdoors, high contrast corporate photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-L2kO7NQ8zlo3yXLVoe_WyYnek4CzpymzuxdDrbk6a3nx6rgoKN5Jvtpqk1qgF3xs17xsNWKTww2X1lw3kJOp64pJjpSfCk02da4LIc5u0l0-QfcWYb2lGOD_SZfTsZJO5ONNAmrZpei7P8JVbduRGvTpvmgDROzkl6MoIzo8beaOkXSO4h60IYTXToJsWaTyGk7-SnSPUfd4hMNHhjfVE1UjL0j01S_qguEaY18qOwEifAEQm0f-"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-[48px] p-stack-lg flex-grow min-h-screen bg-background">
+<div class="max-w-6xl mx-auto">
+<div class="mb-stack-lg flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Recibos Pendentes</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Confirme os dados extraídos das imagens antes de enviar para aprovação.</p>
+</div>
+<div class="text-right">
+<span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-wider block mb-1">Total Pendente</span>
+<span class="font-headline-md text-headline-md text-error">R$ 14.530,00</span>
+</div>
+</div>
+<!-- Receipts Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-lg">
+<!-- Card 1 -->
+<div class="bg-surface rounded border border-outline-variant flex flex-col overflow-hidden">
+<div class="h-48 relative border-b border-outline-variant bg-surface-container-highest p-2">
+<img alt="Recibo digitalizado" class="w-full h-full object-contain bg-white border border-outline-variant rounded-sm" data-alt="A slightly crumpled hardware store receipt resting on a rough wooden construction pallet, bright daylight casting sharp shadows, clear legible text block structure, utilitarian photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2e13EtddWpvbEW3wp5EK6CfFMJK_jUyj33tgYIMCqgyvKNpG7IeelfbBSuOctfZGGPfw9_6BGHE7EOpCZnX7Ehq8VvJCTd_lNh0sFbQ3IM_8_11W8V_pAndpC4GhgyQGWTha85FrDxj06tUhLVftJsxmlF8cBFSRybwHhJiFROGa3QJkwKdr4CuDhoZE2RirQ2O3hEp76iMXDXbQ-qVTP4GafyNIKcEXx6qawrCdNbiaAqO2G_R1q"/>
+<div class="absolute top-4 right-4 bg-surface-variant text-on-surface-variant px-2 py-1 rounded text-xs font-bold border border-outline flex items-center">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="pending">pending</span> Processando
+                         </div>
+</div>
+<div class="p-stack-md flex-grow flex flex-col">
+<div class="mb-4">
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-1">Fornecedor</p>
+<p class="font-headline-md text-headline-md text-on-surface truncate">Depósito Central</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-stack-md">
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-1">Data</p>
+<p class="font-body-md text-body-md text-on-surface">12/10/2023</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-1">Valor</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">R$ 3.450,00</p>
+</div>
+</div>
+<button class="mt-auto w-full bg-surface-container-highest text-primary font-button-text text-button-text py-3 border border-outline-variant rounded transition-colors hover:bg-surface-container-high flex justify-center items-center h-touch-target-min">
+<span class="material-symbols-outlined mr-2" data-icon="edit_document">edit_document</span>
+                            Completar Dados
+                        </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded border-l-4 border-l-error border-y border-r border-outline-variant flex flex-col overflow-hidden">
+<div class="h-48 relative border-b border-outline-variant bg-surface-container-highest p-2">
+<img alt="Recibo digitalizado" class="w-full h-full object-contain bg-white border border-outline-variant rounded-sm" data-alt="A close-up shot of a dirty, smudged concrete delivery invoice held by a hand wearing a thick yellow leather work glove, outdoor construction site background, high contrast lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4HlMd8flUYeR_D0PUhFn2LMZDMhj2BoxB3dEUxXhsDbENmWFrkD4sArszvVSUGbZMHa-A48wziyeEsWK_vqvwurcWMc88AlofxCFjmkLolmGEG69wse_DA-zfDB-gaKGfTtIajTA_NoNSlZzCSoLZ_t-cYUs8U8ll5ZZxyREdQufhEMls-daMcw_aPG7kJhLHOma3Fd-1932GbNwhEa8HXU9_kxf5ZUu6UYHyQrMV-roPQzNNVq0K"/>
+<div class="absolute top-4 right-4 bg-error-container text-on-error-container px-2 py-1 rounded text-xs font-bold border border-error flex items-center">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="warning">warning</span> Revisão Necessária
+                         </div>
+</div>
+<div class="p-stack-md flex-grow flex flex-col">
+<div class="mb-4">
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-1">Fornecedor</p>
+<p class="font-headline-md text-headline-md text-on-surface truncate">Cimentos Betão S.A.</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-stack-md">
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-1">Data</p>
+<p class="font-body-md text-body-md text-on-surface">11/10/2023</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-1">Valor</p>
+<p class="font-body-md text-body-md text-error font-semibold">? (Ilegível)</p>
+</div>
+</div>
+<button class="mt-auto w-full bg-secondary text-on-secondary font-button-text text-button-text py-3 rounded transition-colors hover:bg-secondary-container hover:text-on-secondary-container flex justify-center items-center h-touch-target-min">
+<span class="material-symbols-outlined mr-2" data-icon="edit_document">edit_document</span>
+                            Completar Dados
+                        </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded border border-outline-variant flex flex-col overflow-hidden">
+<div class="h-48 relative border-b border-outline-variant bg-surface-container-highest p-2">
+<img alt="Recibo digitalizado" class="w-full h-full object-contain bg-white border border-outline-variant rounded-sm" data-alt="A clean, crisp digital printout of a lumber yard receipt laying flat on a metal tool box, sharp focus, neutral daylight, highly detailed text elements visible, industrial setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMNSCw5SlNnQJc3_mgwJOdWqAGCZucxVPl2d_SM-6TLhWqP5NVEiSPLRX_HjAkn--iARmhgyseYgq3xPTOx0Eac6Cj8BBKm01WdpEoHdaAbxmpCtqQgo1c4aQLKY6OkVSmulNyHoZB52vaJM516oSkoIV2UYB7dp-3zbWf6QivbXR14Zmsi0kpR4J1Sp1U2VizrPSUe9OKDFgAzWDlbwJ_hjw8VuLhHwHEeEO4oF9YCITbtHsFmT3X"/>
+<div class="absolute top-4 right-4 bg-surface-variant text-on-surface-variant px-2 py-1 rounded text-xs font-bold border border-outline flex items-center">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="pending">pending</span> Processando
+                         </div>
+</div>
+<div class="p-stack-md flex-grow flex flex-col">
+<div class="mb-4">
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-1">Fornecedor</p>
+<p class="font-headline-md text-headline-md text-on-surface truncate">Madeireira Silva</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-stack-md">
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-1">Data</p>
+<p class="font-body-md text-body-md text-on-surface">10/10/2023</p>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase mb-1">Valor</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">R$ 8.900,00</p>
+</div>
+</div>
+<button class="mt-auto w-full bg-surface-container-highest text-primary font-button-text text-button-text py-3 border border-outline-variant rounded transition-colors hover:bg-surface-container-high flex justify-center items-center h-touch-target-min">
+<span class="material-symbols-outlined mr-2" data-icon="edit_document">edit_document</span>
+                            Completar Dados
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

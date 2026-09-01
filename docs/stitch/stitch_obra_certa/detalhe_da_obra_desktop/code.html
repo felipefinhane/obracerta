@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ObraCerta - Detalhe da Obra</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Custom Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#1c1b1b",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-bright": "#fcf9f8",
+                    "outline": "#747780",
+                    "inverse-primary": "#a9c7ff",
+                    "tertiary-fixed": "#c7ecc2",
+                    "on-tertiary-fixed-variant": "#2f4e2f",
+                    "surface-tint": "#3e5f92",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#572000",
+                    "secondary-container": "#fe6b00",
+                    "secondary-fixed-dim": "#ffb693",
+                    "on-primary-fixed": "#001b3d",
+                    "inverse-surface": "#313030",
+                    "on-primary-fixed-variant": "#244779",
+                    "on-secondary-fixed": "#351000",
+                    "surface": "#fcf9f8",
+                    "on-surface-variant": "#43474f",
+                    "surface-dim": "#dcd9d9",
+                    "primary": "#001939",
+                    "tertiary": "#011f05",
+                    "on-tertiary": "#ffffff",
+                    "outline-variant": "#c3c6d0",
+                    "error": "#ba1a1a",
+                    "surface-container": "#f0eded",
+                    "secondary-fixed": "#ffdbcc",
+                    "on-secondary-fixed-variant": "#7a3000",
+                    "on-primary-container": "#7696cd",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#163418",
+                    "surface-container-high": "#eae7e7",
+                    "tertiary-fixed-dim": "#acd0a7",
+                    "on-tertiary-container": "#7c9e78",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e5e2e1",
+                    "primary-fixed": "#d6e3ff",
+                    "primary-container": "#002d5e",
+                    "on-secondary": "#ffffff",
+                    "background": "#fcf9f8",
+                    "on-tertiary-fixed": "#032107",
+                    "on-background": "#1c1b1b",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary": "#a04100",
+                    "primary-fixed-dim": "#a9c7ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "touch-target-min": "48px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px",
+                    "stack-lg": "24px",
+                    "gutter-mobile": "12px"
+            },
+            "fontFamily": {
+                    "button-text": ["Inter"],
+                    "label-bold": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "button-text": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Base configuration for material icons */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface dark:bg-surface-dim z-20 flex flex-col py-stack-lg">
+<!-- Header/Brand -->
+<div class="px-stack-lg mb-stack-lg flex flex-col gap-stack-sm">
+<div class="flex items-center gap-stack-sm">
+<div class="w-10 h-10 rounded-DEFAULT bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">domain</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">ObraCerta</span>
+<span class="font-label-bold text-label-bold text-on-surface-variant">Gestão de Canteiro</span>
+</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 px-base space-y-base overflow-y-auto">
+<!-- Active Tab: Obras -->
+<a class="flex items-center gap-stack-md px-stack-md py-3 rounded-DEFAULT cursor-pointer text-primary dark:text-primary-fixed border-r-4 border-secondary-container bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">construction</span>
+<span class="font-label-bold text-label-bold">Obras</span>
+</a>
+<!-- Inactive Tab: Despesas -->
+<a class="flex items-center gap-stack-md px-stack-md py-3 rounded-DEFAULT cursor-pointer text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 active:bg-surface-container-highest border-r-4 border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-bold text-label-bold">Despesas</span>
+</a>
+<!-- Inactive Tab: Diário -->
+<a class="flex items-center gap-stack-md px-stack-md py-3 rounded-DEFAULT cursor-pointer text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 active:bg-surface-container-highest border-r-4 border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-bold text-label-bold">Diário</span>
+</a>
+<!-- Inactive Tab: Relatórios -->
+<a class="flex items-center gap-stack-md px-stack-md py-3 rounded-DEFAULT cursor-pointer text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors duration-200 active:bg-surface-container-highest border-r-4 border-transparent hover:border-outline-variant" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-bold text-label-bold">Relatórios</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="px-stack-md mt-auto">
+<button class="w-full flex items-center justify-center gap-stack-sm bg-primary text-on-primary font-button-text text-button-text py-3 rounded-DEFAULT min-h-[48px] hover:bg-primary-container transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-container focus:ring-offset-2">
+<span class="material-symbols-outlined">add</span>
+                Novo Projeto
+            </button>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface-dim w-full h-touch-target-min border-b border-outline-variant z-10 flex items-center justify-between px-margin-mobile flex-shrink-0">
+<!-- Left Side: Breadcrumb / Search context (Using standard search position from JSON) -->
+<div class="flex items-center gap-stack-sm text-on-surface-variant">
+<span class="material-symbols-outlined">search</span>
+<input class="bg-transparent border-none focus:ring-0 font-body-md text-body-md placeholder:text-outline py-1 px-2" placeholder="Buscar na obra..." type="text"/>
+</div>
+<!-- Right Side: Actions & Profile -->
+<div class="flex items-center gap-stack-md">
+<button class="flex items-center gap-stack-sm text-primary font-button-text text-button-text hover:bg-surface-container-low p-2 rounded-DEFAULT transition-all duration-200">
+<span class="material-symbols-outlined">sync</span>
+<span class="hidden lg:inline">Sincronizar</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-DEFAULT transition-all duration-200 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full border border-outline-variant overflow-hidden cursor-pointer">
+<img alt="Foto de perfil do gestor" class="w-full h-full object-cover" data-alt="A close-up, highly detailed portrait of a rugged construction project manager wearing a white hard hat. The scene is brightly lit by high-contrast daylight, emphasizing a modern, utilitarian aesthetic. The background is a slightly blurred, light-colored construction site, fitting perfectly within a crisp, high-end corporate construction application UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKflpRENSvjfGt6nCjtisZFjfj9RlAStSCLoKk5rCq-_Fvg3l9YPo6z_fqMF_7Nez_ZOjGWsDed7UH2rHQcTujLCtliU6wnE1NIW-RRMX9eFeovtEcXAmHyyexVZRQbTu3A9UfdS_QJ8FjlbOS3ojk8fg33eO4JCEKTC4ifhp4ST9KaWtoXEKwKLzI80_MD2j3TatWX7bCuQ81hQBdwDjwbQsOPlwArmw736W_y4F2kC5R0zifeKOY"/>
+</div>
+</div>
+</header>
+<!-- Main Scrollable Content -->
+<main class="flex-1 overflow-y-auto p-stack-lg bg-background flex flex-col gap-stack-lg">
+<!-- Page Header / Summary Card (Bento Item 1 - Large) -->
+<section class="bg-surface-container-lowest border border-outline p-stack-lg rounded-DEFAULT flex flex-col gap-stack-lg">
+<div class="flex justify-between items-start">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-1">Residencial Vista Clara</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">business</span>
+                            Cliente: Construtora Alpha
+                        </p>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full font-label-bold text-label-bold flex items-center gap-1 border border-tertiary-fixed-dim">
+<span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+                        Em Andamento
+                    </span>
+</div>
+<!-- Consolidated Progress Bar -->
+<div class="flex flex-col gap-stack-sm pt-stack-md border-t border-outline-variant">
+<div class="flex justify-between items-end">
+<span class="font-label-bold text-label-bold text-on-surface">Orçado vs Realizado (Consolidado)</span>
+<span class="font-headline-md text-headline-md text-primary">68%</span>
+</div>
+<!-- Thick highly visible progress bar for outdoor visibility -->
+<div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden border border-outline-variant">
+<div class="h-full bg-primary" style="width: 68%;"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">Gasto: R$ 1.2M</span>
+<span class="font-body-md text-body-md text-outline">Orçamento: R$ 1.7M</span>
+</div>
+</div>
+</section>
+<!-- Quick Access Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-stack-md">
+<!-- Card 1 -->
+<button class="bg-surface-container-lowest border border-outline p-stack-md rounded-DEFAULT flex flex-col items-start justify-between min-h-[140px] hover:bg-surface-container-low active:bg-surface-container-highest transition-colors cursor-pointer group text-left">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-DEFAULT group-hover:bg-primary-container group-hover:text-on-primary transition-colors text-primary">
+<span class="material-symbols-outlined text-[28px]">calendar_month</span>
+</div>
+<div class="mt-stack-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Planejamento</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Cronograma e Etapas</p>
+</div>
+</button>
+<!-- Card 2 -->
+<button class="bg-surface-container-lowest border border-outline p-stack-md rounded-DEFAULT flex flex-col items-start justify-between min-h-[140px] hover:bg-surface-container-low active:bg-surface-container-highest transition-colors cursor-pointer group text-left">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-DEFAULT group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors text-secondary-container">
+<span class="material-symbols-outlined text-[28px]">payments</span>
+</div>
+<div class="mt-stack-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Despesas</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">NFs e Custos Diretos</p>
+</div>
+</button>
+<!-- Card 3 -->
+<button class="bg-surface-container-lowest border border-outline p-stack-md rounded-DEFAULT flex flex-col items-start justify-between min-h-[140px] hover:bg-surface-container-low active:bg-surface-container-highest transition-colors cursor-pointer group text-left">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-DEFAULT group-hover:bg-tertiary-container group-hover:text-on-tertiary-container transition-colors text-tertiary-container">
+<span class="material-symbols-outlined text-[28px]">engineering</span>
+</div>
+<div class="mt-stack-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Diário de Obra</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Registros e Clima</p>
+</div>
+</button>
+<!-- Card 4 -->
+<button class="bg-surface-container-lowest border border-outline p-stack-md rounded-DEFAULT flex flex-col items-start justify-between min-h-[140px] hover:bg-surface-container-low active:bg-surface-container-highest transition-colors cursor-pointer group text-left">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-DEFAULT group-hover:bg-primary-container group-hover:text-on-primary transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[28px]">monitoring</span>
+</div>
+<div class="mt-stack-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Relatórios</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Avanço Físico e Fotográfico</p>
+</div>
+</button>
+</section>
+<!-- Recent Activities Section -->
+<section class="flex flex-col gap-stack-md mt-stack-sm">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">Atividades Recentes</h2>
+<button class="text-primary font-label-bold text-label-bold hover:underline">Ver todas</button>
+</div>
+<!-- Divided List Container -->
+<div class="bg-surface-container-lowest border border-outline rounded-DEFAULT flex flex-col divide-y divide-outline-variant">
+<!-- List Item 1 -->
+<div class="flex items-center p-stack-md min-h-[64px] hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant mr-stack-md shrink-0">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<span class="font-label-bold text-label-bold text-on-surface">Diário de Obra preenchido</span>
+<span class="font-body-md text-body-md text-outline">Por Carlos Silva • Há 2 horas</span>
+</div>
+<div class="shrink-0 text-right">
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="flex items-center p-stack-md min-h-[64px] hover:bg-surface-container-low transition-colors cursor-pointer border-l-4 border-l-error">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container mr-stack-md shrink-0">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<span class="font-label-bold text-label-bold text-on-surface">Atraso na entrega de cimento</span>
+<span class="font-body-md text-body-md text-outline">Impacta Etapa 3 • Há 5 horas</span>
+</div>
+<div class="shrink-0 text-right">
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded text-[12px] font-bold uppercase tracking-wider">Atenção</span>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="flex items-center p-stack-md min-h-[64px] hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant mr-stack-md shrink-0">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<span class="font-label-bold text-label-bold text-on-surface">Nova despesa registrada: Aluguel Andaimes</span>
+<span class="font-body-md text-body-md text-outline">R$ 4.500,00 • Ontem, 16:30</span>
+</div>
+<div class="shrink-0 text-right">
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom spacing buffer -->
+<div class="h-8"></div>
+</main>
+</div>
+</body></html>

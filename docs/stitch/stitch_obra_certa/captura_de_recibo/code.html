@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ObraCerta - Captura de Recibo</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e5e2e1",
+                        "tertiary": "#011f05",
+                        "on-primary-fixed": "#001b3d",
+                        "outline-variant": "#c3c6d0",
+                        "primary-container": "#002d5e",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fcf9f8",
+                        "background": "#fcf9f8",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#032107",
+                        "on-tertiary-container": "#7c9e78",
+                        "tertiary-container": "#163418",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb693",
+                        "surface": "#fcf9f8",
+                        "tertiary-fixed": "#c7ecc2",
+                        "surface-tint": "#3e5f92",
+                        "primary-fixed": "#d6e3ff",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-surface-variant": "#43474f",
+                        "outline": "#747780",
+                        "on-primary-fixed-variant": "#244779",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1c1b1b",
+                        "surface-container": "#f0eded",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-container": "#572000",
+                        "primary": "#001939",
+                        "on-primary-container": "#7696cd",
+                        "secondary-container": "#fe6b00",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "secondary": "#a04100",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "inverse-primary": "#a9c7ff",
+                        "secondary-fixed": "#ffdbcc",
+                        "surface-container-high": "#eae7e7",
+                        "tertiary-fixed-dim": "#acd0a7",
+                        "primary-fixed-dim": "#a9c7ff",
+                        "on-secondary-fixed": "#351000",
+                        "on-tertiary-fixed-variant": "#2f4e2f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "24px",
+                        "margin-mobile": "16px",
+                        "touch-target-min": "48px",
+                        "base": "8px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "gutter-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "button-text": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "button-text": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-bold": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Camera scanning line animation */
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .scan-line {
+            animation: scan 3s linear infinite;
+        }
+
+        /* Subtle pulse for the giant button */
+        @keyframes subtle-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(254, 107, 0, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(254, 107, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(254, 107, 0, 0); }
+        }
+        .btn-pulse {
+            animation: subtle-pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-[100dvh] flex flex-col antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar (from JSON) -->
+<!-- Applying explicit JSON structural and stylistic instructions -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-touch-target-min bg-surface border-b border-outline-variant transition-opacity">
+<button aria-label="Voltar" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary truncate px-4">ObraCerta</h1>
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden flex-shrink-0 border border-outline hover:bg-surface-container-high cursor-pointer">
+<img alt="Profile Photo" class="w-full h-full object-cover" data-alt="A small circular avatar placeholder image showing a generic user profile silhouette against a light grey background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPwSf0HM64y-hzFb1e0vp3nU6MOIv4DahOXgplssLYJE4a8J0e_Onv5sSjkKHLs-AjMc4jrdo5UCIZpjey8tlPhwhBzKjvQupDggfyuqJwrVXy6xhRwh8yxTfFvRVRxSDZf7qodA6fyblB4DY3YnMtpH4DpNnA31KhdepjtmMuRggezhjX5J9wUJ6UQFs1eWXirlK-F0aC4wMAs_Ab_3jNsKw2_WZKZDwKKV8WARnBKUCAmODhod59"/>
+</div>
+</header>
+<!-- Main Canvas Area -->
+<!-- Padding top accounts for TopAppBar. Navigation Shell (BottomNavBar) is SUPPRESSED as this is a Task-Focused/Linear action screen (Captura de Recibo) accessed via back-navigation. -->
+<main class="flex-1 flex flex-col pt-[calc(48px+16px)] px-margin-mobile pb-margin-mobile gap-stack-md h-full relative">
+<!-- Project Selector (Context Top) -->
+<div aria-haspopup="listbox" class="bg-surface border border-outline rounded-lg flex items-center justify-between p-3 active:bg-surface-container transition-colors cursor-pointer" role="button">
+<div class="flex flex-col">
+<span class="font-label-bold text-label-bold text-on-surface-variant text-[11px] uppercase tracking-wider">Obra Atual</span>
+<span class="font-button-text text-button-text text-on-surface truncate">Torre Alpha - Fundação</span>
+</div>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+<!-- Camera Viewfinder Placeholder -->
+<!-- Prioritizing massive canvas for one-handed operational clarity -->
+<div class="flex-1 w-full bg-inverse-surface rounded-xl relative overflow-hidden flex flex-col items-center justify-center border-2 border-outline-variant/30">
+<!-- Simulated Camera Feed Background -->
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-surface-variant to-inverse-surface"></div>
+<!-- Scanner brackets -->
+<div class="absolute top-8 left-8 w-12 h-12 border-t-4 border-l-4 border-secondary-container rounded-tl-lg opacity-80"></div>
+<div class="absolute top-8 right-8 w-12 h-12 border-t-4 border-r-4 border-secondary-container rounded-tr-lg opacity-80"></div>
+<div class="absolute bottom-8 left-8 w-12 h-12 border-b-4 border-l-4 border-secondary-container rounded-bl-lg opacity-80"></div>
+<div class="absolute bottom-8 right-8 w-12 h-12 border-b-4 border-r-4 border-secondary-container rounded-br-lg opacity-80"></div>
+<!-- Scanning Line -->
+<div class="scan-line absolute left-0 w-full h-0.5 bg-secondary-container shadow-[0_0_15px_rgba(254,107,0,0.8)] z-10"></div>
+<!-- Central Icon -->
+<div class="z-10 flex flex-col items-center gap-2 text-surface-variant/70">
+<span class="material-symbols-outlined text-6xl" data-weight="fill">receipt_long</span>
+<p class="font-label-bold text-label-bold tracking-widest uppercase">Alinhe o recibo</p>
+</div>
+</div>
+<!-- Action Controls (Bottom Stacked for One-Handed Use) -->
+<div class="flex flex-col gap-stack-sm w-full mt-2 shrink-0">
+<!-- Giant Centralized Button (Primary Action) -->
+<!-- Using secondary-container (Orange) as per generic brand guidance for primary actions, adapted to JSON tokens -->
+<button class="w-full h-[88px] bg-secondary-container text-on-secondary-container rounded-xl flex flex-col items-center justify-center gap-1 active:bg-secondary active:text-on-secondary active:scale-[0.98] transition-all border-b-4 border-secondary btn-pulse relative overflow-hidden group" id="capture-btn">
+<span class="absolute inset-0 bg-white/20 opacity-0 group-active:opacity-100 transition-opacity"></span>
+<span class="material-symbols-outlined text-4xl" data-weight="fill">camera</span>
+<span class="font-button-text text-button-text font-bold">Tirar Foto do Recibo</span>
+</button>
+<!-- Secondary Action (Gallery) -->
+<button class="w-full h-touch-target-min bg-surface border border-outline text-on-surface-variant rounded-lg flex items-center justify-center gap-2 active:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">photo_library</span>
+<span class="font-button-text text-button-text">Galeria</span>
+</button>
+</div>
+</main>
+<!-- Feedback Overlay (Hidden state) -->
+<!-- Appears post-capture to provide immediate assurance without requiring data entry -->
+<div class="fixed inset-0 z-[100] bg-inverse-surface/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center opacity-0 pointer-events-none transition-opacity duration-300" id="success-feedback">
+<div class="scale-90 transform transition-transform duration-500 delay-100" id="feedback-content">
+<div class="w-24 h-24 bg-tertiary-container rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+<span class="material-symbols-outlined text-5xl text-on-tertiary-container" data-weight="fill">check</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-surface-bright mb-3">Recibo Registrado!</h2>
+<p class="font-body-lg text-body-lg text-surface-variant max-w-[280px] mx-auto">Você confirma os detalhes depois.</p>
+</div>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const captureBtn = document.getElementById('capture-btn');
+            const feedbackOverlay = document.getElementById('success-feedback');
+            const feedbackContent = document.getElementById('feedback-content');
+
+            captureBtn.addEventListener('click', () => {
+                // Remove pulse animation to signify action taken
+                captureBtn.classList.remove('btn-pulse');
+                
+                // Haptic feedback simulation (visual)
+                captureBtn.style.transform = 'scale(0.95)';
+                setTimeout(() => { captureBtn.style.transform = 'scale(1)'; }, 100);
+
+                // Show success overlay after a tiny simulated "processing" delay
+                setTimeout(() => {
+                    feedbackOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                    feedbackOverlay.classList.add('opacity-100', 'pointer-events-auto');
+                    
+                    // Trigger entry animation for content
+                    feedbackContent.classList.remove('scale-90');
+                    feedbackContent.classList.add('scale-100');
+
+                    // Auto-hide and "reset" or navigate away (simulated)
+                    setTimeout(() => {
+                        feedbackOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+                        feedbackOverlay.classList.add('opacity-0', 'pointer-events-none');
+                        feedbackContent.classList.remove('scale-100');
+                        feedbackContent.classList.add('scale-90');
+                        captureBtn.classList.add('btn-pulse'); // reset for demo purposes
+                    }, 3000);
+                }, 400);
+            });
+        });
+    </script>
+</body></html>
