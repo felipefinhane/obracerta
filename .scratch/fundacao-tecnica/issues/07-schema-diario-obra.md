@@ -1,6 +1,6 @@
 # Schema — diário de obra
 
-Status: open
+Status: done
 Blocked by: 03
 
 ## Contexto
@@ -15,3 +15,6 @@ Ver `docs/modelo-dados.md` seção "Diário de obra".
 - RLS via `has_obra_access` (ticket 03).
 
 ## Comments
+
+- Migration `supabase/migrations/20260901144943_diario_obra.sql`. `diario_midia.tipo` com `check (tipo in ('foto'))` — trava vídeo no nível do banco, não só por convenção da aplicação; solta quando vídeo voltar (fase 2).
+- Testado local e hospedado: `diario_entradas`/`diario_midia` seguem a mesma regra de `has_obra_access` das outras tabelas.
