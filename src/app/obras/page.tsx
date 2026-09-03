@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { criarObra } from "./actions";
 
@@ -15,8 +16,11 @@ export default async function ObrasPage() {
 
   return (
     <div className="min-h-screen bg-background text-on-background">
-      <header className="bg-surface border-b border-outline-variant flex items-center px-margin-mobile h-touch-target-min">
+      <header className="bg-surface border-b border-outline-variant flex items-center justify-between px-margin-mobile h-touch-target-min">
         <h1 className="font-headline-md text-headline-md text-primary">ObraCerta</h1>
+        <Link href="/cadastros" className="font-label-bold text-label-bold text-primary hover:underline">
+          Cadastros
+        </Link>
       </header>
 
       <main className="px-margin-mobile pt-stack-lg pb-stack-lg flex flex-col gap-stack-lg max-w-4xl mx-auto">
@@ -60,6 +64,20 @@ export default async function ObrasPage() {
                 {/* Orçado x Realizado por obra fica pro módulo de Despesas —
                     precisa agregar a view orcado_vs_realizado (por etapa)
                     somada pra obra inteira, não existe ainda nesta tela. */}
+                <div className="flex gap-stack-sm pt-stack-sm border-t border-outline-variant">
+                  <Link
+                    href={`/obras/${obra.id}/despesas`}
+                    className="font-label-bold text-label-bold text-primary hover:underline"
+                  >
+                    Despesas
+                  </Link>
+                  <Link
+                    href={`/obras/${obra.id}/etapas`}
+                    className="font-label-bold text-label-bold text-primary hover:underline"
+                  >
+                    Etapas
+                  </Link>
+                </div>
               </article>
             ))}
           </div>
