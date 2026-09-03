@@ -1,6 +1,6 @@
 # Relatório Orçado vs. Realizado
 
-Status: pending
+Status: done
 
 ## Contexto
 
@@ -13,3 +13,6 @@ Núcleo do produto (`docs/mvp.md` seção 1 e "Relatórios"; `docs/modelo-dados.
 - Link de acesso a partir de `/obras/[obraId]/etapas` e da listagem de Obras.
 
 ## Comments
+
+- `/obras/[obraId]/orcado-realizado`: consulta a view `orcado_vs_realizado` por `obra_id` (uma linha por etapa, com barra de progresso e destaque vermelho quando `valor_realizado > valor_planejado`) + soma à parte de despesas confirmadas com `etapa_id` nulo (a view não cobre, mas é gasto real — linha "Sem etapa vinculada"). Card consolidado no topo soma tudo. Links a partir de `/etapas` e da listagem de Obras.
+- **Testado de ponta a ponta de verdade contra o hospedado**: criei uma despesa confirmada de R$30.000 vinculada à etapa "Fundação" (planejado R$25.000, real, do cadastro do effort anterior) e confirmei que a página mostrou "Estourou o planejado" com a barra vermelha e os dois valores certos (25.000,00 / 30.000,00) — cobre exatamente o caso de estouro que o ticket pede. Despesa de teste apagada ao final.

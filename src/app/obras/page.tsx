@@ -61,9 +61,6 @@ export default async function ObrasPage() {
                     </p>
                   )}
                 </div>
-                {/* Orçado x Realizado por obra fica pro módulo de Despesas —
-                    precisa agregar a view orcado_vs_realizado (por etapa)
-                    somada pra obra inteira, não existe ainda nesta tela. */}
                 <div className="flex gap-stack-sm pt-stack-sm border-t border-outline-variant">
                   <Link
                     href={`/obras/${obra.id}/despesas`}
@@ -76,6 +73,12 @@ export default async function ObrasPage() {
                     className="font-label-bold text-label-bold text-primary hover:underline"
                   >
                     Etapas
+                  </Link>
+                  <Link
+                    href={`/obras/${obra.id}/orcado-realizado`}
+                    className="font-label-bold text-label-bold text-primary hover:underline"
+                  >
+                    Orçado x Realizado
                   </Link>
                 </div>
               </article>
