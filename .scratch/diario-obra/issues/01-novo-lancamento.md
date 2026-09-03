@@ -1,6 +1,6 @@
 # Novo lançamento de diário
 
-Status: pending
+Status: done
 
 ## Contexto
 
@@ -13,3 +13,7 @@ Status: pending
 - Reusa `compressImage` (`src/lib/storage/compress-image.ts`).
 
 ## Comments
+
+- Extraí um pequeno detalhe do `src/lib/storage/signed-url.ts` (do effort `despesas-recibo`/05): já suportava `diario_midia` desde que foi escrito, então não precisou de mudança nenhuma na rota `/api/storage/sign` pra isso funcionar — só reusar.
+- `/obras/[obraId]/diario/novo`: Client Component (mesmo motivo de `despesas/capturar` — compressão e upload só rodam no browser). `criarEntradaDiario` cria o lançamento com todos os campos de texto de uma vez (sem estado provisório); depois, pra cada foto selecionada, `criarMidiaDiario` cria a linha com `id`/caminho determinístico e o cliente sobe direto pro R2 — sequencial, sem a dança de `status_processamento` dos recibos (não tem pipeline lendo essa foto depois).
+- **Testado de ponta a ponta de verdade contra o hospedado**: como as duas server actions são chamadas direto do cliente (não como `<form action>`), reproduzi a mesma sequência via REST + a rota `/api/storage/sign` rodando de verdade + um `PUT` real pro R2 de produção (mesma técnica de cobertura equivalente usada em `despesas-recibo`/03, já que a lógica de servidor é fina o bastante) — criei um lançamento completo (clima, descrição, efetivo, ocorrência, etapa vinculada) com uma foto de verdade. Dado de teste apagado ao final (`DELETE` em `diario_entradas` via service role — cascade cuidou de `diario_midia`) e o objeto correspondente removido do R2.
