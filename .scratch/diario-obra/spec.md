@@ -1,6 +1,6 @@
 # Diário de obra
 
-Status: em andamento
+Status: done
 
 Quinto effort de UI do MVP — o último módulo funcional que falta pra fechar o `docs/mvp.md` inteiro (o que resta depois disso, Recebimentos/conciliação, já está marcado como fase 2, fora do MVP). Schema já existe desde `fundacao-tecnica`/07 (`diario_entradas`, `diario_midia`) e já tem policy de `select`/`insert` prontas (`fundacao-tecnica`/07 e a migration de escrita do mesmo effort) — **sem gap de RLS pra fechar desta vez**, ao contrário dos quatro efforts anteriores.
 
@@ -25,3 +25,8 @@ Mockups do Stitch como referência visual: `docs/stitch/stitch_obra_certa/{novo_
 Ordem: 01 antes de 02 só pra ter dado real pra visualizar na timeline durante o desenvolvimento — não são tecnicamente dependentes (RLS de leitura já existe desde `fundacao-tecnica`).
 
 ## Comments
+
+- 2/2 tickets fechados, testados de ponta a ponta contra o hospedado (Supabase + Cloudflare R2 de produção), mesmo método dos quatro efforts anteriores.
+- Confirmado o que a spec previa: sem gap de RLS pra fechar desta vez — `diario_entradas`/`diario_midia` já tinham select+insert prontos desde `fundacao-tecnica`.
+- **Isso fecha o MVP inteiro definido em `docs/mvp.md`** (Obras, Planejamento, Cadastros de apoio, Despesas/recibo, Diário de obra, Relatórios de Orçado x Realizado e extrato de despesas) — o que resta do documento é só Recebimentos/conciliação, já marcado ali como fase 2.
+- Deploy: mudanças ainda não commitadas/enviadas ao Vercel nesta sessão.

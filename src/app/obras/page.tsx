@@ -80,6 +80,12 @@ export default async function ObrasPage() {
                   >
                     Orçado x Realizado
                   </Link>
+                  <Link
+                    href={`/obras/${obra.id}/diario`}
+                    className="font-label-bold text-label-bold text-primary hover:underline"
+                  >
+                    Diário
+                  </Link>
                 </div>
               </article>
             ))}
