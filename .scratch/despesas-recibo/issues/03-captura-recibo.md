@@ -1,6 +1,6 @@
 # Captura de recibo (mobile)
 
-Status: pending
+Status: done
 
 ## Contexto
 
@@ -15,3 +15,9 @@ Fluxo mobile-first mais específico do produto — `docs/planejamento.md` §3 pa
 - Redireciona pra `/obras/[obraId]/despesas/pendentes` (ticket 04) depois de disparar — não espera a extração terminar (é assíncrona).
 
 ## Comments
+
+- `/obras/[obraId]/despesas/capturar`: Client Component (`CapturarForm`) porque `compressImage` e o upload direto pro R2 só rodam no browser. Sequência exata da ADR 0002/0003 respeitada: `criarLancamentoProvisorio` (server action) grava `despesas` + `recibos` com `id` do recibo gerado no server (`crypto.randomUUID()`) e `arquivo_url` determinístico no mesmo INSERT → cliente pede URL assinada em `/api/storage/sign` → `PUT` direto pro R2 → só então `confirmarUploadRecibo` (server action) vira `status_processamento` pra `pendente`, que é o que dispara o webhook.
+- Erro de rede no upload fica só com uma mensagem informativa (o lançamento já existe, não se perde) — sem tentar reenviar automaticamente reusando o registro, como o próprio ticket já previa como fora de escopo.
+- **Testado de ponta a ponta de verdade contra o hospedado**, com upload real do `recibo_exemplo.jpg` pro Cloudflare R2 de produção: recriei manualmente a sequência exata da tela (insert `despesas`/`recibos` via REST com a sessão real do usuário → `POST /api/storage/sign` na rota rodando de verdade → `PUT` do arquivo pra URL assinada real → `PATCH status_processamento=pendente`) porque o upload em si depende de APIs de browser (Canvas, File) que não dá pra disparar de fora de um browser real; a lógica de servidor (as duas server actions) é fina o bastante pra essa reprodução via REST cobrir o mesmo caminho de código.
+- Isso disparou o webhook e a Edge Function de extração **de verdade** (não só simulação) — primeira tentativa bateu num `503` transitório do Gemini (`gemini-3.6-flash`, "high demand"), o pipeline corretamente marcou `falhou` sem perder o registro; invocando de novo alguns segundos depois, processou certo: fornecedor "DEPOSITO SANTA IFIGENIA", item "TIGRE JOELHO ESGOTO 75X90" (qtd 8, R$9,35 unit.), valor total R$464, confiança 0.95 — os mesmos dados batendo com o que o ticket 09 de `fundacao-tecnica` já tinha relatado pra essa mesma imagem, confirmando que a mudança aqui não alterou o pipeline em si, só passou a alimentá-lo pelo caminho real do app.
+- Recibo/despesa de teste usados também pra validar o ticket 04 (ver lá) antes de ser apagado.
