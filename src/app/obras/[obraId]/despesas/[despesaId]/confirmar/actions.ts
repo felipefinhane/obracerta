@@ -64,7 +64,7 @@ export async function confirmarDespesa(obraId: string, despesaId: string, formDa
     }
   }
 
-  // TODO: redirecionar pra /obras/{obraId}/despesas quando o extrato existir
-  // (ticket 06) — ainda não existe nesta etapa do plano.
+  // Volta pra pendentes, não pro extrato (ticket 06) — o fluxo típico é
+  // confirmar vários lançamentos acumulados em sequência (planejamento.md §3).
   redirect(`/obras/${obraId}/despesas/pendentes`);
 }

@@ -72,7 +72,5 @@ export async function criarDespesaManual(obraId: string, formData: FormData) {
     }
   }
 
-  // TODO: redirecionar pra /obras/{obraId}/despesas quando o extrato
-  // existir (ticket 06 do effort) — ainda não existe nesta etapa do plano.
-  redirect("/obras");
+  redirect(`/obras/${obraId}/despesas`);
 }
