@@ -1,15 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { createClient } from "@/lib/supabase/server";
-import { createR2Client, R2_BUCKET } from "@/lib/storage/r2";
-
-type Kind = "recibo" | "diario_midia";
-
-const TABLE_BY_KIND: Record<Kind, string> = {
-  recibo: "recibos",
-  diario_midia: "diario_midia",
-};
+import { getSignedStorageUrl, TABLE_BY_KIND, type StorageKind } from "@/lib/storage/signed-url";
 
 /**
  * Emite URL assinada de upload/leitura pro Cloudflare R2 (ADR 0003).
@@ -22,7 +13,7 @@ const TABLE_BY_KIND: Record<Kind, string> = {
  * o caminho no R2 vem do próprio `arquivo_url` da linha.
  */
 export async function POST(req: NextRequest) {
-  let body: { kind?: Kind; id?: string; action?: "upload" | "read"; contentType?: string };
+  let body: { kind?: StorageKind; id?: string; action?: "upload" | "read"; contentType?: string };
   try {
     body = await req.json();
   } catch {
@@ -36,25 +27,11 @@ export async function POST(req: NextRequest) {
   }
 
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from(TABLE_BY_KIND[kind])
-    .select("arquivo_url")
-    .eq("id", id)
-    .single();
+  const signed = await getSignedStorageUrl(supabase, kind, id, action, contentType);
 
-  if (error || !data?.arquivo_url) {
+  if (!signed) {
     return NextResponse.json({ error: "não encontrado ou sem acesso" }, { status: 404 });
   }
 
-  const key = data.arquivo_url as string;
-  const s3 = createR2Client();
-
-  const command =
-    action === "upload"
-      ? new PutObjectCommand({ Bucket: R2_BUCKET, Key: key, ContentType: contentType ?? "image/jpeg" })
-      : new GetObjectCommand({ Bucket: R2_BUCKET, Key: key });
-
-  const url = await getSignedUrl(s3, command, { expiresIn: 300 });
-
-  return NextResponse.json({ url, key });
+  return NextResponse.json(signed);
 }
