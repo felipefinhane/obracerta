@@ -1,6 +1,6 @@
 # Editar e excluir etapa
 
-Status: pending
+Status: done
 Blocked by: 01
 
 ## Contexto
@@ -15,3 +15,6 @@ Blocked by: 01
 - Lista volta a ordenar por `ordem` (quando preenchido) em vez de `data_inicio_prevista` (comportamento atual do ticket mínimo).
 
 ## Comments
+
+- `/obras/[obraId]/etapas`: form de criação ganhou `descricao`/`peso_percentual`/`ordem`; lista ordena por `ordem` (nulls last) e depois `data_inicio_prevista`. Cada etapa ganhou link de editar (`/[etapaId]/editar`, form pré-preenchido com todos os campos) e um botão de excluir (`ExcluirEtapaForm`, Client Component só pra poder chamar `confirm()` antes de submeter — o resto do form continua um Server Action puro).
+- **Testado de ponta a ponta de verdade contra o hospedado**, incluindo o POST real (wire protocol do Server Action, mesma técnica dos efforts anteriores) das três ações: criei uma etapa de teste com todos os campos novos, editei via POST real (nome/descrição/valor/peso/ordem mudaram certo), excluí via POST real (sumiu do banco) — tudo reproduzindo o form de verdade, não só chamada direta ao banco. Etapa "Fundação" (real, do cadastro do effort anterior) ganhou peso 15% e ordem 1 como efeito colateral do teste de `update` — mantido, é dado real válido.
