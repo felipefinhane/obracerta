@@ -24,10 +24,7 @@ export async function criarEtapa(obraId: string, formData: FormData) {
   const { error } = await supabase.from("etapas").insert({ obra_id: obraId, ...lerCamposEtapa(formData) });
 
   if (error) {
-    // MVP: mesmo padrão de src/app/obras/actions.ts — sem tela de erro
-    // dedicada ainda, só loga pra não falhar silenciosamente.
-    console.error("criarEtapa falhou:", error.message);
-    return;
+    redirect(`/obras/${obraId}/etapas?erro=${encodeURIComponent(error.message)}`);
   }
 
   revalidatePath(`/obras/${obraId}/etapas`);
@@ -38,8 +35,7 @@ export async function atualizarEtapa(obraId: string, etapaId: string, formData: 
   const { error } = await supabase.from("etapas").update(lerCamposEtapa(formData)).eq("id", etapaId);
 
   if (error) {
-    console.error("atualizarEtapa falhou:", error.message);
-    return;
+    redirect(`/obras/${obraId}/etapas/${etapaId}/editar?erro=${encodeURIComponent(error.message)}`);
   }
 
   redirect(`/obras/${obraId}/etapas`);
@@ -50,8 +46,7 @@ export async function excluirEtapa(obraId: string, etapaId: string) {
   const { error } = await supabase.from("etapas").delete().eq("id", etapaId);
 
   if (error) {
-    console.error("excluirEtapa falhou:", error.message);
-    return;
+    redirect(`/obras/${obraId}/etapas?erro=${encodeURIComponent(error.message)}`);
   }
 
   revalidatePath(`/obras/${obraId}/etapas`);

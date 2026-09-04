@@ -1,8 +1,14 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { ErrorBanner } from "@/components/ErrorBanner";
 import { criarObra } from "./actions";
 
-export default async function ObrasPage() {
+export default async function ObrasPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ erro?: string }>;
+}) {
+  const { erro } = await searchParams;
   const supabase = await createClient();
 
   // RLS já filtra pro que o usuário tem acesso (has_obra_access) — sem
@@ -17,6 +23,8 @@ export default async function ObrasPage() {
   return (
     <>
       <main className="px-margin-mobile pt-stack-lg pb-stack-lg flex flex-col gap-stack-lg max-w-4xl mx-auto">
+        {erro && <ErrorBanner mensagem={erro} />}
+
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
           <div>
             <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { ErrorBanner } from "@/components/ErrorBanner";
 import { criarEtapa, excluirEtapa } from "./actions";
 import { ExcluirEtapaForm } from "./ExcluirEtapaForm";
 
@@ -7,8 +8,15 @@ const inputClass =
   "h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent";
 const labelClass = "font-label-bold text-label-bold text-on-surface";
 
-export default async function EtapasPage({ params }: { params: Promise<{ obraId: string }> }) {
+export default async function EtapasPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ obraId: string }>;
+  searchParams: Promise<{ erro?: string }>;
+}) {
   const { obraId } = await params;
+  const { erro } = await searchParams;
   const supabase = await createClient();
 
   // RLS já filtra (has_obra_access) — sem lógica extra de autorização aqui.
@@ -25,6 +33,8 @@ export default async function EtapasPage({ params }: { params: Promise<{ obraId:
   return (
     <>
       <main className="px-margin-mobile pt-stack-lg pb-stack-lg flex flex-col gap-stack-lg max-w-4xl mx-auto">
+        {erro && <ErrorBanner mensagem={erro} />}
+
         <div>
           <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
             Etapas — {obra?.nome ?? "Obra"}

@@ -37,10 +37,7 @@ export async function confirmarDespesa(obraId: string, despesaId: string, formDa
     .eq("id", despesaId);
 
   if (error) {
-    // MVP: mesmo padrão do resto do app — sem tela de erro dedicada ainda,
-    // só loga pra não falhar silenciosamente.
-    console.error("confirmarDespesa falhou:", error.message);
-    return;
+    redirect(`/obras/${obraId}/despesas/${despesaId}/confirmar?erro=${encodeURIComponent(error.message)}`);
   }
 
   const itens = itemDescricoes

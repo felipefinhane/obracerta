@@ -1,3 +1,4 @@
+import { ErrorBanner } from "@/components/ErrorBanner";
 import { criarConstrutora } from "./actions";
 
 export default async function OnboardingPage({
@@ -24,14 +25,7 @@ export default async function OnboardingPage({
             </p>
           </div>
 
-          {erro && (
-            <div role="alert" className="bg-error-container border-l-4 border-error p-3 flex items-start gap-3 rounded-r">
-              <span aria-hidden className="material-symbols-outlined text-error mt-0.5">
-                error
-              </span>
-              <p className="font-body-md text-body-md text-on-error-container m-0">{erro}</p>
-            </div>
-          )}
+          {erro && <ErrorBanner mensagem={erro} />}
 
           <form action={criarConstrutora} className="flex flex-col gap-stack-md w-full">
             <div className="flex flex-col gap-stack-sm">

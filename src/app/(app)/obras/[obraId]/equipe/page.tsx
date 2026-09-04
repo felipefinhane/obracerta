@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { ErrorBanner } from "@/components/ErrorBanner";
 import { convidarClienteObra } from "./actions";
 
 const STATUS_MENSAGEM: Record<string, string> = {
@@ -46,14 +47,7 @@ export default async function EquipeObraPage({
         </p>
       </div>
 
-      {erro && (
-        <div role="alert" className="bg-error-container border-l-4 border-error p-3 flex items-start gap-3 rounded-r">
-          <span aria-hidden className="material-symbols-outlined text-error mt-0.5">
-            error
-          </span>
-          <p className="font-body-md text-body-md text-on-error-container m-0">{erro}</p>
-        </div>
-      )}
+      {erro && <ErrorBanner mensagem={erro} />}
       {status && STATUS_MENSAGEM[status] && (
         <div role="status" className="bg-secondary-container border-l-4 border-primary p-3 flex items-start gap-3 rounded-r">
           <span aria-hidden className="material-symbols-outlined text-primary mt-0.5">

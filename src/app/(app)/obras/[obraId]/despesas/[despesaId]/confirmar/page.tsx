@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { getSignedStorageUrl } from "@/lib/storage/signed-url";
+import { ErrorBanner } from "@/components/ErrorBanner";
 import { confirmarDespesa } from "./actions";
 
 const inputClass =
@@ -16,10 +17,13 @@ type DadosExtraidos = {
 
 export default async function ConfirmarDespesaPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ obraId: string; despesaId: string }>;
+  searchParams: Promise<{ erro?: string }>;
 }) {
   const { obraId, despesaId } = await params;
+  const { erro } = await searchParams;
   const supabase = await createClient();
 
   // RLS já filtra (has_obra_access) — sem lógica extra de autorização aqui.
@@ -67,6 +71,11 @@ export default async function ConfirmarDespesaPage({
         <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary md:col-span-2">
           Confirmar Despesa
         </h2>
+        {erro && (
+          <div className="md:col-span-2">
+            <ErrorBanner mensagem={erro} />
+          </div>
+        )}
         <div className="flex flex-col gap-stack-sm">
           {fotoUrl ? (
             // eslint-disable-next-line @next/next/no-img-element -- URL assinada de curta duração, next/image cacheia por tempo/host fixo

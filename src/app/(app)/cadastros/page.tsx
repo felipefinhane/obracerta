@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { ErrorBanner } from "@/components/ErrorBanner";
 import { criarCategoria, criarFornecedor } from "./actions";
 
 const TIPO_LABEL: Record<string, string> = {
@@ -7,7 +8,12 @@ const TIPO_LABEL: Record<string, string> = {
   mao_de_obra: "Mão de obra",
 };
 
-export default async function CadastrosPage() {
+export default async function CadastrosPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ erro?: string }>;
+}) {
+  const { erro } = await searchParams;
   const supabase = await createClient();
 
   // RLS já filtra pro que o usuário tem acesso (has_construtora_access) —
@@ -27,6 +33,8 @@ export default async function CadastrosPage() {
   return (
     <>
       <main className="px-margin-mobile pt-stack-lg pb-stack-lg flex flex-col gap-stack-lg max-w-4xl mx-auto">
+        {erro && <ErrorBanner mensagem={erro} />}
+
         <div>
           <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
             Cadastros

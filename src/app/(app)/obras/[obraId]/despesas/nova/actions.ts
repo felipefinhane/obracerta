@@ -45,10 +45,7 @@ export async function criarDespesaManual(obraId: string, formData: FormData) {
     .single();
 
   if (error || !despesa) {
-    // MVP: mesmo padrão de src/app/obras/actions.ts — sem tela de erro
-    // dedicada ainda, só loga pra não falhar silenciosamente.
-    console.error("criarDespesaManual falhou:", error?.message);
-    return;
+    redirect(`/obras/${obraId}/despesas/nova?erro=${encodeURIComponent(error?.message ?? "falha ao criar despesa")}`);
   }
 
   const itens = itemDescricoes

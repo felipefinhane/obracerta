@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
@@ -23,10 +24,7 @@ export async function criarMedicao(obraId: string, etapaId: string, formData: Fo
   });
 
   if (error) {
-    // MVP: mesmo padrão do resto do app — sem tela de erro dedicada ainda,
-    // só loga pra não falhar silenciosamente.
-    console.error("criarMedicao falhou:", error.message);
-    return;
+    redirect(`/obras/${obraId}/etapas/${etapaId}/medicoes?erro=${encodeURIComponent(error.message)}`);
   }
 
   revalidatePath(`/obras/${obraId}/etapas/${etapaId}/medicoes`);

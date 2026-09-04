@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { ErrorBanner } from "@/components/ErrorBanner";
 import { atualizarEtapa } from "../../actions";
 
 const inputClass =
@@ -7,10 +8,13 @@ const labelClass = "font-label-bold text-label-bold text-on-surface";
 
 export default async function EditarEtapaPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ obraId: string; etapaId: string }>;
+  searchParams: Promise<{ erro?: string }>;
 }) {
   const { obraId, etapaId } = await params;
+  const { erro } = await searchParams;
   const supabase = await createClient();
 
   // RLS já filtra (has_obra_access) — sem lógica extra de autorização aqui.
@@ -25,6 +29,8 @@ export default async function EditarEtapaPage({
   return (
     <>
       <main className="px-margin-mobile pt-stack-lg pb-stack-lg flex flex-col gap-stack-lg max-w-md mx-auto">
+        {erro && <ErrorBanner mensagem={erro} />}
+
         <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
           Editar Etapa
         </h2>

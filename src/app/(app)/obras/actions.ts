@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
@@ -25,10 +26,7 @@ export async function criarObra(formData: FormData) {
   });
 
   if (error) {
-    // MVP: sem tela de erro dedicada ainda pra esse form: fica pro próximo
-    // ciclo de UI. Loga pra não falhar silenciosamente.
-    console.error("criarObra falhou:", error.message);
-    return;
+    redirect(`/obras?erro=${encodeURIComponent(error.message)}`);
   }
 
   revalidatePath("/obras");

@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
@@ -12,10 +13,7 @@ export async function criarCategoria(formData: FormData) {
   const { error } = await supabase.from("categorias").insert({ construtora_id, nome, tipo });
 
   if (error) {
-    // MVP: mesmo padrão de src/app/obras/actions.ts — sem tela de erro
-    // dedicada ainda, só loga pra não falhar silenciosamente.
-    console.error("criarCategoria falhou:", error.message);
-    return;
+    redirect(`/cadastros?erro=${encodeURIComponent(error.message)}`);
   }
 
   revalidatePath("/cadastros");
@@ -31,8 +29,7 @@ export async function criarFornecedor(formData: FormData) {
   const { error } = await supabase.from("fornecedores").insert({ construtora_id, nome, cnpj_cpf, telefone });
 
   if (error) {
-    console.error("criarFornecedor falhou:", error.message);
-    return;
+    redirect(`/cadastros?erro=${encodeURIComponent(error.message)}`);
   }
 
   revalidatePath("/cadastros");

@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { ErrorBanner } from "@/components/ErrorBanner";
 import { criarMedicao } from "./actions";
 
 const inputClass =
@@ -7,10 +8,13 @@ const labelClass = "font-label-bold text-label-bold text-on-surface";
 
 export default async function MedicoesPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ obraId: string; etapaId: string }>;
+  searchParams: Promise<{ erro?: string }>;
 }) {
   const { obraId, etapaId } = await params;
+  const { erro } = await searchParams;
   const supabase = await createClient();
 
   // RLS já filtra (has_obra_access, via etapas) — sem lógica extra de
@@ -30,6 +34,7 @@ export default async function MedicoesPage({
         <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
           Medições — {etapa?.nome ?? "Etapa"}
         </h2>
+        {erro && <ErrorBanner mensagem={erro} />}
         <p className="font-body-md text-body-md text-on-surface-variant text-[12px]">
           Medição simplificada — sem fluxo de aprovação nesta versão.
         </p>
