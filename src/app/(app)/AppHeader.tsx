@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { signOut } from "./actions";
+import { ConstrutoraMenu } from "./ConstrutoraMenu";
 
 /**
  * Header compartilhado de toda a área logada (layout.tsx deste route
@@ -8,6 +9,10 @@ import { signOut } from "./actions";
  * usuário em 2026-09-04. A faixa de sub-navegação por obra (Despesas,
  * Etapas, etc.) fica em `obras/[obraId]/ObraSubNav.tsx` — este componente
  * não tem acesso a `obraId` (fica acima desse segmento na árvore de rotas).
+ *
+ * Cadastros/Equipe (construtora, não obra) ficam agrupados em
+ * `ConstrutoraMenu` — feedback do usuário: misturados soltos aqui do lado
+ * de Obras, davam a impressão de fazer parte do mesmo nível de navegação.
  */
 export function AppHeader({ userEmail }: { userEmail: string | null }) {
   return (
@@ -18,18 +23,7 @@ export function AppHeader({ userEmail }: { userEmail: string | null }) {
         </Link>
 
         <div className="flex items-center gap-stack-sm flex-shrink-0">
-          <Link
-            href="/cadastros"
-            className="font-label-bold text-label-bold text-on-surface-variant hover:text-primary hidden sm:inline"
-          >
-            Cadastros
-          </Link>
-          <Link
-            href="/equipe"
-            className="font-label-bold text-label-bold text-on-surface-variant hover:text-primary hidden sm:inline"
-          >
-            Equipe
-          </Link>
+          <ConstrutoraMenu />
           {userEmail && (
             <span className="font-body-md text-body-md text-on-surface-variant text-[12px] hidden md:inline truncate max-w-[180px]">
               {userEmail}

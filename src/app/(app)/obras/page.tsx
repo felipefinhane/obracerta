@@ -62,30 +62,15 @@ export default async function ObrasPage({
                     </p>
                   )}
                 </div>
-                <div className="flex gap-stack-sm pt-stack-sm border-t border-outline-variant">
+                <div className="pt-stack-sm border-t border-outline-variant">
                   <Link
                     href={`/obras/${obra.id}/despesas`}
-                    className="font-label-bold text-label-bold text-primary hover:underline"
+                    className="font-label-bold text-label-bold text-primary hover:underline flex items-center gap-1"
                   >
-                    Despesas
-                  </Link>
-                  <Link
-                    href={`/obras/${obra.id}/etapas`}
-                    className="font-label-bold text-label-bold text-primary hover:underline"
-                  >
-                    Etapas
-                  </Link>
-                  <Link
-                    href={`/obras/${obra.id}/orcado-realizado`}
-                    className="font-label-bold text-label-bold text-primary hover:underline"
-                  >
-                    Orçado x Realizado
-                  </Link>
-                  <Link
-                    href={`/obras/${obra.id}/diario`}
-                    className="font-label-bold text-label-bold text-primary hover:underline"
-                  >
-                    Diário
+                    Abrir obra
+                    <span aria-hidden className="material-symbols-outlined text-[18px]">
+                      arrow_forward
+                    </span>
                   </Link>
                 </div>
               </article>

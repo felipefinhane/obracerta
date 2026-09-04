@@ -1,17 +1,7 @@
 import Link from "next/link";
+import { ObraMenu } from "./ObraMenu";
 
 export function ObraSubNav({ obraId, obraNome }: { obraId: string; obraNome: string }) {
-  const itens = [
-    { href: `/obras/${obraId}/despesas`, label: "Despesas" },
-    { href: `/obras/${obraId}/etapas`, label: "Etapas" },
-    { href: `/obras/${obraId}/orcado-realizado`, label: "Orçado x Realizado" },
-    { href: `/obras/${obraId}/diario`, label: "Diário" },
-    { href: `/obras/${obraId}/recebimentos`, label: "Recebimentos" },
-    { href: `/obras/${obraId}/fluxo-de-caixa`, label: "Fluxo de Caixa" },
-    { href: `/obras/${obraId}/conciliacao`, label: "Conciliação" },
-    { href: `/obras/${obraId}/equipe`, label: "Equipe" },
-  ];
-
   return (
     <div className="bg-surface border-b border-outline-variant">
       <div className="flex items-center gap-1 px-margin-mobile pt-2 text-on-surface-variant text-[12px]">
@@ -21,17 +11,9 @@ export function ObraSubNav({ obraId, obraNome }: { obraId: string; obraNome: str
         <span aria-hidden>/</span>
         <span className="text-on-surface truncate">{obraNome}</span>
       </div>
-      <nav className="flex gap-stack-md px-margin-mobile overflow-x-auto">
-        {itens.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="font-label-bold text-label-bold text-on-surface-variant hover:text-primary py-2 whitespace-nowrap"
-          >
-            {item.label}
-          </Link>
-        ))}
-      </nav>
+      <div className="px-margin-mobile py-2">
+        <ObraMenu obraId={obraId} />
+      </div>
     </div>
   );
 }
