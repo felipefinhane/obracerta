@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { AppHeader } from "./AppHeader";
+import { SincronizacaoOffline } from "./SincronizacaoOffline";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -15,6 +16,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <div className="min-h-screen bg-background text-on-background flex flex-col">
       <AppHeader userEmail={user?.email ?? null} />
       {children}
+      <SincronizacaoOffline />
     </div>
   );
 }

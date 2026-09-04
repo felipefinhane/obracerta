@@ -23,8 +23,21 @@ export default async function CadastrosPage({
 
   const { data: categorias } = await supabase
     .from("categorias")
-    .select("id, nome, tipo")
+    .select("id, nome, tipo, categoria_pai_id")
     .order("nome");
+
+  // Hierarquia de 2 níveis só (categoria / subcategoria, docs/mvp.md) — sem
+  // suporte a sub-de-sub na UI, mesmo que o schema não impeça tecnicamente.
+  type Categoria = { id: string; nome: string; tipo: string; categoria_pai_id: string | null };
+  const listaCategorias = (categorias ?? []) as Categoria[];
+  const categoriasPai = listaCategorias.filter((c) => !c.categoria_pai_id);
+  const subcategoriasPorPai = new Map<string, Categoria[]>();
+  for (const c of listaCategorias) {
+    if (!c.categoria_pai_id) continue;
+    const lista = subcategoriasPorPai.get(c.categoria_pai_id) ?? [];
+    lista.push(c);
+    subcategoriasPorPai.set(c.categoria_pai_id, lista);
+  }
   const { data: fornecedores } = await supabase
     .from("fornecedores")
     .select("id, nome, cnpj_cpf, telefone")
@@ -50,17 +63,36 @@ export default async function CadastrosPage({
               Categorias
             </h3>
 
-            {categorias && categorias.length > 0 ? (
+            {categoriasPai.length > 0 ? (
               <ul className="flex flex-col gap-stack-sm">
-                {categorias.map((c) => (
-                  <li
-                    key={c.id}
-                    className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center font-body-md text-body-md"
-                  >
-                    <span>{c.nome}</span>
-                    <span className="text-on-surface-variant text-[12px] uppercase">
-                      {TIPO_LABEL[c.tipo] ?? c.tipo}
-                    </span>
+                {categoriasPai.map((c) => (
+                  <li key={c.id} className="flex flex-col gap-1">
+                    <div className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center font-body-md text-body-md">
+                      <span>{c.nome}</span>
+                      <span className="text-on-surface-variant text-[12px] uppercase">
+                        {TIPO_LABEL[c.tipo] ?? c.tipo}
+                      </span>
+                    </div>
+                    {(subcategoriasPorPai.get(c.id) ?? []).length > 0 && (
+                      <ul className="flex flex-col gap-1 pl-stack-md">
+                        {subcategoriasPorPai.get(c.id)!.map((sub) => (
+                          <li
+                            key={sub.id}
+                            className="bg-surface border border-outline-variant rounded p-2 flex justify-between items-center font-body-md text-body-md text-[13px]"
+                          >
+                            <span className="flex items-center gap-1 text-on-surface-variant">
+                              <span aria-hidden className="material-symbols-outlined text-[16px]">
+                                subdirectory_arrow_right
+                              </span>
+                              {sub.nome}
+                            </span>
+                            <span className="text-on-surface-variant text-[12px] uppercase">
+                              {TIPO_LABEL[sub.tipo] ?? sub.tipo}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -96,6 +128,23 @@ export default async function CadastrosPage({
                 <option value="produto">Produto</option>
                 <option value="servico">Serviço</option>
                 <option value="mao_de_obra">Mão de obra</option>
+              </select>
+              <label className="font-label-bold text-label-bold text-on-surface" htmlFor="cat-pai">
+                Categoria pai
+                <span className="text-on-surface-variant font-body-md text-[12px] font-normal"> — opcional</span>
+              </label>
+              <select
+                id="cat-pai"
+                name="categoria_pai_id"
+                defaultValue=""
+                className="h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option value="">Nenhuma (categoria principal)</option>
+                {categoriasPai.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.nome}
+                  </option>
+                ))}
               </select>
               <button
                 type="submit"

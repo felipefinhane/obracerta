@@ -1,11 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { compressImage } from "@/lib/storage/compress-image";
+import { salvarUploadPendente } from "@/lib/storage/fila-offline";
 import { confirmarUploadRecibo, criarLancamentoProvisorio } from "./actions";
 
-type Etapa = "ocioso" | "comprimindo" | "enviando" | "erro";
+type Etapa = "ocioso" | "comprimindo" | "enviando" | "erro" | "guardado_offline";
 
 /**
  * Único input obrigatório no momento da captura é a foto — sem categoria,
@@ -19,14 +21,17 @@ export function CapturarForm({ obraId }: { obraId: string }) {
 
   async function handleFile(file: File) {
     setErro(null);
+    let reciboId: string | undefined;
+    let comprimida: Blob | undefined;
+
     try {
       setEtapa("comprimindo");
-      const comprimida = await compressImage(file);
+      comprimida = await compressImage(file);
 
       setEtapa("enviando");
       const lancamento = await criarLancamentoProvisorio(obraId);
       if ("error" in lancamento) throw new Error(lancamento.error);
-      const { reciboId } = lancamento;
+      reciboId = lancamento.reciboId;
 
       const signRes = await fetch("/api/storage/sign", {
         method: "POST",
@@ -49,11 +54,54 @@ export function CapturarForm({ obraId }: { obraId: string }) {
       router.push(`/obras/${obraId}/despesas/pendentes`);
     } catch (e) {
       // O lançamento já existe (criado antes do upload — ADR 0002), então o
-      // gasto não se perde: fica em `aguardando_upload`, disponível pra
-      // retry manual (ticket 04) mesmo se essa tentativa falhar aqui.
+      // gasto não se perde. Resiliência básica de conexão (docs/mvp.md §1):
+      // se já temos a foto comprimida e o recibo criado, guarda localmente
+      // (IndexedDB) e deixa a sincronização automática (SincronizacaoOffline,
+      // no layout) reenviar sozinha quando a conexão voltar — em vez de só
+      // avisar que "não se perdeu" sem fazer nada a respeito.
+      if (reciboId && comprimida) {
+        try {
+          await salvarUploadPendente({
+            id: reciboId,
+            tipo: "recibo",
+            blob: comprimida,
+            contentType: "image/jpeg",
+            criadoEm: Date.now(),
+          });
+          setEtapa("guardado_offline");
+          return;
+        } catch {
+          // IndexedDB indisponível (raro) — cai no aviso de erro normal abaixo.
+        }
+      }
       setErro(e instanceof Error ? e.message : "falha inesperada");
       setEtapa("erro");
     }
+  }
+
+  if (etapa === "guardado_offline") {
+    return (
+      <div className="flex flex-col items-center gap-stack-lg text-center">
+        <div className="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center">
+          <span aria-hidden className="material-symbols-outlined text-on-primary-container text-5xl">
+            cloud_off
+          </span>
+        </div>
+        <div>
+          <p className="font-headline-md text-headline-md text-on-surface">Guardado no aparelho</p>
+          <p className="font-body-md text-body-md text-on-surface-variant mt-1">
+            Sem conexão pra enviar a foto agora — o gasto já está registrado e a foto foi guardada aqui. Envio
+            automático assim que a conexão voltar.
+          </p>
+        </div>
+        <Link
+          href={`/obras/${obraId}/despesas/pendentes`}
+          className="font-label-bold text-label-bold text-primary hover:underline"
+        >
+          Ver recibos pendentes
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -97,8 +145,7 @@ export function CapturarForm({ obraId }: { obraId: string }) {
             error
           </span>
           <p className="font-body-md text-body-md text-on-error-container m-0">
-            Não deu pra enviar agora ({erro}). O gasto já ficou registrado — não se perdeu — mas o reenvio
-            automático desse registro ainda não existe nesta versão; avise quem cuida do sistema.
+            Não deu pra enviar agora ({erro}). O gasto já ficou registrado — não se perdeu.
           </p>
         </div>
       )}

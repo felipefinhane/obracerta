@@ -8,9 +8,10 @@ export async function criarCategoria(formData: FormData) {
   const construtora_id = String(formData.get("construtora_id") ?? "");
   const nome = String(formData.get("nome") ?? "");
   const tipo = String(formData.get("tipo") ?? "");
+  const categoria_pai_id = formData.get("categoria_pai_id") ? String(formData.get("categoria_pai_id")) : null;
 
   const supabase = await createClient();
-  const { error } = await supabase.from("categorias").insert({ construtora_id, nome, tipo });
+  const { error } = await supabase.from("categorias").insert({ construtora_id, nome, tipo, categoria_pai_id });
 
   if (error) {
     redirect(`/cadastros?erro=${encodeURIComponent(error.message)}`);

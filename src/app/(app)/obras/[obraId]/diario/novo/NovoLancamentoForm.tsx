@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { compressImage } from "@/lib/storage/compress-image";
+import { salvarUploadPendente } from "@/lib/storage/fila-offline";
 import { criarEntradaDiario, criarMidiaDiario } from "./actions";
 
 const inputClass =
@@ -31,27 +32,57 @@ export function NovoLancamentoForm({ obraId, etapas }: { obraId: string; etapas:
       if ("error" in entrada) throw new Error(entrada.error);
 
       // Sem estado provisório aqui (ao contrário da captura de recibo) —
-      // texto e fotos nascem juntos, então basta subir uma de cada vez.
+      // texto e fotos nascem juntos, então basta subir uma de cada vez. Se
+      // uma foto falhar por causa da conexão, guarda ela sozinha na fila
+      // offline (mesma resiliência básica de docs/mvp.md §1) em vez de
+      // abortar o lançamento inteiro — o texto já foi salvo de qualquer jeito.
       for (let i = 0; i < fotos.length; i++) {
         setProgresso(`Enviando foto ${i + 1} de ${fotos.length}…`);
-        const comprimida = await compressImage(fotos[i]);
-        const midia = await criarMidiaDiario(entrada.entradaId);
-        if ("error" in midia) throw new Error(midia.error);
+        let comprimida: Blob | undefined;
+        let midiaId: string | undefined;
 
-        const signRes = await fetch("/api/storage/sign", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ kind: "diario_midia", id: midia.midiaId, action: "upload", contentType: "image/jpeg" }),
-        });
-        if (!signRes.ok) throw new Error("não consegui gerar a URL de upload");
-        const { url } = (await signRes.json()) as { url: string };
+        try {
+          comprimida = await compressImage(fotos[i]);
+          const midia = await criarMidiaDiario(entrada.entradaId);
+          if ("error" in midia) throw new Error(midia.error);
+          midiaId = midia.midiaId;
 
-        const uploadRes = await fetch(url, {
-          method: "PUT",
-          headers: { "Content-Type": "image/jpeg" },
-          body: comprimida,
-        });
-        if (!uploadRes.ok) throw new Error(`upload da foto ${i + 1} falhou`);
+          const signRes = await fetch("/api/storage/sign", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              kind: "diario_midia",
+              id: midiaId,
+              action: "upload",
+              contentType: "image/jpeg",
+            }),
+          });
+          if (!signRes.ok) throw new Error("não consegui gerar a URL de upload");
+          const { url } = (await signRes.json()) as { url: string };
+
+          const uploadRes = await fetch(url, {
+            method: "PUT",
+            headers: { "Content-Type": "image/jpeg" },
+            body: comprimida,
+          });
+          if (!uploadRes.ok) throw new Error(`upload da foto ${i + 1} falhou`);
+        } catch (fotoErro) {
+          if (midiaId && comprimida) {
+            try {
+              await salvarUploadPendente({
+                id: midiaId,
+                tipo: "diario_midia",
+                blob: comprimida,
+                contentType: "image/jpeg",
+                criadoEm: Date.now(),
+              });
+              continue; // guardado — segue pras próximas fotos, não aborta o lançamento
+            } catch {
+              // IndexedDB indisponível (raro) — cai no comportamento antigo (aborta).
+            }
+          }
+          throw fotoErro;
+        }
       }
 
       router.push(`/obras/${obraId}/diario`);
