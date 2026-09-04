@@ -1,6 +1,6 @@
 # Schema: convites, RPC convidar_membro, trigger, views de leitura
 
-Status: pending
+Status: done
 
 ## Contexto
 
@@ -18,3 +18,11 @@ Ver `spec.md` — decisão de produto e desenho técnico já registrados ali, n�
 - Views `membros_construtora_com_email` e `membros_obra_com_email` (sem `security_invoker` — mesmo truque do `orcado_vs_realizado`, rodam com privilégio de dono pra ler `auth.users`, mas replicam o filtro de acesso no `where`).
 
 ## Comments
+
+- Migration `supabase/migrations/20260904124125_convites_membros.sql`: tabela `convites`, RPC `convidar_membro`, trigger `on_auth_user_created_aplicar_convites` em `auth.users`, views `membros_construtora_com_email`/`membros_obra_com_email`.
+- **Testado de ponta a ponta de verdade contra o hospedado**, criando dois usuários reais de teste via admin API (`colega.teste.qa@obracerta-teste.dev`, `cliente.pendente.qa@obracerta-teste.dev`) e usando a sessão real do admin (`felipefinhane@gmail.com`):
+  - `convidar_membro` com e-mail que já tinha conta → retornou `"adicionado"`, linha criada em `construtora_membros` na hora, visível via `membros_construtora_com_email` com o e-mail resolvido corretamente.
+  - `convidar_membro` com e-mail sem conta (papel `cliente`, `p_obra_id` de uma obra real) → retornou `"convite_pendente"`, linha gravada em `convites`.
+  - Simulei o cadastro dessa segunda pessoa criando o `auth.users` com o mesmo e-mail (via admin API, dispara o trigger de verdade, não simulação) → `obra_membros` ganhou a linha automaticamente com o papel certo, e `convites.aceito_em` foi preenchido. Visível via `membros_obra_com_email`.
+  - Login como esse cliente recém-criado confirmou acesso de leitura à obra (via `obra_membros`) e bloqueio de escrita em `despesas` (RLS de cliente-é-leitura, já testada antes, se comportou igual pra um membro chegado por convite).
+  - Todo dado de teste (dois usuários + convite já aceito) apagado ao final — `on delete cascade` limpou `construtora_membros`/`obra_membros` sozinho ao deletar os usuários; o convite (sem FK pro usuário, só e-mail em texto) precisou de `DELETE` manual.
