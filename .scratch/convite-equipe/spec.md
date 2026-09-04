@@ -1,6 +1,6 @@
 # Convite de membros (equipe e cliente)
 
-Status: em andamento
+Status: done
 
 Sexto effort de UI, fechando o gap mais antigo do projeto: anotado desde `fundacao-tecnica`/03 ("Fluxo de convite/onboarding de membro ainda não desenhado") e citado como fora de escopo em `auth-bootstrap-obras` — até agora só o próprio bootstrap (via `criar_construtora`) conseguia entrar numa construtora. Sem isso, o sistema só serve pra uma pessoa (mesmo com 4 papéis modelados — `docs/mvp.md` §2.7).
 
@@ -41,3 +41,7 @@ Motivo: Supabase Free tem limite baixo de envio de e-mail (mesmo argumento que j
 Ordem: 01 bloqueia 02 e 03. 02 e 03 são independentes entre si.
 
 ## Comments
+
+- 3/3 tickets fechados, testados de ponta a ponta contra o hospedado com usuários reais de teste (criados e apagados via admin API), incluindo o POST real dos forms nas duas telas (não só a RPC isolada).
+- Fecha o gap mais antigo do projeto (anotado desde `fundacao-tecnica`/03): o sistema agora atende mais de uma pessoa por construtora, nos dois níveis (equipe da construtora e cliente por obra).
+- Deploy: mudanças ainda não commitadas/enviadas ao Vercel nesta sessão.

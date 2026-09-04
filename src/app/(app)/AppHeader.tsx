@@ -24,6 +24,12 @@ export function AppHeader({ userEmail }: { userEmail: string | null }) {
           >
             Cadastros
           </Link>
+          <Link
+            href="/equipe"
+            className="font-label-bold text-label-bold text-on-surface-variant hover:text-primary hidden sm:inline"
+          >
+            Equipe
+          </Link>
           {userEmail && (
             <span className="font-body-md text-body-md text-on-surface-variant text-[12px] hidden md:inline truncate max-w-[180px]">
               {userEmail}

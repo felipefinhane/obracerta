@@ -6,6 +6,7 @@ export function ObraSubNav({ obraId, obraNome }: { obraId: string; obraNome: str
     { href: `/obras/${obraId}/etapas`, label: "Etapas" },
     { href: `/obras/${obraId}/orcado-realizado`, label: "Orçado x Realizado" },
     { href: `/obras/${obraId}/diario`, label: "Diário" },
+    { href: `/obras/${obraId}/equipe`, label: "Equipe" },
   ];
 
   return (
