@@ -1,6 +1,6 @@
 # Schema: recebimentos, transacoes_bancarias, RLS
 
-Status: pending
+Status: done
 
 ## Contexto
 
@@ -38,3 +38,5 @@ transacoes_bancarias (
 - Constraint em `transacoes_bancarias`: `check (despesa_id is null or recebimento_id is null)`.
 
 ## Comments
+
+- Migration `supabase/migrations/20260904134124_recebimentos_conciliacao.sql`. Testado indiretamente pelos tickets 02-04 (insert/update reais confirmam a RLS).

@@ -1,6 +1,6 @@
 # Lançar e listar recebimentos por obra
 
-Status: pending
+Status: done
 Blocked by: 01
 
 ## Escopo
@@ -10,3 +10,6 @@ Blocked by: 01
 - Sem edição/exclusão (`spec.md`).
 
 ## Comments
+
+- `/obras/[obraId]/recebimentos` + aba na `ObraSubNav`.
+- **Testado de ponta a ponta de verdade contra o hospedado**: POST real do form (wire protocol) lançou uma parcela de financiamento de R$120.000 na obra de demonstração ("Residencial Vista Alegre") — mantido como dado real do cenário (representa a liberação após a Fundação), não é lixo de teste.

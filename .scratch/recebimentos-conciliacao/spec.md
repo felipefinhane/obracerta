@@ -1,6 +1,6 @@
 # Recebimentos e conciliação bancária
 
-Status: em andamento
+Status: done
 
 Item 2 do pedido do usuário em 2026-09-04. Módulo marcado como fase 2 em `docs/mvp.md` ("só faz sentido com o ciclo de despesas já validado em uso real") — nunca foi desenhado em detalhe (sem seção em `docs/modelo-dados.md`, sem ADR). `docs/mvp.md` §2.5 descreve o funcional em alto nível: entradas (parcela de financiamento, aporte do cliente), saídas (pagamentos), conciliação bancária (import de extrato OFX/CSV), resultado em fluxo de caixa. Este spec fecha o desenho que faltava.
 
@@ -37,3 +37,7 @@ Item 2 do pedido do usuário em 2026-09-04. Módulo marcado como fase 2 em `docs
 Ordem: 01 bloqueia os demais. 02 bloqueia 03 (fluxo de caixa precisa de recebimentos existindo pra fazer sentido testar). 04 é independente de 02/03, mas faz mais sentido por último (produto mais específico).
 
 ## Comments
+
+- 4/4 tickets fechados, testados de ponta a ponta contra o hospedado com POST/upload reais dos forms.
+- Fecha o módulo de fase 2 descrito em `docs/mvp.md` §2.5, com as decisões de escopo registradas acima (sem OFX, sem matching automático, saídas reusa despesas). Com isso, `docs/mvp.md` fica praticamente inteiro implementado — o item explicitamente listado como fase 2 mais próximo do core (recebimentos/conciliação) está feito; o que resta do documento é ajuste fino, não módulo novo.
+- Deploy: será feito junto com o effort `polish-edicoes` (item 1 do mesmo pedido do usuário), num push só.
