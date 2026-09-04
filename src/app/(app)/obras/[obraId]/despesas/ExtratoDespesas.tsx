@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
+import { excluirDespesa } from "./actions";
 
 type Despesa = {
   id: string;
@@ -27,10 +29,12 @@ const selectClass =
 const labelClass = "font-label-bold text-label-bold text-on-surface text-[12px]";
 
 export function ExtratoDespesas({
+  obraId,
   despesas,
   categorias,
   fornecedores,
 }: {
+  obraId: string;
   despesas: Despesa[];
   categorias: { id: string; nome: string }[];
   fornecedores: { id: string; nome: string }[];
@@ -147,9 +151,38 @@ export function ExtratoDespesas({
                     .join(" · ")}
                 </span>
               </div>
-              <span className="text-on-surface font-label-bold text-label-bold whitespace-nowrap">
-                {(d.valor ?? 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-              </span>
+              <div className="flex items-center gap-1 flex-shrink-0">
+                <span className="text-on-surface font-label-bold text-label-bold whitespace-nowrap">
+                  {(d.valor ?? 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                </span>
+                <Link
+                  href={`/obras/${obraId}/despesas/${d.id}/editar`}
+                  aria-label="Editar despesa"
+                  className="text-primary p-2 hover:bg-surface-container rounded transition-colors"
+                >
+                  <span aria-hidden className="material-symbols-outlined text-[18px]">
+                    edit
+                  </span>
+                </Link>
+                <form
+                  action={excluirDespesa.bind(null, obraId, d.id)}
+                  onSubmit={(e) => {
+                    if (!confirm("Excluir esta despesa? Essa ação não pode ser desfeita.")) {
+                      e.preventDefault();
+                    }
+                  }}
+                >
+                  <button
+                    type="submit"
+                    aria-label="Excluir despesa"
+                    className="text-error p-2 hover:bg-error-container rounded transition-colors"
+                  >
+                    <span aria-hidden className="material-symbols-outlined text-[18px]">
+                      delete
+                    </span>
+                  </button>
+                </form>
+              </div>
             </li>
           ))}
         </ul>

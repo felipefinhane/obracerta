@@ -1,6 +1,6 @@
 # Polish — editar/excluir despesa e gerenciar equipe
 
-Status: em andamento
+Status: done
 
 Segundo pacote de polish pós-MVP (item 1 da lista de próximos passos de 2026-09-04): edição/exclusão de despesa já confirmada, e edição de papel/remoção de membro da equipe — os dois gaps deliberadamente deixados de fora dos efforts anteriores (`despesas-recibo`, `convite-equipe`).
 
@@ -25,3 +25,6 @@ Segundo pacote de polish pós-MVP (item 1 da lista de próximos passos de 2026-0
 Ordem: 01 bloqueia 02 e 03. 02 e 03 são independentes entre si.
 
 ## Comments
+
+- 3/3 tickets fechados, testados de ponta a ponta contra o hospedado (POST real dos forms) — edição/exclusão de despesa confirmada, edição de papel e remoção de membro nos dois níveis (construtora e obra).
+- Deploy: ainda não commitado/enviado ao Vercel nesta sessão — combinado com o resto do pedido (item 2, Recebimentos/conciliação) antes de subir tudo junto.

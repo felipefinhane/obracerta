@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { ErrorBanner } from "@/components/ErrorBanner";
-import { convidarMembro } from "./actions";
+import { ConfirmDeleteForm } from "@/components/ConfirmDeleteForm";
+import { atualizarPapelMembro, convidarMembro, removerMembro } from "./actions";
 
 const PAPEL_LABEL: Record<string, string> = {
   admin: "Admin",
@@ -67,12 +68,33 @@ export default async function EquipePage({
             {membros.map((m) => (
               <li
                 key={m.id}
-                className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center font-body-md text-body-md"
+                className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center font-body-md text-body-md gap-stack-sm"
               >
-                <span className="text-on-surface">{m.email}</span>
-                <span className="text-on-surface-variant text-[12px] uppercase">
-                  {PAPEL_LABEL[m.papel] ?? m.papel}
-                </span>
+                <span className="text-on-surface truncate">{m.email}</span>
+                <div className="flex items-center gap-1 flex-shrink-0">
+                  <form action={atualizarPapelMembro.bind(null, m.id)} className="flex items-center gap-1">
+                    <select
+                      name="papel"
+                      defaultValue={m.papel}
+                      className="h-touch-target-min px-2 border border-outline rounded bg-surface-bright text-on-surface font-body-md text-body-md text-[12px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    >
+                      <option value="engenheiro">Engenheiro/Mestre de obra</option>
+                      <option value="financeiro">Financeiro</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                    <button
+                      type="submit"
+                      className="font-label-bold text-label-bold text-primary text-[12px] px-2 py-1 hover:bg-surface-container rounded transition-colors"
+                    >
+                      Salvar
+                    </button>
+                  </form>
+                  <ConfirmDeleteForm
+                    action={removerMembro.bind(null, m.id)}
+                    confirmMessage={`Remover ${m.email} da equipe?`}
+                    label={`Remover ${m.email}`}
+                  />
+                </div>
               </li>
             ))}
           </ul>

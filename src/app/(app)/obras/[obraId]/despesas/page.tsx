@@ -92,7 +92,7 @@ export default async function ExtratoDespesasPage({
           </div>
         </div>
 
-        <ExtratoDespesas despesas={despesas} categorias={categorias ?? []} fornecedores={fornecedores ?? []} />
+        <ExtratoDespesas obraId={obraId} despesas={despesas} categorias={categorias ?? []} fornecedores={fornecedores ?? []} />
       </main>
     </>
   );

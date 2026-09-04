@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export async function convidarMembro(formData: FormData) {
@@ -15,4 +16,28 @@ export async function convidarMembro(formData: FormData) {
   }
 
   redirect(`/equipe?status=${data}`);
+}
+
+export async function atualizarPapelMembro(membroId: string, formData: FormData) {
+  const papel = String(formData.get("papel") ?? "");
+
+  const supabase = await createClient();
+  const { error } = await supabase.from("construtora_membros").update({ papel }).eq("id", membroId);
+
+  if (error) {
+    redirect(`/equipe?erro=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/equipe");
+}
+
+export async function removerMembro(membroId: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.from("construtora_membros").delete().eq("id", membroId);
+
+  if (error) {
+    redirect(`/equipe?erro=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/equipe");
 }

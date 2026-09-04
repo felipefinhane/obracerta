@@ -1,6 +1,6 @@
 # RLS: delete em despesas, update/delete em membros
 
-Status: pending
+Status: done
 
 ## Escopo
 
@@ -9,3 +9,5 @@ Status: pending
 - `obra_membros`: `update` e `delete` via `has_obra_write_access`.
 
 ## Comments
+
+- Migration `supabase/migrations/20260904133034_delete_despesas_update_delete_membros.sql`. Testado indiretamente pelos tickets 02/03 (POST real de update/delete funcionando confirma a RLS).

@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { ErrorBanner } from "@/components/ErrorBanner";
-import { convidarClienteObra } from "./actions";
+import { ConfirmDeleteForm } from "@/components/ConfirmDeleteForm";
+import { convidarClienteObra, removerClienteObra } from "./actions";
 
 const STATUS_MENSAGEM: Record<string, string> = {
   adicionado: "Pessoa já tinha conta — acesso liberado na hora.",
@@ -66,10 +67,17 @@ export default async function EquipeObraPage({
             {membros.map((m) => (
               <li
                 key={m.id}
-                className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center font-body-md text-body-md"
+                className="bg-surface-container-lowest border border-outline-variant rounded p-3 flex justify-between items-center font-body-md text-body-md gap-stack-sm"
               >
-                <span className="text-on-surface">{m.email}</span>
-                <span className="text-on-surface-variant text-[12px] uppercase">{m.papel}</span>
+                <span className="text-on-surface truncate">{m.email}</span>
+                <div className="flex items-center gap-1 flex-shrink-0">
+                  <span className="text-on-surface-variant text-[12px] uppercase">{m.papel}</span>
+                  <ConfirmDeleteForm
+                    action={removerClienteObra.bind(null, obraId, m.id)}
+                    confirmMessage={`Remover o acesso de ${m.email} a esta obra?`}
+                    label={`Remover ${m.email}`}
+                  />
+                </div>
               </li>
             ))}
           </ul>
