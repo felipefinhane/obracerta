@@ -1,6 +1,6 @@
 # Achado: CORS do bucket R2 nunca configurado
 
-Status: bloqueado — precisa de ação do usuário (fora do meu alcance com as credenciais atuais)
+Status: resolvido — usuário aplicou o CORS direto no painel da Cloudflare
 
 ## O problema
 
@@ -38,3 +38,8 @@ Uma destas duas:
 Nenhuma mudança de código é necessária depois disso — a captura de recibo, o diário com foto e a fila offline (ticket 02) já estão prontos e devem funcionar assim que o CORS existir.
 
 ## Comments
+
+- Usuário aplicou a política de CORS no painel da Cloudflare (2026-09-04). Minha chave de API continua sem permissão de leitura/escrita de CORS (`GetBucketCorsCommand` ainda dá `AccessDenied` com a chave de escopo objeto) — não consigo confirmar o conteúdo exato da política aplicada por essa via, só o efeito prático.
+- **Confirmado de ponta a ponta de verdade com um browser real (Playwright)**, dessa vez sem bloquear nada: capturei o `recibo_exemplo.jpg` do zero pela tela de verdade — upload do browser pro R2 funcionou sem erro de CORS no console, a tela navegou pra "pendentes" (sucesso real, não o estado "guardado no aparelho"), e confirmei três coisas independentes do lado do servidor: (1) `recibos.status_processamento` avançou pra `pendente` (prova que `confirmarUploadRecibo` rodou depois de um upload que realmente completou); (2) o objeto existe de verdade no R2 (`HeadObjectCommand`, 108238 bytes, `image/jpeg`); (3) invocando a Edge Function manualmente, ela conseguiu baixar o arquivo do R2 e chamar o Gemini, retornando uma extração completa e correta (fornecedor, 3 itens, confiança 0.98) — só não fechou como `processado` por uma condição de corrida das minhas próprias invocações manuais repetidas (não é um bug real de uso normal, onde o webhook dispara uma vez só).
+- Também re-testei a fila offline (ticket 02) inteira, agora até o fim: bloqueei só as requests pro R2, capturei uma foto (guardou no IndexedDB, UI mostrou "Guardado no aparelho"), desbloqueei, naveguei pra `/obras` — o componente `SincronizacaoOffline` reenviou sozinho, o badge de pendente sumiu, o IndexedDB ficou vazio, e `status_processamento` do recibo confirmou `pendente` no servidor. **A resiliência offline básica (item 3) está confirmada funcionando de ponta a ponta agora, não só até o ponto em que o CORS bloqueava.**
+- Todo dado de teste (2 despesas/recibos + os 2 objetos correspondentes no R2) apagado ao final.

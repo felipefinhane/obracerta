@@ -1,6 +1,6 @@
 # Fechando o MVP — subcategoria e resiliência offline básica
 
-Status: done (item 3 com uma pendência de infra fora do meu alcance — ver Comments)
+Status: done — CORS aplicado pelo usuário, tudo confirmado de ponta a ponta
 
 Itens 1 e 3 da lacuna identificada em 2026-09-04 ao revisar `docs/mvp.md`/`docs/planejamento.md` contra o que foi implementado. Item 2 (detecção de QR code/NF-e) fica pra outro momento, por pedido do usuário.
 
