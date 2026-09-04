@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export async function criarCategoria(formData: FormData) {
@@ -14,10 +13,10 @@ export async function criarCategoria(formData: FormData) {
   const { error } = await supabase.from("categorias").insert({ construtora_id, nome, tipo, categoria_pai_id });
 
   if (error) {
-    redirect(`/cadastros?erro=${encodeURIComponent(error.message)}`);
+    redirect(`/cadastros/categorias/nova?erro=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/cadastros");
+  redirect("/cadastros");
 }
 
 export async function criarFornecedor(formData: FormData) {
@@ -30,8 +29,8 @@ export async function criarFornecedor(formData: FormData) {
   const { error } = await supabase.from("fornecedores").insert({ construtora_id, nome, cnpj_cpf, telefone });
 
   if (error) {
-    redirect(`/cadastros?erro=${encodeURIComponent(error.message)}`);
+    redirect(`/cadastros/fornecedores/nova?erro=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/cadastros");
+  redirect("/cadastros");
 }

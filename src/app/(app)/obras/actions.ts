@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export async function criarObra(formData: FormData) {
@@ -26,8 +25,8 @@ export async function criarObra(formData: FormData) {
   });
 
   if (error) {
-    redirect(`/obras?erro=${encodeURIComponent(error.message)}`);
+    redirect(`/obras/nova?erro=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/obras");
+  redirect("/obras");
 }

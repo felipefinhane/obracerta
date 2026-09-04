@@ -12,7 +12,7 @@ export async function convidarMembro(formData: FormData) {
   const { data, error } = await supabase.rpc("convidar_membro", { p_email: email, p_papel: papel });
 
   if (error) {
-    redirect(`/equipe?erro=${encodeURIComponent(error.message)}`);
+    redirect(`/equipe/novo?erro=${encodeURIComponent(error.message)}`);
   }
 
   redirect(`/equipe?status=${data}`);

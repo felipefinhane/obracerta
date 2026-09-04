@@ -27,7 +27,7 @@ export async function importarExtrato(obraId: string, formData: FormData) {
   const arquivo = formData.get("arquivo");
 
   if (!(arquivo instanceof File) || arquivo.size === 0) {
-    redirect(`/obras/${obraId}/conciliacao?erro=${encodeURIComponent("selecione um arquivo CSV")}`);
+    redirect(`/obras/${obraId}/conciliacao/importar?erro=${encodeURIComponent("selecione um arquivo CSV")}`);
   }
 
   const texto = await (arquivo as File).text();
@@ -35,7 +35,7 @@ export async function importarExtrato(obraId: string, formData: FormData) {
 
   if (transacoes.length === 0) {
     redirect(
-      `/obras/${obraId}/conciliacao?erro=${encodeURIComponent("nenhuma linha válida encontrada no CSV (esperado: data,descricao,valor)")}`,
+      `/obras/${obraId}/conciliacao/importar?erro=${encodeURIComponent("nenhuma linha válida encontrada no CSV (esperado: data,descricao,valor)")}`,
     );
   }
 
@@ -45,10 +45,10 @@ export async function importarExtrato(obraId: string, formData: FormData) {
     .insert(transacoes.map((t) => ({ obra_id: obraId, ...t })));
 
   if (error) {
-    redirect(`/obras/${obraId}/conciliacao?erro=${encodeURIComponent(error.message)}`);
+    redirect(`/obras/${obraId}/conciliacao/importar?erro=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath(`/obras/${obraId}/conciliacao`);
+  redirect(`/obras/${obraId}/conciliacao`);
 }
 
 export async function vincularTransacao(obraId: string, transacaoId: string, formData: FormData) {

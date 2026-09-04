@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export async function criarMedicao(obraId: string, etapaId: string, formData: FormData) {
@@ -24,8 +23,8 @@ export async function criarMedicao(obraId: string, etapaId: string, formData: Fo
   });
 
   if (error) {
-    redirect(`/obras/${obraId}/etapas/${etapaId}/medicoes?erro=${encodeURIComponent(error.message)}`);
+    redirect(`/obras/${obraId}/etapas/${etapaId}/medicoes/nova?erro=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath(`/obras/${obraId}/etapas/${etapaId}/medicoes`);
+  redirect(`/obras/${obraId}/etapas/${etapaId}/medicoes`);
 }

@@ -1,7 +1,6 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export async function criarRecebimento(obraId: string, formData: FormData) {
@@ -28,8 +27,8 @@ export async function criarRecebimento(obraId: string, formData: FormData) {
   });
 
   if (error) {
-    redirect(`/obras/${obraId}/recebimentos?erro=${encodeURIComponent(error.message)}`);
+    redirect(`/obras/${obraId}/recebimentos/novo?erro=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath(`/obras/${obraId}/recebimentos`);
+  redirect(`/obras/${obraId}/recebimentos`);
 }

@@ -1,7 +1,8 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { ErrorBanner } from "@/components/ErrorBanner";
 import { ConfirmDeleteForm } from "@/components/ConfirmDeleteForm";
-import { convidarClienteObra, removerClienteObra } from "./actions";
+import { removerClienteObra } from "./actions";
 
 const STATUS_MENSAGEM: Record<string, string> = {
   adicionado: "Pessoa já tinha conta — acesso liberado na hora.",
@@ -34,18 +35,27 @@ export default async function EquipeObraPage({
     .is("aceito_em", null)
     .order("criado_em", { ascending: false });
 
-  const convidarNestaObra = convidarClienteObra.bind(null, obraId);
-
   return (
     <main className="px-margin-mobile pt-stack-lg pb-stack-lg flex flex-col gap-stack-lg max-w-2xl mx-auto">
-      <div>
-        <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
-          Equipe da obra
-        </h2>
-        <p className="font-body-md text-body-md text-on-surface-variant mt-1">
-          Acesso restrito a esta obra só (papel cliente — leitura). Pra dar acesso à construtora inteira, use a
-          tela de Equipe no menu principal.
-        </p>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
+        <div>
+          <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
+            Equipe da obra
+          </h2>
+          <p className="font-body-md text-body-md text-on-surface-variant mt-1">
+            Acesso restrito a esta obra só (papel cliente — leitura). Pra dar acesso à construtora inteira, use a
+            tela de Equipe no menu principal.
+          </p>
+        </div>
+        <Link
+          href={`/obras/${obraId}/equipe/novo`}
+          className="h-touch-target-min px-6 bg-secondary-container text-on-secondary font-button-text text-button-text rounded flex items-center justify-center gap-2 hover:opacity-90 transition-opacity flex-shrink-0"
+        >
+          <span aria-hidden className="material-symbols-outlined text-[18px]">
+            add
+          </span>
+          Convidar
+        </Link>
       </div>
 
       {erro && <ErrorBanner mensagem={erro} />}
@@ -104,32 +114,6 @@ export default async function EquipeObraPage({
           </ul>
         </div>
       )}
-
-      <form
-        action={convidarNestaObra}
-        className="flex flex-col gap-stack-sm bg-surface-container-lowest p-stack-md border border-outline-variant rounded-lg"
-      >
-        <h3 className="font-headline-md text-headline-md text-on-surface border-b-2 border-outline-variant pb-2">
-          Convidar cliente
-        </h3>
-        <label className="font-label-bold text-label-bold text-on-surface" htmlFor="email">
-          E-mail
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="cliente@exemplo.com"
-          required
-          className="h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-        />
-        <button
-          type="submit"
-          className="h-touch-target-min px-6 bg-secondary-container text-on-secondary font-button-text text-button-text rounded hover:opacity-90 transition-opacity mt-stack-sm"
-        >
-          Convidar
-        </button>
-      </form>
     </main>
   );
 }

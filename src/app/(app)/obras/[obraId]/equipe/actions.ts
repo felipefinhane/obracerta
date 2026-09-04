@@ -15,7 +15,7 @@ export async function convidarClienteObra(obraId: string, formData: FormData) {
   });
 
   if (error) {
-    redirect(`/obras/${obraId}/equipe?erro=${encodeURIComponent(error.message)}`);
+    redirect(`/obras/${obraId}/equipe/novo?erro=${encodeURIComponent(error.message)}`);
   }
 
   redirect(`/obras/${obraId}/equipe?status=${data}`);

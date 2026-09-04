@@ -24,10 +24,10 @@ export async function criarEtapa(obraId: string, formData: FormData) {
   const { error } = await supabase.from("etapas").insert({ obra_id: obraId, ...lerCamposEtapa(formData) });
 
   if (error) {
-    redirect(`/obras/${obraId}/etapas?erro=${encodeURIComponent(error.message)}`);
+    redirect(`/obras/${obraId}/etapas/nova?erro=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath(`/obras/${obraId}/etapas`);
+  redirect(`/obras/${obraId}/etapas`);
 }
 
 export async function atualizarEtapa(obraId: string, etapaId: string, formData: FormData) {

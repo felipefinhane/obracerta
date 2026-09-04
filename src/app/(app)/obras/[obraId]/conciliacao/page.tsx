@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { ErrorBanner } from "@/components/ErrorBanner";
-import { importarExtrato, vincularTransacao } from "./actions";
+import { vincularTransacao } from "./actions";
 
 const inputClass =
   "h-touch-target-min px-3 border border-outline rounded bg-surface-bright text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent";
@@ -46,33 +47,28 @@ export default async function ConciliacaoPage({
     return { ...t, vinculoDescricao: despesa?.descricao ?? recebimento?.descricao ?? null };
   });
 
-  const importarExtratoNestaObra = importarExtrato.bind(null, obraId);
-
   return (
     <main className="px-margin-mobile pt-stack-lg pb-stack-lg flex flex-col gap-stack-lg max-w-3xl mx-auto">
-      <div>
-        <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
-          Conciliação Bancária
-        </h2>
-        <p className="font-body-md text-body-md text-on-surface-variant mt-1">
-          Importe um extrato em CSV (colunas: data, descrição, valor — positivo para entrada, negativo para
-          saída) e vincule cada linha a uma despesa ou recebimento já lançado.
-        </p>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-stack-md">
+        <div>
+          <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
+            Conciliação Bancária
+          </h2>
+          <p className="font-body-md text-body-md text-on-surface-variant mt-1">
+            Vincule cada linha do extrato importado a uma despesa ou recebimento já lançado.
+          </p>
+        </div>
+        <Link
+          href={`/obras/${obraId}/conciliacao/importar`}
+          className="h-touch-target-min px-6 bg-secondary-container text-on-secondary font-button-text text-button-text rounded flex items-center justify-center gap-2 hover:opacity-90 transition-opacity flex-shrink-0"
+        >
+          <span aria-hidden className="material-symbols-outlined text-[18px]">
+            upload_file
+          </span>
+          Importar Extrato
+        </Link>
       </div>
       {erro && <ErrorBanner mensagem={erro} />}
-
-      <form
-        action={importarExtratoNestaObra}
-        className="flex flex-col sm:flex-row items-start sm:items-center gap-stack-sm bg-surface-container-lowest p-stack-md border border-outline-variant rounded-lg"
-      >
-        <input type="file" name="arquivo" accept=".csv,text/csv" required className="font-body-md text-body-md" />
-        <button
-          type="submit"
-          className="h-touch-target-min px-6 bg-secondary-container text-on-secondary font-button-text text-button-text rounded hover:opacity-90 transition-opacity flex-shrink-0"
-        >
-          Importar
-        </button>
-      </form>
 
       {transacoes.length > 0 ? (
         <ul className="flex flex-col gap-stack-sm">
